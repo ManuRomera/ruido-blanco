@@ -1,107 +1,91 @@
-<div class="rb-revelacion-interior">
+<div class="rb-revelacion">
 
-  <header class="rb-revelacion-cabecera">
+  <header class="rb-revelacion-cab">
     <h1>La Revelación</h1>
     <p class="rb-lead">El clímax ocurre cuando alguien pone una explicación en el mundo y acepta sus consecuencias.</p>
-    {{#if caso.pregunta}}<p class="rb-pregunta">{{caso.pregunta}}</p>{{/if}}
   </header>
 
-  <section class="rb-panel rb-nucleo">
-    <h2>Formular el Núcleo</h2>
-    <label>QUÉ OCURRIÓ
-      <textarea name="nucleoQue" rows="2" {{disabled (not esGM)}}
-        placeholder="El acontecimiento central que explica el caso">{{caso.nucleo.que}}</textarea></label>
-    <label>QUIÉN / QUÉ LO PROVOCÓ
-      <textarea name="nucleoQuien" rows="2" {{disabled (not esGM)}}
-        placeholder="Una persona, grupo, accidente, fenómeno o combinación">{{caso.nucleo.quien}}</textarea></label>
-    <label>POR QUÉ
-      <textarea name="nucleoPorQue" rows="2" {{disabled (not esGM)}}
-        placeholder="El motivo, objetivo o lógica que explica lo ocurrido">{{caso.nucleo.porque}}</textarea></label>
+  <section class="rb-nucleo rb-oscuro">
+    <div class="rb-nucleo-campo {{#unless caso.nucleo.que}}vacio{{/unless}}">
+      <label>Qué ocurrió</label>
+      <textarea rows="2" data-nucleo="que" placeholder="El acontecimiento central que explica el caso">{{caso.nucleo.que}}</textarea>
+    </div>
+    <div class="rb-nucleo-campo {{#unless caso.nucleo.quien}}vacio{{/unless}}">
+      <label>Quién / qué lo provocó</label>
+      <textarea rows="2" data-nucleo="quien" placeholder="Una persona, grupo, accidente, fenómeno o combinación">{{caso.nucleo.quien}}</textarea>
+    </div>
+    <div class="rb-nucleo-campo {{#unless caso.nucleo.porque}}vacio{{/unless}}">
+      <label>Por qué</label>
+      <textarea rows="2" data-nucleo="porque" placeholder="El motivo, objetivo o lógica que explica lo ocurrido">{{caso.nucleo.porque}}</textarea>
+    </div>
   </section>
 
-  <section class="rb-panel rb-clasificacion">
-    <h2>Clasificar todas las Pistas</h2>
-    <p class="rb-ayuda">Ninguna puede ignorarse. Señal aporta materialmente; Ruido queda cerrado por un Puente Causal;
-      Interferencia puede coexistir pero todavía no sabéis qué significa.</p>
+  <div class="rb-bandejas">
+    {{#each bandejas}}
+    <section class="rb-bandeja rb-bandeja-{{clase}}" data-bandeja="{{id}}">
+      <header class="rb-bandeja-cab"><h2>{{titulo}}</h2><p>{{nota}}</p></header>
+      <div class="rb-bandeja-cuerpo">
+        {{#each pistas}}
+        <article class="rb-ficha-pista rb-papel" data-tipo="ficha-pista" data-id="{{id}}" style="--rb-giro:{{giro}}deg">
+          <div class="rb-pista-cab">
+            <span class="rb-codigo">{{codigo}}</span>
+            {{#if dura}}<span class="rb-marca rb-marca-dura">DURA</span>{{/if}}
+            <button type="button" class="rb-boton-icono" data-action="abrirPista" title="Abrir la tarjeta"><i class="fa-solid fa-pen"></i></button>
+          </div>
+          <p class="rb-pista-texto">{{texto}}</p>
+          {{#if fiabilidad}}<p class="rb-pista-fiabilidad">{{fiabilidad}}</p>{{/if}}
+          {{#unless (eq ../id "")}}
+          <input class="rb-justificacion {{#if faltaJustificacion}}falta{{/if}}" type="text"
+                 data-justificacion="{{id}}" value="{{justificacion}}"
+                 placeholder="{{#if (eq ../id 'senal')}}Esto apoya nuestra teoría porque…{{else if (eq ../id 'ruido')}}Esto existe porque… pero pertenece a…{{else}}Anotad lo que no encaja{{/if}}">
+          {{/unless}}
+          {{#if esSenal}}
+          <div class="rb-ancla-sel">
+            {{#each anclas}}
+            <button type="button" class="rb-ancla-btn {{#if activa}}activa{{/if}}" data-action="ancla" data-ancla="{{id}}">{{corto}}</button>
+            {{/each}}
+          </div>
+          {{/if}}
+        </article>
+        {{else}}
+        <p class="rb-vacio">—</p>
+        {{/each}}
+      </div>
+    </section>
+    {{/each}}
+  </div>
 
-    <div class="rb-revelacion-pistas">
-      {{#each filas}}
-      <article class="rb-fila-pista rb-clase-{{#if clasificacion}}{{clasificacion}}{{else}}sin{{/if}}" data-id="{{id}}">
-        <header>
-          <span class="rb-tarjeta-codigo">{{codigo}}</span>
-          <p class="rb-fila-texto">{{texto}}</p>
-          {{#if dura}}<span class="rb-badge rb-badge-dura">DURA</span>{{/if}}
-        </header>
-        {{#if fiabilidad}}<p class="rb-tarjeta-fiabilidad">{{fiabilidad}}</p>{{/if}}
-        <div class="rb-fila-controles">
-          <label class="rb-radio rb-radio-senal">
-            <input type="radio" name="pista.{{id}}.clasificacion" value="senal"
-                   {{checked (eq clasificacion "senal")}} {{disabled (not ../esGM)}}> SEÑAL</label>
-          <label class="rb-radio rb-radio-ruido">
-            <input type="radio" name="pista.{{id}}.clasificacion" value="ruido"
-                   {{checked (eq clasificacion "ruido")}} {{disabled (not ../esGM)}}> RUIDO</label>
-          <label class="rb-radio rb-radio-interferencia">
-            <input type="radio" name="pista.{{id}}.clasificacion" value="interferencia"
-                   {{checked (eq clasificacion "interferencia")}} {{disabled (not ../esGM)}}> INTERFERENCIA</label>
-          <label class="rb-radio rb-radio-sin">
-            <input type="radio" name="pista.{{id}}.clasificacion" value=""
-                   {{checked (not clasificacion)}} {{disabled (not ../esGM)}}> —</label>
-          <select name="pista.{{id}}.ancla" {{disabled (or (not esSenal) (not ../esGM))}}>
-            {{selectOptions ../anclasOpciones selected=ancla valueAttr="id" labelAttr="label"}}
-          </select>
-        </div>
-        <input class="rb-fila-justificacion" type="text" name="pista.{{id}}.justificacion"
-               value="{{justificacion}}" {{disabled (not ../esGM)}}
-               placeholder="Señal: «apoya nuestra teoría porque…» · Ruido: «existe porque… pero pertenece a…»">
-      </article>
-      {{else}}
-      <p class="rb-vacio">No hay Pistas descubiertas todavía.</p>
+  <section class="rb-marcador">
+    <div class="rb-caja-cifra rb-caja-senal"><span class="n">{{senales.length}}</span><span class="t">Señales</span></div>
+    <div class="rb-caja-cifra rb-caja-ruido"><span class="n">{{ruido.length}}</span><span class="t">Ruido</span></div>
+    <div class="rb-caja-cifra rb-caja-interferencia"><span class="n">{{interferencias.length}}</span><span class="t">Interferencias</span></div>
+    <div class="rb-caja-cifra rb-caja-afinacion"><span class="n">+{{afinacion}}</span><span class="t">Afinación</span></div>
+    <div class="rb-estados">
+      {{#if control}}<p class="rb-estado rb-estado-control"><i class="fa-solid fa-shield"></i> CONTROL · en un 7-9, QUÉ, QUIÉN y POR QUÉ quedan protegidos.</p>{{/if}}
+      {{#if mordedura}}<p class="rb-estado rb-estado-mordedura"><i class="fa-solid fa-bolt"></i> MORDEDURA · cualquier 10+ se convierte en 7-9.</p>{{/if}}
+      {{#if anclaObligatoria}}<p class="rb-estado rb-estado-ancla"><i class="fa-solid fa-thumbtack"></i> Una sola Interferencia: será el Ancla obligatoria si sale 7-9.</p>{{/if}}
+      {{#each requisitos}}
+      <p class="rb-requisito {{#if cumplido}}cumplido{{else}}pendiente{{/if}}">
+        <i class="fa-solid {{#if cumplido}}fa-circle-check{{else}}fa-circle{{/if}}"></i> {{texto}}</p>
       {{/each}}
     </div>
   </section>
 
-  <section class="rb-revelacion-marcador">
-    <div class="rb-marcador-caja rb-marcador-senal">
-      <span class="rb-cifra">{{senales.length}}</span><span class="rb-etiqueta">Señales</span></div>
-    <div class="rb-marcador-caja rb-marcador-ruido">
-      <span class="rb-cifra">{{ruido.length}}</span><span class="rb-etiqueta">Ruido</span></div>
-    <div class="rb-marcador-caja rb-marcador-interferencia">
-      <span class="rb-cifra">{{interferencias.length}}</span><span class="rb-etiqueta">Interferencias</span></div>
-    <div class="rb-marcador-caja rb-marcador-afinacion">
-      <span class="rb-cifra">+{{afinacion}}</span><span class="rb-etiqueta">Afinación</span></div>
-  </section>
-
-  <section class="rb-revelacion-estados">
-    {{#if control}}<p class="rb-estado rb-estado-control"><i class="fa-solid fa-shield"></i>
-      CONTROL · con +3, QUÉ, QUIÉN y POR QUÉ quedan protegidos en un 7-9.</p>{{/if}}
-    {{#if mordedura}}<p class="rb-estado rb-estado-mordedura"><i class="fa-solid fa-bolt"></i>
-      MORDEDURA · con {{interferencias.length}} Interferencias, cualquier 10+ se convierte en 7-9.</p>{{/if}}
-    {{#if anclaObligatoria}}<p class="rb-estado rb-estado-ancla"><i class="fa-solid fa-thumbtack"></i>
-      Una sola Interferencia: será el Ancla obligatoria si obtenéis 7-9.</p>{{/if}}
-    <ul class="rb-requisitos">
-      {{#each requisitos}}
-      <li class="{{#if cumplido}}cumplido{{else}}pendiente{{/if}}">
-        <i class="fa-solid {{#if cumplido}}fa-circle-check{{else}}fa-circle{{/if}}"></i> {{texto}}</li>
-      {{/each}}
-    </ul>
-  </section>
-
   {{#if bloqueos}}
-  <section class="rb-revelacion-bloqueos">
+  <section class="rb-bloqueos">
     {{#each bloqueos}}<p><i class="fa-solid fa-triangle-exclamation"></i> {{this}}</p>{{/each}}
   </section>
   {{/if}}
 
   {{#if esGM}}
-  <footer class="rb-revelacion-acciones">
-    <button type="button" class="rb-boton-revelar" data-action="tirar" {{disabled bloqueos.length}}>
+  <footer class="rb-acciones">
+    <button type="button" class="rb-boton-fuerte" data-action="tirar" {{disabled bloqueos.length}}>
       <i class="fa-solid fa-dice"></i> Revelar · 2d6 +{{afinacion}}</button>
-    <span class="rb-acciones-secundarias">
-      <button type="button" data-action="retirada"><i class="fa-solid fa-person-walking-arrow-right"></i> Retirada (+1 Ruido)</button>
-      <button type="button" data-action="grieta"><i class="fa-solid fa-bolt-lightning"></i> Seguir la Grieta (+2 Ruido)</button>
-      <button type="button" data-action="limpiar"><i class="fa-solid fa-eraser"></i> Limpiar clasificación</button>
+    <span class="rb-secundarias">
+      <button type="button" data-action="retirada"><i class="fa-solid fa-person-walking-arrow-right"></i> Retirada</button>
+      <button type="button" data-action="grieta"><i class="fa-solid fa-bolt-lightning"></i> Seguir la Grieta</button>
+      <button type="button" data-action="limpiar"><i class="fa-solid fa-eraser"></i> Limpiar</button>
     </span>
   </footer>
   {{/if}}
-
 </div>

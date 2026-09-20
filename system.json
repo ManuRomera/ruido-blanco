@@ -2,7 +2,7 @@
   "id": "ruido-blanco",
   "title": "RUIDO BLANCO",
   "description": "Juego de rol de investigación contemporánea emergente. Las Pistas son reales; su significado, interpretable. Sistema para Foundry VTT con Muro de investigación, Ruido de Fondo compartido y motor de Revelación.",
-  "version": "0.5.5",
+  "version": "0.6.0",
   "compatibility": {
     "minimum": "13",
     "verified": "13.351"
@@ -48,7 +48,10 @@
       "path": "packs/manual",
       "type": "JournalEntry",
       "system": "ruido-blanco",
-      "ownership": { "PLAYER": "OBSERVER", "ASSISTANT": "OWNER" }
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
     },
     {
       "name": "pregenerados",
@@ -56,7 +59,10 @@
       "path": "packs/pregenerados",
       "type": "Actor",
       "system": "ruido-blanco",
-      "ownership": { "PLAYER": "OBSERVER", "ASSISTANT": "OWNER" }
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
     },
     {
       "name": "caso",
@@ -64,7 +70,10 @@
       "path": "packs/caso",
       "type": "JournalEntry",
       "system": "ruido-blanco",
-      "ownership": { "PLAYER": "NONE", "ASSISTANT": "OWNER" }
+      "ownership": {
+        "PLAYER": "NONE",
+        "ASSISTANT": "OWNER"
+      }
     },
     {
       "name": "caso-pistas",
@@ -72,7 +81,10 @@
       "path": "packs/caso-pistas",
       "type": "Item",
       "system": "ruido-blanco",
-      "ownership": { "PLAYER": "NONE", "ASSISTANT": "OWNER" }
+      "ownership": {
+        "PLAYER": "NONE",
+        "ASSISTANT": "OWNER"
+      }
     },
     {
       "name": "caso-personas",
@@ -80,7 +92,10 @@
       "path": "packs/caso-personas",
       "type": "Actor",
       "system": "ruido-blanco",
-      "ownership": { "PLAYER": "NONE", "ASSISTANT": "OWNER" }
+      "ownership": {
+        "PLAYER": "NONE",
+        "ASSISTANT": "OWNER"
+      }
     }
   ],
   "grid": {

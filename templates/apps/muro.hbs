@@ -1,76 +1,123 @@
-<div class="rb-muro-wrapper">
+<div class="rb-muro">
 
   <header class="rb-muro-cabecera">
-    <div class="rb-muro-caso">
+    <div>
       <h1>{{#if caso.nombre}}{{caso.nombre}}{{else}}Caso sin nombre{{/if}}</h1>
-      <p class="rb-pregunta">{{#if caso.pregunta}}{{caso.pregunta}}{{else}}Escribe la Pregunta Central del caso.{{/if}}</p>
+      <p class="rb-pregunta-central">{{#if caso.pregunta}}{{caso.pregunta}}{{else}}Escribe la Pregunta Central: debe admitir respuestas distintas y exigir una explicación.{{/if}}</p>
       {{#if esGM}}
-      <button type="button" class="rb-boton-linea" data-action="editarCaso">
-        <i class="fa-solid fa-pen-to-square"></i> Editar caso</button>
+      <span class="rb-pista-acciones">
+        <button type="button" class="rb-boton-icono" data-action="editarCaso"><i class="fa-solid fa-pen-to-square"></i> Editar caso</button>
+        <button type="button" class="rb-boton-icono" data-action="nuevaEscena"><i class="fa-solid fa-clapperboard"></i> Nueva escena</button>
+        <button type="button" class="rb-boton-icono" data-action="nuevaSesion"><i class="fa-solid fa-rotate-left"></i> Nueva sesión</button>
+      </span>
       {{/if}}
     </div>
 
-    <div class="rb-muro-umbral">
-      <span class="rb-umbral-cifra">{{descubiertas}}<small>/{{caso.umbral}}</small></span>
-      <span class="rb-umbral-label">Pistas · caso {{caso.umbralLabel}}</span>
-      {{#if umbralAlcanzado}}
-        <span class="rb-umbral-ok">Umbral alcanzado{{#if sobreUmbral}} · {{sobreUmbral}} por encima{{/if}}</span>
-      {{else}}
-        <span class="rb-umbral-falta">Faltan {{faltan}}</span>
-      {{/if}}
-      <button type="button" class="rb-boton-revelar" data-action="abrirRevelacion">
+    <div class="rb-umbral {{#if umbralAlcanzado}}alcanzado{{/if}}">
+      <span class="rb-umbral-cifras">{{descubiertas}}<small>/{{caso.umbral}}</small></span>
+      <span class="rb-umbral-nota">
+        {{#if umbralAlcanzado}}Umbral alcanzado{{#if sobreUmbral}} · {{sobreUmbral}} por encima{{/if}}
+        {{else}}Caso {{caso.umbralLabel}} · faltan {{faltan}}{{/if}}
+      </span>
+      <button type="button" class="rb-boton-fuerte" data-action="revelacion">
         <i class="fa-solid fa-bullseye"></i> Revelación</button>
     </div>
   </header>
 
-  {{> systems/ruido-blanco/templates/partials/ruido-track.hbs}}
+  <section class="rb-ruido">
+    <div>
+      <span class="rb-ruido-titulo">Ruido de Fondo</span>
+      <p class="rb-ruido-sub">Investigar modifica aquello que intentas comprender.</p>
+      {{#if enReaccionMayor}}{{#if esGM}}
+      <button type="button" class="rb-boton-fuerte" data-action="reaccionMayor" style="margin-top:.35rem">
+        <i class="fa-solid fa-triangle-exclamation"></i> Resolver y bajar a 3</button>
+      {{/if}}{{/if}}
+    </div>
+    <div class="rb-ruido-track">
+      {{#each ruidoTrack}}
+      <button type="button" class="rb-ruido-paso {{#if activo}}activo{{/if}} {{#if reaccion}}es-reaccion{{/if}} {{#if mayor}}es-mayor{{/if}}"
+              data-action="ruido" data-valor="{{n}}" {{disabled (not ../esGM)}}>{{n}}{{#if reaccion}}<span class="rb-ruido-marca">Reacción</span>{{/if}}{{#if mayor}}<span class="rb-ruido-marca">Mayor</span>{{/if}}</button>
+      {{/each}}
+    </div>
+  </section>
 
-  <div class="rb-muro-columnas">
+  {{#if seleccionId}}
+  <p class="rb-enlazando"><i class="fa-solid fa-link"></i>
+    Enlazando <em>«{{seleccionTexto}}»</em> — pulsa el hilo de una Pista para unirla o soltarla, o arrastra la tarjeta sobre la nota.</p>
+  {{/if}}
 
-    <section class="rb-columna rb-columna-pistas">
-      <header class="rb-columna-cabecera">
+  <div class="rb-columnas">
+    <svg class="rb-hilo" aria-hidden="true"></svg>
+
+    <section class="rb-columna">
+      <header class="rb-columna-cab">
         <h2>Pistas</h2>
         <span class="rb-columna-nota">Hechos. No cambian de texto.</span>
-        {{#if esGM}}
-        <button type="button" class="rb-boton-linea" data-action="nuevaPista">
-          <i class="fa-solid fa-plus"></i> Nueva</button>
-        {{/if}}
+        {{#if esGM}}<button type="button" data-action="nuevaPista"><i class="fa-solid fa-plus"></i> Nueva</button>{{/if}}
       </header>
       <div class="rb-columna-cuerpo">
         {{#each pistas}}
-          {{> systems/ruido-blanco/templates/partials/pista-tarjeta.hbs esGM=../esGM}}
+        <article class="rb-pista rb-papel rb-clavado {{#unless descubierta}}oculta{{/unless}} {{#if enlazada}}seleccionada{{/if}}"
+                 data-tipo="pista" data-id="{{id}}" style="--rb-giro:{{giro}}deg">
+          <div class="rb-pista-cab">
+            <span class="rb-codigo">{{#if codigo}}{{codigo}}{{else}}—{{/if}}</span>
+            <h3 class="rb-pista-titulo">{{nombre}}</h3>
+            {{#if dura}}<span class="rb-marca rb-marca-dura">DURA</span>{{/if}}
+            {{#if clasificada}}<span class="rb-marca rb-marca-{{clasificacion}}">{{marca}}</span>{{/if}}
+          </div>
+          <p class="rb-pista-texto">{{texto}}</p>
+          {{#if contexto}}<p class="rb-pista-contexto">{{contexto}}</p>{{/if}}
+          {{#if fiabilidad}}<p class="rb-pista-fiabilidad"><i class="fa-solid fa-circle-half-stroke"></i> {{fiabilidad}}</p>{{/if}}
+          <div class="rb-pista-pie">
+            {{#if descubierta}}<i class="fa-solid fa-location-dot"></i> {{#if lugar}}{{lugar}}{{else}}Sin lugar{{/if}}
+            {{else}}<i class="fa-solid fa-eye-slash"></i> Sin descubrir{{/if}}
+            <span class="rb-pista-acciones">
+              <button type="button" class="rb-boton-icono" data-action="enlazar" title="Unir con la hipótesis seleccionada"><i class="fa-solid fa-link"></i></button>
+              <button type="button" class="rb-boton-icono" data-action="profundizar" title="Profundizar"><i class="fa-solid fa-magnifying-glass-plus"></i></button>
+              {{#if ../esGM}}
+              <button type="button" class="rb-boton-icono" data-action="descubrir" title="Descubierta por la mesa">
+                <i class="fa-solid {{#if descubierta}}fa-eye{{else}}fa-eye-slash{{/if}}"></i></button>
+              {{/if}}
+              <button type="button" class="rb-boton-icono" data-action="abrir" title="Abrir la tarjeta"><i class="fa-solid fa-pen"></i></button>
+              {{#if ../esGM}}
+              <button type="button" class="rb-boton-icono" data-action="borrar" title="Quitar del Muro"><i class="fa-solid fa-trash"></i></button>
+              {{/if}}
+            </span>
+          </div>
+        </article>
         {{else}}
-          <p class="rb-vacio">Todavía no hay Pistas en el Muro.</p>
+        <p class="rb-vacio">Todavía no hay Pistas en el Muro.</p>
         {{/each}}
       </div>
     </section>
 
     <section class="rb-columna rb-columna-hipotesis">
-      <header class="rb-columna-cabecera">
+      <header class="rb-columna-cab">
         <h2>Hipótesis</h2>
-        <span class="rb-columna-nota">Frases de la mesa. Se tachan libremente.</span>
-        <button type="button" class="rb-boton-linea" data-action="nuevaHipotesis">
-          <i class="fa-solid fa-plus"></i> Nueva</button>
+        <span class="rb-columna-nota">Se tachan libremente.</span>
+        <button type="button" data-action="nuevaHipotesis"><i class="fa-solid fa-plus"></i> Nueva</button>
       </header>
       <div class="rb-columna-cuerpo">
         {{#each hipotesis}}
-        <article class="rb-nota {{#if descartada}}descartada{{/if}}" data-id="{{id}}">
-          <p>{{texto}}</p>
-          <footer>
-            {{#if autor}}<span class="rb-nota-autor">{{autor}}</span>{{/if}}
-            <span class="rb-tarjeta-acciones">
-              <button type="button" data-action="alternarDescartada" title="Tachar">
-                <i class="fa-solid fa-strikethrough"></i></button>
-              <button type="button" data-action="abrirDoc" title="Abrir"><i class="fa-solid fa-pen"></i></button>
-              <button type="button" data-action="borrarDoc" title="Borrar"><i class="fa-solid fa-trash"></i></button>
+        <article class="rb-hipotesis rb-clavado {{#if descartada}}descartada{{/if}} {{#if seleccionada}}seleccionada{{/if}}"
+                 data-tipo="hipotesis" data-id="{{id}}" style="--rb-giro:{{giro}}deg">
+          <p class="rb-hipotesis-texto" data-action="seleccionar">{{texto}}</p>
+          <div class="rb-hipotesis-pie">
+            {{#if autor}}{{autor}}{{/if}}
+            {{#if codigos}}<span class="rb-vinculos">— {{codigos}}</span>{{/if}}
+            <span class="rb-pista-acciones">
+              <button type="button" class="rb-boton-icono" data-action="seleccionar" title="Resaltar sus hilos"><i class="fa-solid fa-link"></i></button>
+              <button type="button" class="rb-boton-icono" data-action="tachar" title="Tachar o recuperar">
+                <i class="fa-solid {{#if descartada}}fa-rotate-left{{else}}fa-strikethrough{{/if}}"></i></button>
+              <button type="button" class="rb-boton-icono" data-action="abrir" title="Abrir"><i class="fa-solid fa-pen"></i></button>
+              <button type="button" class="rb-boton-icono" data-action="borrar" title="Quitar"><i class="fa-solid fa-trash"></i></button>
             </span>
-          </footer>
+          </div>
         </article>
         {{else}}
-          <p class="rb-vacio">Ninguna hipótesis sobre la mesa.</p>
+        <p class="rb-vacio">Ninguna hipótesis sobre la mesa.</p>
         {{/each}}
       </div>
     </section>
-
   </div>
 </div>

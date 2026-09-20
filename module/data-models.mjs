@@ -29,7 +29,13 @@ export class InvestigadorData extends foundry.abstract.TypeDataModel {
       }),
       especialidades: new fields.SchemaField({ c1: str(), c2: str() }),
       kit: str(),
-      talento: new fields.SchemaField({ nombre: str(), regla: str() }),
+      talento: new fields.SchemaField({
+        nombre: str(),
+        regla: str(),
+        /** Los Talentos se gastan por escena o por sesión; el contador lo reinicia el GM. */
+        usos: new fields.NumberField({ required: true, integer: true, min: 0, initial: 0 }),
+        usosMax: new fields.NumberField({ required: true, integer: true, min: 1, initial: 1 })
+      }),
       obsesion: str(),
       puntoCiego: str(),
       anclas: new fields.SchemaField({
@@ -59,6 +65,8 @@ export class InvestigadorData extends foundry.abstract.TypeDataModel {
     this.condicionesActivas = Object.values(this.condiciones).filter(Boolean);
     this.secuelasActivas = Object.values(this.secuelas).filter(s => s.nombre);
     this.anclasDisponibles = Object.values(this.anclas).filter(a => a.nombre && !a.usada).length;
+    this.talentoDisponible = this.talento.usos < this.talento.usosMax;
+    this.enRiesgoDeRuptura = this.tension.value >= this.tension.max;
   }
 }
 
@@ -109,7 +117,9 @@ export class HipotesisData extends foundry.abstract.TypeDataModel {
       texto: str(),
       /** Las Hipótesis se tachan libremente: no son hechos. */
       descartada: bool(),
-      autor: str()
+      autor: str(),
+      /** Ids de las Pistas que esta hipótesis usa: es el hilo rojo del Muro. */
+      pistas: new fields.ArrayField(new fields.StringField(), { required: true, initial: [] })
     };
   }
 }

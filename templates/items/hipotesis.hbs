@@ -1,12 +1,26 @@
-<form class="rb-sheet rb-sheet-hipotesis {{#if system.descartada}}descartada{{/if}}" autocomplete="off">
-  <section class="rb-sheet-body">
-    <p class="rb-ayuda">Ninguna conexión se convierte en verdad por decirla muchas veces.</p>
-    <label>Hipótesis
-      <textarea name="system.texto" rows="4">{{system.texto}}</textarea></label>
-    <div class="rb-pista-fila">
-      <label>Quien la propuso
-        <input type="text" name="system.autor" value="{{system.autor}}"></label>
-      <label class="rb-check"><input type="checkbox" name="system.descartada" {{checked system.descartada}}> Tachada</label>
-    </div>
+<form class="rb-sheet rb-oscuro {{#if system.descartada}}descartada{{/if}}" autocomplete="off">
+  <section class="rb-cuerpo">
+    <section class="rb-papel">
+      <h2>Hipótesis</h2>
+      <p class="rb-ayuda">Ninguna conexión se convierte en verdad por decirla muchas veces. Se tachan, dividen o contradicen libremente.</p>
+      <textarea name="system.texto" rows="4" class="rb-mano">{{system.texto}}</textarea>
+      <div class="rb-pista-fila" style="display:grid;grid-template-columns:1fr auto;gap:.6rem;margin-top:.5rem">
+        <div><label>Quien la propuso</label><input type="text" name="system.autor" value="{{system.autor}}"></div>
+        <label class="rb-check"><input type="checkbox" name="system.descartada" {{checked system.descartada}}> Tachada</label>
+      </div>
+    </section>
+
+    <section class="rb-papel" style="margin-top:.9rem">
+      <h2>Pistas que usa</h2>
+      <p class="rb-ayuda">El hilo rojo del Muro. Se enlazan arrastrando la Pista sobre la nota.</p>
+      {{#each enlazadas}}
+      <div class="rb-condicion">
+        <span><span class="rb-codigo">{{codigo}}</span> {{texto}}</span>
+        <button type="button" class="rb-boton-icono" data-rb="desenlazar" data-id="{{id}}" title="Soltar el hilo"><i class="fa-solid fa-scissors"></i></button>
+      </div>
+      {{else}}
+      <p class="rb-vacio">Sin hilos todavía.</p>
+      {{/each}}
+    </section>
   </section>
 </form>

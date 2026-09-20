@@ -30,12 +30,15 @@ Requiere Foundry VTT v13 o superior.
 
 | | |
 |---|---|
-| **Ficha de investigador** | Los cuatro Métodos con tirada integrada, Profesión, Especialidades, Kit, Talento, Obsesión, Punto Ciego y Vínculo. |
-| **Tensión y Ruptura** | Pista de Tensión 0-3. Marcar una cuarta provoca Ruptura automática: baja a 1 y abre el diálogo para escribir la Secuela. |
-| **Anclas personales** | Una escena significativa con un Ancla borra 1 Tensión, una vez por sesión. Un botón devuelve las Anclas al empezar sesión. |
-| **Muro de investigación** | Las dos únicas zonas que existen durante la investigación: PISTAS (hechos) e HIPÓTESIS (frases tachables de la mesa). |
-| **Ruido de Fondo** | Contador compartido 0-6 con aviso automático de Reacción (3) y Reacción Mayor (6), que devuelve el contador a 3. |
-| **Motor de Revelación** | Núcleo QUÉ/QUIÉN/POR QUÉ, clasificación obligatoria de todas las Pistas, Afinación con sus requisitos, Mordedura, Control y Lentes de Distorsión. |
+| **Ficha de investigador** | Los cuatro Métodos con tirada integrada, Profesión, Especialidades, Kit, Talento con contador de usos, Obsesión, Punto Ciego y Vínculo. |
+| **Diálogo de Apuesta** | Antes de tirar: el riesgo en una frase, quién Ayuda, qué Condiciones afectan a la Acción, y si Forzáis o si la Apuesta incluye Ruido. |
+| **Ayudar** | Concede Ventaja y deja al ayudante expuesto; la tarjeta de chat trae el botón para repartirle el coste. |
+| **Tensión y Ruptura** | Pista de 0 a 3. La cuarta marca provoca Ruptura automática: baja a 1 y abre el diálogo de Secuela. |
+| **Condiciones y Secuelas** | Las Condiciones aplican Desventaja solas al marcarlas en el diálogo. Cada Secuela tiene un botón de Disparador: marcar 1 Tensión o aceptar la complicación. |
+| **Anclas personales** | Una escena significativa borra 1 Tensión, una vez por sesión. Nueva escena y Nueva sesión las devuelven a toda la mesa. |
+| **Muro de investigación** | PISTAS e HIPÓTESIS, las dos únicas zonas que existen durante la investigación, con hilo rojo real entre cada hipótesis y las Pistas que dice usar. |
+| **Ruido de Fondo** | Contador compartido 0-6 con Reacción en 3 y Reacción Mayor en 6, que avisa en chat y vuelve a 3. |
+| **Revelación** | Clasificación arrastrando las Pistas entre cuatro bandejas, Anclas del Núcleo, Afinación con sus requisitos, Mordedura, Control, Lentes de Distorsión y flujo completo de Falso Positivo. |
 
 ### Compendios incluidos
 
@@ -70,6 +73,7 @@ la web de `docs/` y el compendio del manual se generan desde él.
 ```bash
 npm install
 npm test                        # las reglas: Afinación, grados y fórmulas
+npm run maqueta                 # dev/maqueta.html: las plantillas reales, sin abrir Foundry
 python3 scripts/manuscrito.py   # .docx -> REGLAMENTO.md, docs/index.html, _data/manual.json
 python3 scripts/contenido.py    # pregenerados, caso y Pistas -> _data/*.json
 node scripts/build.mjs          # _data/*.json -> packs/ (cierra Foundry antes)
@@ -77,6 +81,13 @@ node scripts/build.mjs          # _data/*.json -> packs/ (cierra Foundry antes)
 
 Los packs compilados no se versionan: los genera el workflow al publicar una
 etiqueta `vX.Y.Z`, que debe coincidir con la versión de `system.json`.
+
+> **Cuidado si desarrollas dentro de `Data/systems/ruido-blanco`.**
+> Instalar o actualizar el sistema desde el manifiesto **borra el directorio y
+> lo reemplaza por el contenido del zip**, que no incluye `.git`, `_data/`,
+> `scripts/`, `sources/`, `tests/` ni `docs/`. Mientras trabajes en el
+> repositorio, no pulses instalar ni actualizar sobre este sistema: haz `git push`
+> a menudo, porque el remoto es la única copia que sobrevive.
 
 ## Estado
 

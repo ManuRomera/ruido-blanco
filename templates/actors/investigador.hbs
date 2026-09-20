@@ -1,31 +1,30 @@
 <form class="rb-sheet" autocomplete="off">
 
-  <header class="rb-sheet-header">
-    <img class="rb-retrato" src="{{actor.img}}" data-edit="img" title="{{actor.name}}">
-    <div class="rb-identidad">
+  <header class="rb-cabecera rb-oscuro">
+    <div class="rb-retrato-marco">
+      <img class="rb-retrato" src="{{actor.img}}" data-edit="img" title="{{actor.name}}">
+      <span class="rb-retrato-pie">{{system.pronombres}}</span>
+    </div>
+    <div>
       <input class="rb-nombre" type="text" name="name" value="{{actor.name}}" placeholder="Nombre">
       <input class="rb-concepto" type="text" name="system.concepto" value="{{system.concepto}}"
-             placeholder="Una frase: quién eres y qué clase de problemas resuelves">
-      <div class="rb-identidad-fila">
-        <label>Pronombres
-          <input type="text" name="system.pronombres" value="{{system.pronombres}}"></label>
-        <label>Profesión
-          <select name="system.profesion">
-            <option value="">—</option>
+             placeholder="Una frase: quién eres y qué clase de problemas sueles resolver">
+      <div class="rb-cabecera-fila">
+        <div><label>Pronombres</label><input type="text" name="system.pronombres" value="{{system.pronombres}}"></div>
+        <div><label>Profesión</label>
+          <select name="system.profesion"><option value="">—</option>
             {{#each profesiones}}<option value="{{this}}" {{#if (eq this ../system.profesion)}}selected{{/if}}>{{this}}</option>{{/each}}
-          </select>
-        </label>
-        <label>Kit
-          <select name="system.kit">
-            <option value="">—</option>
+          </select></div>
+        <div><label>Kit</label>
+          <select name="system.kit"><option value="">—</option>
             {{#each kits}}<option value="{{this}}" {{#if (eq this ../system.kit)}}selected{{/if}}>{{this}}</option>{{/each}}
-          </select>
-        </label>
+          </select></div>
       </div>
     </div>
-    <button type="button" class="rb-boton-muro" data-action="abrir-muro" title="Muro de investigación">
-      <i class="fa-solid fa-diagram-project"></i>
-    </button>
+    <div class="rb-cabecera-acciones">
+      <button type="button" data-rb="muro"><i class="fa-solid fa-diagram-project"></i> Muro</button>
+      <button type="button" data-rb="revelacion"><i class="fa-solid fa-bullseye"></i> Revelar</button>
+    </div>
   </header>
 
   <nav class="rb-tabs">
@@ -34,122 +33,135 @@
     <a class="item" data-tab="notas">Notas</a>
   </nav>
 
-  <section class="rb-sheet-body">
+  <section class="rb-sheet-body rb-cuerpo">
 
-    <div class="tab rb-tab-ficha" data-tab="ficha">
-
-      <section class="rb-panel rb-metodos">
+    <div class="tab" data-tab="ficha">
+      <section class="rb-papel rb-ancho" style="margin-bottom:1.1rem">
         <h2>Los cuatro Métodos</h2>
-        <p class="rb-ayuda">2d6 + un d6 por punto de Método; conserva los dos mejores.
+        <p class="rb-ayuda">2d6 más un d6 por punto de Método; conserva los dos mejores. Un 0 no significa incompetencia.
           {{#unless repartoValido}}<span class="rb-aviso">El reparto debería ser 2, 1, 1 y 0.</span>{{/unless}}</p>
-        <div class="rb-metodos-rejilla">
+        <div class="rb-metodos">
           {{#each metodos}}
-          <div class="rb-metodo">
-            <button type="button" class="rb-metodo-tirar" data-action="tirar-metodo" data-metodo="{{clave}}">
+          <div>
+            <button type="button" class="rb-metodo {{#unless valor}}rb-cero{{/unless}}" data-rb="tirar" data-metodo="{{clave}}"
+                    title="Tirar {{etiqueta}}">
               <span class="rb-metodo-nombre">{{etiqueta}}</span>
               <span class="rb-metodo-valor">{{valor}}</span>
-              <span class="rb-metodo-dados">{{dados}}d6</span>
+              <span class="rb-metodo-dados">{{dados}}d6kh2</span>
             </button>
-            <input type="number" name="system.metodos.{{clave}}" value="{{valor}}" min="0" max="3">
+            <div class="rb-metodo-ajuste">
+              <button type="button" data-rb="metodo-menos" data-metodo="{{clave}}">−</button>
+              <input type="number" name="system.metodos.{{clave}}" value="{{valor}}" min="0" max="3">
+              <button type="button" data-rb="metodo-mas" data-metodo="{{clave}}">+</button>
+            </div>
           </div>
           {{/each}}
         </div>
       </section>
 
-      <section class="rb-panel rb-especialidades">
-        <h2>Especialidades</h2>
-        <p class="rb-ayuda">Formación real. No añaden dados: permiten lectura experta y justifican Ventaja.</p>
-        <input type="text" name="system.especialidades.c1" value="{{system.especialidades.c1}}" placeholder="Especialidad 1">
-        <input type="text" name="system.especialidades.c2" value="{{system.especialidades.c2}}" placeholder="Especialidad 2">
-      </section>
+      <div class="rb-rejilla">
+        <section class="rb-papel">
+          <h2>Especialidades</h2>
+          <p class="rb-ayuda">Formación real. No añaden dados: permiten lectura experta y justifican Ventaja.</p>
+          <div class="rb-lista-campos">
+            <input type="text" name="system.especialidades.c1" value="{{system.especialidades.c1}}" placeholder="Especialidad 1">
+            <input type="text" name="system.especialidades.c2" value="{{system.especialidades.c2}}" placeholder="Especialidad 2">
+          </div>
+        </section>
 
-      <section class="rb-panel rb-talento">
-        <h2>Talento</h2>
-        <select class="rb-talento-elegir">
-          <option value="">— elegir de la lista —</option>
-          {{#each talentos}}<option value="{{id}}" {{#if (eq nombre ../system.talento.nombre)}}selected{{/if}}>{{nombre}}</option>{{/each}}
-        </select>
-        <input type="text" name="system.talento.nombre" value="{{system.talento.nombre}}" placeholder="Nombre del Talento">
-        <textarea name="system.talento.regla" rows="3" placeholder="Qué permite exactamente">{{system.talento.regla}}</textarea>
-      </section>
+        <section class="rb-papel">
+          <h2>Talento</h2>
+          <select class="rb-talento-elegir">
+            <option value="">— elegir de la lista —</option>
+            {{#each talentos}}<option value="{{id}}" {{#if (eq nombre ../system.talento.nombre)}}selected{{/if}}>{{nombre}}</option>{{/each}}
+          </select>
+          <input type="text" name="system.talento.nombre" value="{{system.talento.nombre}}" placeholder="Nombre del Talento">
+          <p class="rb-talento-regla">{{#if system.talento.regla}}{{system.talento.regla}}{{else}}Los Talentos conceden preguntas, permisos o excepciones concretas; nunca bonificadores.{{/if}}</p>
+          <div class="rb-usos">
+            <label style="margin:0">Usos</label>
+            {{#each usosTalento}}
+            <button type="button" class="rb-uso {{#if gastado}}gastado{{/if}}" data-rb="uso-talento" data-n="{{n}}" title="Uso {{n}}"></button>
+            {{/each}}
+            <button type="button" style="margin-left:auto" data-rb="usar-talento" {{disabled (not talentoDisponible)}}>Usar</button>
+          </div>
+        </section>
 
-      <section class="rb-panel rb-mirada">
-        <h2>Obsesión y Punto Ciego</h2>
-        <label>Obsesión
-          <textarea name="system.obsesion" rows="2"
-            placeholder="Qué pregunta, injusticia o patrón te impide dejar el caso">{{system.obsesion}}</textarea></label>
-        <label>Punto Ciego
-          <textarea name="system.puntoCiego" rows="2"
-            placeholder="Cómo interpretas mal a personas o situaciones">{{system.puntoCiego}}</textarea></label>
-        <label>Vínculo
-          <textarea name="system.vinculo" rows="2"
-            placeholder="Una frase sobre otro investigador">{{system.vinculo}}</textarea></label>
-      </section>
-
+        <section class="rb-papel rb-ancho">
+          <h2>Obsesión, Punto Ciego y Vínculo</h2>
+          <div class="rb-rejilla" style="gap:.8rem">
+            <div><label>Obsesión</label><textarea name="system.obsesion" rows="2"
+              placeholder="Qué pregunta, injusticia o patrón te impide dejar el caso">{{system.obsesion}}</textarea></div>
+            <div><label>Punto Ciego</label><textarea name="system.puntoCiego" rows="2"
+              placeholder="Cómo interpretas mal a personas o situaciones">{{system.puntoCiego}}</textarea></div>
+            <div class="rb-ancho"><label>Vínculo</label><textarea name="system.vinculo" rows="2"
+              placeholder="Una frase sobre otro investigador: qué le debes o por qué confías —o no— en su criterio">{{system.vinculo}}</textarea></div>
+          </div>
+        </section>
+      </div>
     </div>
 
-    <div class="tab rb-tab-presion" data-tab="presion">
+    <div class="tab" data-tab="presion">
+      <div class="rb-rejilla">
+        <section class="rb-papel">
+          <h2>Tensión</h2>
+          <p class="rb-ayuda">Cuánto de ti mismo estás gastando para seguir funcionando. No penaliza tiradas por sí sola.</p>
+          <div class="rb-tension-fila">
+            {{#each tensionCasillas}}
+            <button type="button" class="rb-casilla {{#if marcada}}marcada{{/if}}" data-rb="tension" data-valor="{{n}}">
+              <i class="fa-solid {{#if marcada}}fa-bolt{{else}}fa-square{{/if}}"></i></button>
+            {{/each}}
+            <span class="rb-tension-cuenta">{{system.tension.value}} / {{system.tension.max}}</span>
+          </div>
+          <div class="rb-fila-botones">
+            <button type="button" data-rb="encajar"><i class="fa-solid fa-plus"></i> Encajar</button>
+            <button type="button" data-rb="borrar-tension"><i class="fa-solid fa-minus"></i> Borrar</button>
+          </div>
+          {{#if enRiesgoDeRuptura}}<span class="rb-sello">Una marca más: Ruptura</span>{{/if}}
+        </section>
 
-      <section class="rb-panel rb-tension">
-        <h2>Tensión</h2>
-        <p class="rb-ayuda">Cuánto de ti mismo estás gastando para seguir funcionando. No penaliza tiradas por sí sola.</p>
-        <div class="rb-tension-casillas">
-          {{#each tensionCasillas}}
-          <button type="button" class="rb-casilla {{#if marcada}}marcada{{/if}}"
-                  data-action="tension" data-valor="{{n}}" title="Tensión {{n}}">
-            <i class="fa-solid {{#if marcada}}fa-bolt{{else}}fa-square{{/if}}"></i>
-          </button>
+        <section class="rb-papel">
+          <h2>Condiciones</h2>
+          <p class="rb-ayuda">Descriptores de ficción. Si afectan a una Acción, provocan Desventaja; si la hacen inverosímil, cambia de enfoque.</p>
+          <div class="rb-lista-campos">
+            {{#each condiciones}}
+            <div class="rb-condicion">
+              <input type="text" name="system.condiciones.{{slot}}" value="{{texto}}" placeholder="Condición {{n}}">
+              <button type="button" class="rb-boton-icono" data-rb="quitar-condicion" data-slot="{{slot}}" title="La ficción lo permite"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            {{/each}}
+          </div>
+        </section>
+
+        <section class="rb-papel">
+          <h2>Secuelas</h2>
+          <p class="rb-ayuda">Cuando aparece el Disparador: marca 1 Tensión para mantener el control, o acepta la complicación.</p>
+          {{#each secuelas}}
+          <div class="rb-secuela">
+            <input type="text" name="system.secuelas.{{slot}}.nombre" value="{{nombre}}" placeholder="Nombre">
+            <input type="text" name="system.secuelas.{{slot}}.disparador" value="{{disparador}}" placeholder="Disparador">
+            <button type="button" data-rb="secuela" data-slot="{{slot}}" {{disabled (not nombre)}} title="Se dispara">
+              <i class="fa-solid fa-burst"></i></button>
+          </div>
           {{/each}}
-          <span class="rb-tension-valor">{{system.tension.value}} / {{system.tension.max}}</span>
-        </div>
-        <div class="rb-tension-acciones">
-          <button type="button" data-action="marcar-tension"><i class="fa-solid fa-plus"></i> Encajar</button>
-          <button type="button" data-action="borrar-tension"><i class="fa-solid fa-minus"></i> Borrar</button>
-        </div>
-        <p class="rb-ayuda rb-ayuda-fuerte">Una cuarta marca provoca Ruptura: bajas a 1 y escribes una Secuela.</p>
-      </section>
+        </section>
 
-      <section class="rb-panel rb-condiciones">
-        <h2>Condiciones</h2>
-        <p class="rb-ayuda">Descriptores de ficción. Si afectan a una Acción, provocan Desventaja.</p>
-        <input type="text" name="system.condiciones.c1" value="{{system.condiciones.c1}}" placeholder="Condición 1">
-        <input type="text" name="system.condiciones.c2" value="{{system.condiciones.c2}}" placeholder="Condición 2">
-        <input type="text" name="system.condiciones.c3" value="{{system.condiciones.c3}}" placeholder="Condición 3">
-      </section>
-
-      <section class="rb-panel rb-secuelas">
-        <h2>Secuelas</h2>
-        <div class="rb-secuela">
-          <input type="text" name="system.secuelas.s1.nombre" value="{{system.secuelas.s1.nombre}}" placeholder="Nombre">
-          <input type="text" name="system.secuelas.s1.disparador" value="{{system.secuelas.s1.disparador}}" placeholder="Disparador">
-        </div>
-        <div class="rb-secuela">
-          <input type="text" name="system.secuelas.s2.nombre" value="{{system.secuelas.s2.nombre}}" placeholder="Nombre">
-          <input type="text" name="system.secuelas.s2.disparador" value="{{system.secuelas.s2.disparador}}" placeholder="Disparador">
-        </div>
-      </section>
-
-      <section class="rb-panel rb-anclas">
-        <h2>Anclas personales</h2>
-        <p class="rb-ayuda">Una escena significativa con un Ancla borra 1 Tensión, una vez por sesión.</p>
-        <div class="rb-ancla {{#if system.anclas.a1.usada}}usada{{/if}}">
-          <input type="text" name="system.anclas.a1.nombre" value="{{system.anclas.a1.nombre}}" placeholder="Persona, lugar, rutina o compromiso">
-          <button type="button" data-action="jugar-ancla" data-slot="a1" {{disabled system.anclas.a1.usada}}>
-            <i class="fa-solid fa-anchor"></i> Jugar escena</button>
-        </div>
-        <div class="rb-ancla {{#if system.anclas.a2.usada}}usada{{/if}}">
-          <input type="text" name="system.anclas.a2.nombre" value="{{system.anclas.a2.nombre}}" placeholder="Persona, lugar, rutina o compromiso">
-          <button type="button" data-action="jugar-ancla" data-slot="a2" {{disabled system.anclas.a2.usada}}>
-            <i class="fa-solid fa-anchor"></i> Jugar escena</button>
-        </div>
-        <button type="button" class="rb-reiniciar" data-action="reiniciar-anclas">
-          <i class="fa-solid fa-rotate-left"></i> Nueva sesión: devolver Anclas</button>
-      </section>
-
+        <section class="rb-papel">
+          <h2>Anclas personales</h2>
+          <p class="rb-ayuda">Una escena breve y significativa con un Ancla borra 1 Tensión, una vez por sesión.</p>
+          {{#each anclas}}
+          <div class="rb-ancla-fila {{#if usada}}usada{{/if}}">
+            <input type="text" name="system.anclas.{{slot}}.nombre" value="{{nombre}}"
+                   placeholder="Persona, lugar, rutina o compromiso fuera del caso">
+            <button type="button" data-rb="ancla" data-slot="{{slot}}" {{disabled (or usada (not nombre))}}>
+              <i class="fa-solid {{#if usada}}fa-check{{else}}fa-anchor{{/if}}"></i> {{#if usada}}Usada{{else}}Jugar{{/if}}</button>
+          </div>
+          {{/each}}
+        </section>
+      </div>
     </div>
 
-    <div class="tab rb-tab-notas" data-tab="notas">
-      <section class="rb-panel">
+    <div class="tab" data-tab="notas">
+      <section class="rb-papel">
         <h2>Notas</h2>
         {{editor notasHTML target="system.notas" button=true editable=editable engine="prosemirror"}}
       </section>

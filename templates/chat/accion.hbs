@@ -1,23 +1,37 @@
-<div class="rb-chat rb-chat-accion {{grado.clase}}">
-  <header>
-    <span class="rb-chat-metodo">{{metodo}} {{valor}}</span>
+<div class="rb-chat rb-chat-accion rb-grado-{{gradoId}}" data-actor="{{actorId}}">
+  <div class="rb-chat-cab">
+    <span class="rb-chat-quien">{{metodo}} {{valor}} · {{actor}}</span>
     <h3>{{grado.titulo}}</h3>
     <span class="rb-chat-total">{{total}}</span>
-  </header>
+  </div>
 
   {{#if apuesta}}<p class="rb-chat-apuesta"><strong>La Apuesta:</strong> {{apuesta}}</p>{{/if}}
 
   <div class="rb-chat-dados">
     {{#each dados}}<span class="rb-dado {{#unless active}}descartado{{/unless}}">{{result}}</span>{{/each}}
-    <span class="rb-chat-formula">{{formula}}</span>
     {{#if ventaja}}<span class="rb-chat-flag rb-flag-ventaja">Ventaja</span>{{/if}}
     {{#if desventaja}}<span class="rb-chat-flag rb-flag-desventaja">Desventaja</span>{{/if}}
+    <span class="rb-chat-formula">{{formula}}</span>
   </div>
 
-  <p class="rb-chat-efecto">
-    {{#if (eq gradoId "nitido")}}Consigues lo que querías y además creas una ventaja, reduces 1 Ruido de Fondo si tiene sentido o descubres un detalle adicional.{{/if}}
-    {{#if (eq gradoId "limpio")}}Consigues el objetivo sin consecuencia relevante.{{/if}}
-    {{#if (eq gradoId "coste")}}Consigues lo esencial y el GM cobra una consecuencia coherente con la Apuesta.{{/if}}
-    {{#if (eq gradoId "reves")}}No lo consigues como pretendías y la situación empeora. La partida siempre avanza.{{/if}}
-  </p>
+  {{#if ayudante}}
+  <p class="rb-chat-nota"><i class="fa-solid fa-hands-helping"></i>
+    Ayuda: <strong>{{ayudante.nombre}}</strong>. Ayudar expone: si la consecuencia también podría alcanzarle,
+    el GM puede aplicársela o repartirla.</p>
+  {{/if}}
+
+  {{#if condiciones}}
+  <p class="rb-chat-nota"><i class="fa-solid fa-bandage"></i>
+    Desventaja por Condición: {{#each condiciones}}{{this}}{{#unless @last}}, {{/unless}}{{/each}}</p>
+  {{/if}}
+
+  <p class="rb-chat-efecto">{{grado.efecto}}</p>
+
+  <div class="rb-chat-botones">
+    <button type="button" data-rb="ruido-mas">+1 Ruido de Fondo</button>
+    {{#if esNitido}}<button type="button" data-rb="ruido-menos">−1 Ruido de Fondo</button>{{/if}}
+    <button type="button" data-rb="condicion">Marcar Condición</button>
+    <button type="button" data-rb="encajar">Encajar (+1 Tensión)</button>
+    {{#if ayudante}}<button type="button" data-rb="encajar-ayudante" data-id="{{ayudante.id}}">Coste para {{ayudante.nombre}}</button>{{/if}}
+  </div>
 </div>

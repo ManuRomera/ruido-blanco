@@ -1,55 +1,51 @@
-<form class="rb-sheet rb-sheet-pista {{#if system.dura}}rb-pista-dura{{/if}}" autocomplete="off">
-  <header class="rb-sheet-header rb-pista-header">
+<form class="rb-sheet {{#if system.dura}}rb-pista-dura{{/if}}" autocomplete="off">
+  <header class="rb-cabecera rb-oscuro" style="grid-template-columns:auto 1fr">
     <input class="rb-pista-codigo" type="text" name="system.codigo" value="{{system.codigo}}" placeholder="P1">
-    <input class="rb-nombre" type="text" name="name" value="{{item.name}}" placeholder="Título breve">
-    {{#if system.dura}}<span class="rb-badge rb-badge-dura">PISTA DURA</span>{{/if}}
+    <div>
+      <input class="rb-nombre" type="text" name="name" value="{{item.name}}" placeholder="Título breve">
+      {{#if system.dura}}<span class="rb-marca rb-marca-dura">PISTA DURA</span>{{/if}}
+    </div>
   </header>
 
-  <section class="rb-sheet-body rb-pista-cuerpo">
-
-    <label class="rb-campo-grande">El hecho
+  <section class="rb-cuerpo">
+    <section class="rb-papel">
+      <h2>El hecho</h2>
+      <p class="rb-ayuda">Un dato concreto que puede escribirse sin incluir su explicación: preciso para importar, abierto para admitir más de una lectura.</p>
       <textarea name="system.texto" rows="4"
-        placeholder="Un dato concreto, sin su explicación. Hora, objeto, conducta, contradicción, acceso o relación.">{{system.texto}}</textarea></label>
+        placeholder="Hora, objeto, conducta, contradicción, transferencia, acceso o relación.">{{system.texto}}</textarea>
 
-    <div class="rb-pista-fila">
-      <label>Lugar
-        <input type="text" name="system.lugar" value="{{system.lugar}}" placeholder="Dónde puede aparecer"></label>
-      <label>Fiabilidad de la fuente
-        <input type="text" name="system.fiabilidad" value="{{system.fiabilidad}}"
-               placeholder="Copia sin metadatos, declaración interesada, imagen parcial…"></label>
-    </div>
-
-    <label>Contexto añadido al Profundizar
-      <textarea name="system.contexto" rows="2"
-        placeholder="Procedencia, cronología, relación con otra persona o una limitación técnica.">{{system.contexto}}</textarea></label>
-
-    {{#if esGM}}
-    <div class="rb-pista-gm">
-      <label class="rb-check"><input type="checkbox" name="system.descubierta" {{checked system.descubierta}}> Descubierta por la mesa</label>
-      <label class="rb-check"><input type="checkbox" name="system.dura" {{checked system.dura}}> Pista Dura (nace de un Falso Positivo)</label>
-    </div>
-    {{/if}}
-
-    <section class="rb-panel rb-panel-revelacion">
-      <h2>Solo durante la Revelación</h2>
-      <div class="rb-pista-fila">
-        <label>Clasificación
-          <select name="system.clasificacion">
-            {{selectOptions clasificaciones selected=system.clasificacion valueAttr="id" labelAttr="label"}}
-          </select></label>
-        <label>Ancla del Núcleo
-          <select name="system.ancla" {{disabled (ne system.clasificacion "senal")}}>
-            {{selectOptions anclas selected=system.ancla valueAttr="id" labelAttr="label"}}
-          </select></label>
+      <div class="rb-rejilla" style="gap:.7rem;margin-top:.6rem">
+        <div><label>Lugar</label><input type="text" name="system.lugar" value="{{system.lugar}}" placeholder="Dónde puede aparecer"></div>
+        <div><label>Limitación de la fuente</label><input type="text" name="system.fiabilidad" value="{{system.fiabilidad}}"
+          placeholder="Copia sin metadatos, imagen parcial…"></div>
+        <div class="rb-ancho"><label>Contexto añadido al Profundizar</label>
+          <textarea name="system.contexto" rows="2"
+            placeholder="Procedencia, cronología, relación con otra persona o una limitación técnica.">{{system.contexto}}</textarea></div>
       </div>
-      <label>Justificación
-        <textarea name="system.justificacion" rows="3"
-          placeholder="Señal: «Esto apoya nuestra teoría porque…» · Ruido: «Esto existe porque [hecho], que explica [propiedad], pero pertenece a [otro suceso].»">{{system.justificacion}}</textarea></label>
+
+      {{#if esGM}}
+      <div class="rb-lista-campos" style="margin-top:.6rem">
+        <label class="rb-check"><input type="checkbox" name="system.descubierta" {{checked system.descubierta}}> Descubierta por la mesa</label>
+        <label class="rb-check"><input type="checkbox" name="system.dura" {{checked system.dura}}> Pista Dura (nace de un Falso Positivo)</label>
+      </div>
+      {{/if}}
+    </section>
+
+    <section class="rb-papel" style="margin-top:.9rem">
+      <h2>Solo durante la Revelación</h2>
+      <div class="rb-rejilla" style="gap:.7rem">
+        <div><label>Clasificación</label>
+          <select name="system.clasificacion">{{selectOptions clasificaciones selected=system.clasificacion valueAttr="id" labelAttr="label"}}</select></div>
+        <div><label>Ancla del Núcleo</label>
+          <select name="system.ancla" {{disabled (ne system.clasificacion "senal")}}>{{selectOptions anclas selected=system.ancla valueAttr="id" labelAttr="label"}}</select></div>
+      </div>
+      <label style="margin-top:.5rem">Justificación</label>
+      <textarea name="system.justificacion" rows="3"
+        placeholder="Señal: «Esto apoya nuestra teoría porque…» · Ruido: «Esto existe porque [hecho], que explica [propiedad], pero pertenece a [otro suceso].»">{{system.justificacion}}</textarea>
       <details class="rb-ayuda-despl">
         <summary>Prueba de Aporte: una Señal hace al menos una de estas cosas</summary>
         <ul>{{#each funcionesSenal}}<li>{{this}}</li>{{/each}}</ul>
       </details>
     </section>
-
   </section>
 </form>
