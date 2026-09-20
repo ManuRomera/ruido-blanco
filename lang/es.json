@@ -1,0 +1,35 @@
+{
+  "TYPES.Actor.investigador": "Investigador",
+  "TYPES.Actor.pnj": "Persona de interés",
+  "TYPES.Item.pista": "Pista",
+  "TYPES.Item.hipotesis": "Hipótesis",
+
+  "RB.Metodo.Observar": "OBSERVAR",
+  "RB.Metodo.Razonar": "RAZONAR",
+  "RB.Metodo.Influir": "INFLUIR",
+  "RB.Metodo.Intervenir": "INTERVENIR",
+
+  "RB.Clasificacion.SinClasificar": "— sin clasificar —",
+  "RB.Clasificacion.Senal": "SEÑAL",
+  "RB.Clasificacion.Ruido": "RUIDO",
+  "RB.Clasificacion.Interferencia": "INTERFERENCIA",
+
+  "RB.Ancla.Ninguna": "— sin Ancla —",
+  "RB.Ancla.Que": "Ancla de QUÉ",
+  "RB.Ancla.Quien": "Ancla de QUIÉN",
+  "RB.Ancla.PorQue": "Ancla de POR QUÉ",
+
+  "RB.Muro.Titulo": "Muro de investigación",
+  "RB.Muro.NuevaHipotesis": "Nueva hipótesis",
+  "RB.Muro.EditarCaso": "Editar el caso",
+
+  "RB.Revelacion.Titulo": "La Revelación",
+
+  "RB.Ficha.Investigador": "Ficha de investigador",
+  "RB.Ficha.Pnj": "Ficha de persona de interés",
+  "RB.Ficha.Pista": "Tarjeta de Pista",
+  "RB.Ficha.Hipotesis": "Nota de hipótesis",
+
+  "RB.Ajustes.MostrarPistas": "Los jugadores ven el Muro de Pistas",
+  "RB.Ajustes.MostrarPistasHint": "Si se desactiva, solo el GM ve las Pistas descubiertas en el Muro de investigación."
+}

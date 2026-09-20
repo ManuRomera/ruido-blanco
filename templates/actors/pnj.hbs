@@ -1,0 +1,23 @@
+<form class="rb-sheet rb-sheet-pnj" autocomplete="off">
+  <header class="rb-sheet-header">
+    <img class="rb-retrato" src="{{actor.img}}" data-edit="img" title="{{actor.name}}">
+    <div class="rb-identidad">
+      <input class="rb-nombre" type="text" name="name" value="{{actor.name}}" placeholder="Nombre">
+      <input class="rb-concepto" type="text" name="system.rol" value="{{system.rol}}" placeholder="Rol en el caso">
+    </div>
+  </header>
+
+  <section class="rb-sheet-body rb-pnj-cuerpo">
+    <p class="rb-ayuda rb-ayuda-fuerte">Un secreto no equivale a culpabilidad. No decidas antes de la Revelación.</p>
+    <label>Qué quiere
+      <textarea name="system.quiere" rows="3">{{system.quiere}}</textarea></label>
+    <label>Qué oculta
+      <textarea name="system.oculta" rows="3">{{system.oculta}}</textarea></label>
+    <label>Cómo reacciona bajo presión
+      <textarea name="system.bajoPresion" rows="3">{{system.bajoPresion}}</textarea></label>
+    <div class="rb-panel">
+      <h2>Notas</h2>
+      {{editor notasHTML target="system.notas" button=true editable=editable engine="prosemirror"}}
+    </div>
+  </section>
+</form>

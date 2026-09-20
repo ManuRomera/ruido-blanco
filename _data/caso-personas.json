@@ -1,0 +1,56 @@
+{
+  "documents": [
+    {
+      "_id": "RBPnjSara0000000",
+      "name": "Sara Beltrán",
+      "type": "pnj",
+      "img": "icons/svg/cowled.svg",
+      "system": {
+        "rol": "Cofundadora y expareja de Irene",
+        "quiere": "Mantener el control de NEREIDA y su vida privada fuera del escándalo.",
+        "oculta": "Irene le pidió material interno fuera de protocolo.",
+        "bajoPresion": "Coopera hasta que la relación personal entra en juego; después llama a abogados.",
+        "notas": ""
+      }
+    },
+    {
+      "_id": "RBPnjLeo00000000",
+      "name": "Leo Marín",
+      "type": "pnj",
+      "img": "icons/svg/cowled.svg",
+      "system": {
+        "rol": "Responsable de Seguridad",
+        "quiere": "Demostrar que la brecha no fue negligencia suya.",
+        "oculta": "Hizo cambios de mantenimiento mal documentados.",
+        "bajoPresion": "Bajo presión explica demasiado y empieza a «ordenar» registros ambiguos.",
+        "notas": ""
+      }
+    },
+    {
+      "_id": "RBPnjEva00000000",
+      "name": "Eva Montal",
+      "type": "pnj",
+      "img": "icons/svg/cowled.svg",
+      "system": {
+        "rol": "Finanzas",
+        "quiere": "Salvar una ronda de financiación.",
+        "oculta": "Autorizó pagos irregulares vinculados a NEREIDA y usa administración remota.",
+        "bajoPresion": "Intenta encuadrarlo todo como problema de Seguridad.",
+        "notas": ""
+      }
+    },
+    {
+      "_id": "RBPnjTomas000000",
+      "name": "Tomás Vidal",
+      "type": "pnj",
+      "img": "icons/svg/cowled.svg",
+      "system": {
+        "rol": "Periodista",
+        "quiere": "Publicar NEREIDA y proteger a su fuente.",
+        "oculta": "Entró en el edificio y ocultó el motivo real.",
+        "bajoPresion": "Niega su presencia hasta que los registros la hacen insostenible.",
+        "notas": ""
+      }
+    }
+  ]
+}

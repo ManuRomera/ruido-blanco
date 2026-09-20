@@ -1,0 +1,23 @@
+<div class="rb-chat rb-chat-accion {{grado.clase}}">
+  <header>
+    <span class="rb-chat-metodo">{{metodo}} {{valor}}</span>
+    <h3>{{grado.titulo}}</h3>
+    <span class="rb-chat-total">{{total}}</span>
+  </header>
+
+  {{#if apuesta}}<p class="rb-chat-apuesta"><strong>La Apuesta:</strong> {{apuesta}}</p>{{/if}}
+
+  <div class="rb-chat-dados">
+    {{#each dados}}<span class="rb-dado {{#unless active}}descartado{{/unless}}">{{result}}</span>{{/each}}
+    <span class="rb-chat-formula">{{formula}}</span>
+    {{#if ventaja}}<span class="rb-chat-flag rb-flag-ventaja">Ventaja</span>{{/if}}
+    {{#if desventaja}}<span class="rb-chat-flag rb-flag-desventaja">Desventaja</span>{{/if}}
+  </div>
+
+  <p class="rb-chat-efecto">
+    {{#if (eq gradoId "nitido")}}Consigues lo que querías y además creas una ventaja, reduces 1 Ruido de Fondo si tiene sentido o descubres un detalle adicional.{{/if}}
+    {{#if (eq gradoId "limpio")}}Consigues el objetivo sin consecuencia relevante.{{/if}}
+    {{#if (eq gradoId "coste")}}Consigues lo esencial y el GM cobra una consecuencia coherente con la Apuesta.{{/if}}
+    {{#if (eq gradoId "reves")}}No lo consigues como pretendías y la situación empeora. La partida siempre avanza.{{/if}}
+  </p>
+</div>

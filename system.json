@@ -1,0 +1,97 @@
+{
+  "id": "ruido-blanco",
+  "title": "RUIDO BLANCO",
+  "description": "Juego de rol de investigación contemporánea emergente. Las Pistas son reales; su significado, interpretable. Sistema para Foundry VTT con Muro de investigación, Ruido de Fondo compartido y motor de Revelación.",
+  "version": "0.5.5",
+  "compatibility": {
+    "minimum": "13",
+    "verified": "13.351"
+  },
+  "authors": [
+    {
+      "name": "Manu Romera",
+      "url": "https://github.com/ManuRomera"
+    }
+  ],
+  "url": "https://github.com/ManuRomera/ruido-blanco",
+  "license": "LICENSE",
+  "readme": "README.md",
+  "changelog": "https://github.com/ManuRomera/ruido-blanco/blob/main/CHANGELOG.md",
+  "bugs": "https://github.com/ManuRomera/ruido-blanco/issues",
+  "esmodules": [
+    "ruido-blanco.mjs"
+  ],
+  "styles": [
+    "styles/ruido-blanco.css"
+  ],
+  "languages": [
+    {
+      "lang": "es",
+      "name": "Español",
+      "path": "lang/es.json"
+    }
+  ],
+  "documentTypes": {
+    "Actor": {
+      "investigador": {},
+      "pnj": {}
+    },
+    "Item": {
+      "pista": {},
+      "hipotesis": {}
+    }
+  },
+  "packs": [
+    {
+      "name": "manual",
+      "label": "RB · Manual del investigador",
+      "path": "packs/manual",
+      "type": "JournalEntry",
+      "system": "ruido-blanco",
+      "ownership": { "PLAYER": "OBSERVER", "ASSISTANT": "OWNER" }
+    },
+    {
+      "name": "pregenerados",
+      "label": "RB · Investigadores pregenerados",
+      "path": "packs/pregenerados",
+      "type": "Actor",
+      "system": "ruido-blanco",
+      "ownership": { "PLAYER": "OBSERVER", "ASSISTANT": "OWNER" }
+    },
+    {
+      "name": "caso",
+      "label": "RB · Caso: Once minutos sin imagen",
+      "path": "packs/caso",
+      "type": "JournalEntry",
+      "system": "ruido-blanco",
+      "ownership": { "PLAYER": "NONE", "ASSISTANT": "OWNER" }
+    },
+    {
+      "name": "caso-pistas",
+      "label": "RB · Pistas: Once minutos sin imagen",
+      "path": "packs/caso-pistas",
+      "type": "Item",
+      "system": "ruido-blanco",
+      "ownership": { "PLAYER": "NONE", "ASSISTANT": "OWNER" }
+    },
+    {
+      "name": "caso-personas",
+      "label": "RB · Personas de interés: Once minutos sin imagen",
+      "path": "packs/caso-personas",
+      "type": "Actor",
+      "system": "ruido-blanco",
+      "ownership": { "PLAYER": "NONE", "ASSISTANT": "OWNER" }
+    }
+  ],
+  "grid": {
+    "distance": 1,
+    "units": "m"
+  },
+  "initiative": "2d6",
+  "primaryTokenAttribute": "tension",
+  "secondaryTokenAttribute": null,
+  "socket": true,
+  "background": "systems/ruido-blanco/assets/portada.webp",
+  "manifest": "https://github.com/ManuRomera/ruido-blanco/releases/latest/download/system.json",
+  "download": "https://github.com/ManuRomera/ruido-blanco/releases/latest/download/ruido-blanco.zip"
+}

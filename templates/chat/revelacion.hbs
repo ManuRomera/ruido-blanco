@@ -1,0 +1,46 @@
+<div class="rb-chat rb-chat-revelacion rb-grado-{{grado}}">
+  <header>
+    <span class="rb-chat-metodo">Revelación · 2d6 +{{afinacion}}</span>
+    <h3>
+      {{#if esClara}}SEÑAL CLARA{{/if}}
+      {{#if esDistorsionada}}SEÑAL DISTORSIONADA{{/if}}
+      {{#if esFalsoPositivo}}FALSO POSITIVO{{/if}}
+    </h3>
+    <span class="rb-chat-total">{{total}}</span>
+  </header>
+
+  <div class="rb-chat-marcador">
+    <span>{{senales}} Señales</span><span>{{ruido}} Ruido</span><span>{{interferencias}} Interferencias</span>
+    {{#if control}}<span class="rb-flag-control">CONTROL</span>{{/if}}
+    {{#if degradado}}<span class="rb-flag-mordedura">MORDEDURA</span>{{/if}}
+  </div>
+
+  <section class="rb-chat-nucleo">
+    <p><strong>QUÉ:</strong> {{caso.nucleo.que}}</p>
+    <p><strong>QUIÉN:</strong> {{caso.nucleo.quien}}</p>
+    <p><strong>POR QUÉ:</strong> {{caso.nucleo.porque}}</p>
+  </section>
+
+  {{#if esClara}}
+  <p class="rb-chat-efecto">QUÉ, QUIÉN y POR QUÉ se convierten en verdad tal como los habéis presentado.
+    Quien lideró la Revelación añade un detalle visible que confirma la conclusión.</p>
+  {{/if}}
+
+  {{#if esDistorsionada}}
+  <p class="rb-chat-efecto">Tenéis razón en lo fundamental, pero…
+    {{#if control}} Con Control, POR QUÉ también queda protegido.{{else}} Sin Control, la Distorsión puede afectar al POR QUÉ.{{/if}}</p>
+  {{#if degradado}}<p class="rb-chat-nota">La Mordedura ha degradado un 10+ a 7-9: llegasteis a la verdad dejando demasiados elementos sin explicar.</p>{{/if}}
+  {{#if anclaDistorsion}}
+  <p class="rb-chat-ancla"><strong>Ancla sugerida:</strong> {{anclaDistorsion.codigo}} — {{anclaDistorsion.texto}}</p>
+  {{/if}}
+  <details class="rb-chat-lentes"><summary>Lentes de Distorsión</summary>
+    <ul>{{#each lentes}}<li><strong>{{nombre}}.</strong> {{pregunta}}</li>{{/each}}</ul>
+  </details>
+  {{/if}}
+
+  {{#if esFalsoPositivo}}
+  <p class="rb-chat-efecto">La teoría no es la verdad del caso. El riesgo anunciado se materializa.
+    El GM añade un detalle factual a una Pista y la convierte en PISTA DURA: debe abrir al menos dos explicaciones plausibles nuevas.</p>
+  <p class="rb-chat-nota">Elegid: <strong>Retirada</strong> (Ruido +1) o <strong>Seguir la Grieta</strong> (Ruido +2).</p>
+  {{/if}}
+</div>

@@ -1,0 +1,240 @@
+{
+  "documents": [
+    {
+      "_id": "RBPregAlex000000",
+      "name": "Alex Pardo",
+      "type": "investigador",
+      "img": "icons/svg/mystery-man.svg",
+      "system": {
+        "concepto": "Abogada de cumplimiento y litigación interna.",
+        "pronombres": "",
+        "profesion": "Abogada / cumplimiento",
+        "metodos": {
+          "observar": 1,
+          "razonar": 1,
+          "influir": 2,
+          "intervenir": 0
+        },
+        "especialidades": {
+          "c1": "Derecho",
+          "c2": "Finanzas"
+        },
+        "kit": "Legal",
+        "talento": {
+          "nombre": "Lectura del sistema",
+          "regla": "Una vez por escena institucional, pregunta quién puede darte realmente lo que buscas y qué quiere evitar."
+        },
+        "obsesion": "Obligar a una institución a reconocer la evidencia que intenta administrar.",
+        "puntoCiego": "Cree que todo problema tiene una vía procesal si se encuentra el documento correcto.",
+        "anclas": {
+          "a1": {
+            "nombre": "Su hermana Júlia",
+            "usada": false
+          },
+          "a2": {
+            "nombre": "Su reputación profesional fuera de los casos de Ruido Blanco",
+            "usada": false
+          }
+        },
+        "vinculo": "Iván siempre encuentra el dato que Alex necesita convertir en argumento.",
+        "tension": {
+          "value": 0,
+          "max": 3
+        },
+        "condiciones": {
+          "c1": "",
+          "c2": "",
+          "c3": ""
+        },
+        "secuelas": {
+          "s1": {
+            "nombre": "",
+            "disparador": ""
+          },
+          "s2": {
+            "nombre": "",
+            "disparador": ""
+          }
+        },
+        "notas": ""
+      }
+    },
+    {
+      "_id": "RBPregIvan000000",
+      "name": "Iván Costa",
+      "type": "investigador",
+      "img": "icons/svg/mystery-man.svg",
+      "system": {
+        "concepto": "Analista de respuesta a incidentes.",
+        "pronombres": "",
+        "profesion": "Analista / auditor",
+        "metodos": {
+          "observar": 1,
+          "razonar": 2,
+          "influir": 0,
+          "intervenir": 1
+        },
+        "especialidades": {
+          "c1": "Ciberseguridad",
+          "c2": "Análisis de datos"
+        },
+        "kit": "Digital",
+        "talento": {
+          "nombre": "Preparación oculta",
+          "regla": "Marca 1 Tensión para declarar una preparación previa concreta y razonable."
+        },
+        "obsesion": "Demostrar que los sistemas dejan huellas incluso cuando las personas no.",
+        "puntoCiego": "Sobrevalora los registros técnicos y sospecha demasiado de los testimonios emocionales.",
+        "anclas": {
+          "a1": {
+            "nombre": "Cocinar para su padre los domingos",
+            "usada": false
+          },
+          "a2": {
+            "nombre": "El taller comunitario donde repara equipos viejos",
+            "usada": false
+          }
+        },
+        "vinculo": "Mara le recuerda que detrás de cada log hay un cuerpo o una persona.",
+        "tension": {
+          "value": 0,
+          "max": 3
+        },
+        "condiciones": {
+          "c1": "",
+          "c2": "",
+          "c3": ""
+        },
+        "secuelas": {
+          "s1": {
+            "nombre": "",
+            "disparador": ""
+          },
+          "s2": {
+            "nombre": "",
+            "disparador": ""
+          }
+        },
+        "notas": ""
+      }
+    },
+    {
+      "_id": "RBPregMara000000",
+      "name": "Mara Soler",
+      "type": "investigador",
+      "img": "icons/svg/mystery-man.svg",
+      "system": {
+        "concepto": "Enfermera forense de urgencias.",
+        "pronombres": "",
+        "profesion": "Sanitario",
+        "metodos": {
+          "observar": 2,
+          "razonar": 0,
+          "influir": 1,
+          "intervenir": 1
+        },
+        "especialidades": {
+          "c1": "Medicina forense",
+          "c2": "Primeros auxilios"
+        },
+        "kit": "Forense",
+        "talento": {
+          "nombre": "Esto no encaja",
+          "regla": "Una vez por escena, tras examinar un lugar, pregunta qué detalle objetivo contradice la explicación más obvia."
+        },
+        "obsesion": "Que la historia final respete lo que el cuerpo y la escena dicen de verdad.",
+        "puntoCiego": "Interpreta el autocontrol de otras personas como ocultación demasiado rápido.",
+        "anclas": {
+          "a1": {
+            "nombre": "Su hijo Nil",
+            "usada": false
+          },
+          "a2": {
+            "nombre": "Correr al amanecer por el puerto",
+            "usada": false
+          }
+        },
+        "vinculo": "Óscar la convenció de empezar a trabajar casos de Ruido Blanco y todavía no sabe si agradecérselo.",
+        "tension": {
+          "value": 0,
+          "max": 3
+        },
+        "condiciones": {
+          "c1": "",
+          "c2": "",
+          "c3": ""
+        },
+        "secuelas": {
+          "s1": {
+            "nombre": "",
+            "disparador": ""
+          },
+          "s2": {
+            "nombre": "",
+            "disparador": ""
+          }
+        },
+        "notas": ""
+      }
+    },
+    {
+      "_id": "RBPregOscar00000",
+      "name": "Óscar Rius",
+      "type": "investigador",
+      "img": "icons/svg/mystery-man.svg",
+      "system": {
+        "concepto": "Investigador privado; antiguo seguridad corporativa.",
+        "pronombres": "",
+        "profesion": "Investigador privado",
+        "metodos": {
+          "observar": 1,
+          "razonar": 0,
+          "influir": 1,
+          "intervenir": 2
+        },
+        "especialidades": {
+          "c1": "Vigilancia",
+          "c2": "Seguridad"
+        },
+        "kit": "Vigilancia",
+        "talento": {
+          "nombre": "Salida preparada",
+          "regla": "Una vez por sesión, cuando todo se complica, obtén Ventaja para abandonar la escena."
+        },
+        "obsesion": "Descubrir qué hace una institución cuando cree que nadie la está mirando.",
+        "puntoCiego": "Asume que quien protege una organización protegerá antes la organización que la verdad.",
+        "anclas": {
+          "a1": {
+            "nombre": "Su hija adulta Laia",
+            "usada": false
+          },
+          "a2": {
+            "nombre": "Un gimnasio de barrio donde nadie le pregunta por su trabajo",
+            "usada": false
+          }
+        },
+        "vinculo": "Alex le ha sacado de más de un problema legal del que piensa admitir.",
+        "tension": {
+          "value": 0,
+          "max": 3
+        },
+        "condiciones": {
+          "c1": "",
+          "c2": "",
+          "c3": ""
+        },
+        "secuelas": {
+          "s1": {
+            "nombre": "",
+            "disparador": ""
+          },
+          "s2": {
+            "nombre": "",
+            "disparador": ""
+          }
+        },
+        "notas": ""
+      }
+    }
+  ]
+}

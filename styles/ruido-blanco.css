@@ -1,0 +1,442 @@
+/* RUIDO BLANCO — noche azul, papel envejecido, hilo rojo. */
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Special+Elite&family=Caveat:wght@500;700&display=swap");
+
+.ruido-blanco {
+  --rb-noche: #0c1622;
+  --rb-noche-2: #142235;
+  --rb-noche-3: #1d2f45;
+  --rb-papel: #e9e1cc;
+  --rb-papel-2: #d9cfb4;
+  --rb-papel-3: #c7bb9a;
+  --rb-tinta: #1a1710;
+  --rb-tinta-suave: #5a5243;
+  --rb-rojo: #8f2b22;
+  --rb-rojo-vivo: #b93b2b;
+  --rb-oro: #c9a14e;
+  --rb-senal: #4f6b46;
+  --rb-ruido: #8f2b22;
+  --rb-interferencia: #3b5a75;
+  --rb-display: "Oswald", "Signika", sans-serif;
+  --rb-texto: "Crimson Pro", "Signika", serif;
+  --rb-maquina: "Special Elite", "Courier New", monospace;
+  --rb-mano: "Caveat", cursive;
+
+  font-family: var(--rb-texto);
+  color: var(--rb-tinta);
+}
+
+.ruido-blanco h1,
+.ruido-blanco h2,
+.ruido-blanco h3 {
+  font-family: var(--rb-display);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border: none;
+  margin: 0;
+}
+
+/* ---------- Marco de ventana ---------- */
+.ruido-blanco.application,
+.ruido-blanco.window-app {
+  background: var(--rb-noche);
+}
+
+.ruido-blanco .window-content {
+  background:
+    radial-gradient(circle at 12% 8%, rgba(201, 161, 78, 0.16), transparent 42%),
+    linear-gradient(160deg, var(--rb-noche-2), var(--rb-noche));
+  color: var(--rb-papel);
+  padding: 0;
+  overflow: hidden;
+}
+
+/* ---------- Paneles de papel ---------- */
+.ruido-blanco .rb-panel {
+  background: linear-gradient(180deg, var(--rb-papel), var(--rb-papel-2));
+  border: 1px solid var(--rb-papel-3);
+  border-radius: 2px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+  padding: 0.7rem 0.9rem;
+  margin-bottom: 0.75rem;
+  color: var(--rb-tinta);
+}
+
+.ruido-blanco .rb-panel h2 {
+  font-size: 1.05rem;
+  color: var(--rb-tinta);
+  border-bottom: 2px solid var(--rb-tinta);
+  padding-bottom: 0.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.ruido-blanco .rb-ayuda {
+  font-size: 0.82rem;
+  font-style: italic;
+  color: var(--rb-tinta-suave);
+  margin: 0 0 0.5rem;
+}
+
+.ruido-blanco .rb-ayuda-fuerte {
+  font-style: normal;
+  font-family: var(--rb-maquina);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: var(--rb-rojo);
+}
+
+.ruido-blanco .rb-aviso { color: var(--rb-rojo); font-weight: 600; }
+.ruido-blanco .rb-vacio { color: var(--rb-papel-3); font-style: italic; padding: 1rem; }
+
+.ruido-blanco input[type="text"],
+.ruido-blanco input[type="number"],
+.ruido-blanco textarea,
+.ruido-blanco select {
+  background: rgba(255, 255, 255, 0.35);
+  border: none;
+  border-bottom: 1px solid var(--rb-tinta-suave);
+  border-radius: 0;
+  color: var(--rb-tinta);
+  font-family: var(--rb-texto);
+  width: 100%;
+}
+
+.ruido-blanco textarea { resize: vertical; }
+.ruido-blanco label { display: block; font-size: 0.8rem; color: var(--rb-tinta-suave); }
+.ruido-blanco .rb-check { display: flex; align-items: center; gap: 0.4rem; }
+.ruido-blanco .rb-check input { width: auto; }
+
+.ruido-blanco button {
+  font-family: var(--rb-display);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background: var(--rb-noche-3);
+  color: var(--rb-papel);
+  border: 1px solid var(--rb-oro);
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.ruido-blanco button:hover:not(:disabled) { background: var(--rb-rojo); border-color: var(--rb-rojo-vivo); }
+.ruido-blanco button:disabled { opacity: 0.4; cursor: default; }
+.ruido-blanco .rb-boton-linea { font-size: 0.72rem; padding: 0.15rem 0.5rem; }
+.ruido-blanco .rb-boton-alerta { background: var(--rb-rojo); border-color: var(--rb-rojo-vivo); width: 100%; padding: 0.4rem; }
+
+/* ---------- Cabecera de ficha ---------- */
+.ruido-blanco .rb-sheet { height: 100%; display: flex; flex-direction: column; }
+
+.ruido-blanco .rb-sheet-header {
+  display: flex;
+  gap: 0.8rem;
+  align-items: center;
+  padding: 0.8rem;
+  border-bottom: 2px solid var(--rb-oro);
+}
+
+.ruido-blanco .rb-retrato {
+  width: 86px; height: 86px; object-fit: cover;
+  border: 2px solid var(--rb-papel-2);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.6);
+}
+
+.ruido-blanco .rb-identidad { flex: 1; }
+
+.ruido-blanco .rb-nombre {
+  font-family: var(--rb-display);
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  color: var(--rb-papel);
+  background: transparent;
+  border-bottom: 1px solid rgba(201, 161, 78, 0.4);
+}
+
+.ruido-blanco .rb-concepto,
+.ruido-blanco .rb-identidad input,
+.ruido-blanco .rb-identidad select {
+  color: var(--rb-papel);
+  background: rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgba(201, 161, 78, 0.3);
+}
+
+.ruido-blanco .rb-identidad label { color: var(--rb-oro); font-size: 0.7rem; text-transform: uppercase; }
+.ruido-blanco .rb-identidad-fila { display: flex; gap: 0.6rem; margin-top: 0.3rem; }
+.ruido-blanco .rb-boton-muro { align-self: flex-start; padding: 0.4rem 0.6rem; }
+
+/* ---------- Pestañas ---------- */
+.ruido-blanco .rb-tabs {
+  display: flex; gap: 0.4rem; padding: 0.4rem 0.8rem 0;
+  border-bottom: 1px solid rgba(201, 161, 78, 0.3);
+}
+
+.ruido-blanco .rb-tabs .item {
+  font-family: var(--rb-display);
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  padding: 0.25rem 0.8rem;
+  color: var(--rb-papel-3);
+  border: 1px solid transparent;
+  border-bottom: none;
+}
+
+.ruido-blanco .rb-tabs .item.active {
+  color: var(--rb-noche);
+  background: var(--rb-papel);
+  border-color: var(--rb-papel-3);
+}
+
+.ruido-blanco .rb-sheet-body { flex: 1; overflow-y: auto; padding: 0.8rem; }
+.ruido-blanco .rb-tab-ficha { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; align-items: start; }
+.ruido-blanco .rb-metodos { grid-column: 1 / -1; }
+
+/* ---------- Métodos ---------- */
+.ruido-blanco .rb-metodos-rejilla { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; }
+.ruido-blanco .rb-metodo { display: flex; flex-direction: column; gap: 0.25rem; }
+
+.ruido-blanco .rb-metodo-tirar {
+  display: flex; flex-direction: column; align-items: center; gap: 0.1rem;
+  padding: 0.5rem 0.2rem;
+  background: var(--rb-noche);
+}
+
+.ruido-blanco .rb-metodo-nombre { font-size: 0.7rem; }
+.ruido-blanco .rb-metodo-valor { font-size: 1.8rem; line-height: 1; color: var(--rb-oro); }
+.ruido-blanco .rb-metodo-dados { font-family: var(--rb-maquina); font-size: 0.65rem; color: var(--rb-papel-3); }
+.ruido-blanco .rb-metodo input { text-align: center; }
+
+/* ---------- Tensión ---------- */
+.ruido-blanco .rb-tension-casillas { display: flex; align-items: center; gap: 0.4rem; margin-bottom: 0.5rem; }
+.ruido-blanco .rb-casilla { width: 40px; height: 40px; background: var(--rb-noche); }
+.ruido-blanco .rb-casilla.marcada { background: var(--rb-rojo); border-color: var(--rb-rojo-vivo); }
+.ruido-blanco .rb-tension-valor { font-family: var(--rb-maquina); margin-left: auto; color: var(--rb-tinta); }
+.ruido-blanco .rb-tension-acciones { display: flex; gap: 0.4rem; }
+.ruido-blanco .rb-tension-acciones button { flex: 1; padding: 0.25rem; font-size: 0.72rem; }
+
+.ruido-blanco .rb-secuela { display: grid; grid-template-columns: 1fr 1.4fr; gap: 0.4rem; margin-bottom: 0.3rem; }
+.ruido-blanco .rb-ancla { display: flex; gap: 0.4rem; align-items: center; margin-bottom: 0.4rem; }
+.ruido-blanco .rb-ancla button { white-space: nowrap; font-size: 0.7rem; padding: 0.2rem 0.5rem; }
+.ruido-blanco .rb-ancla.usada input { opacity: 0.5; text-decoration: line-through; }
+.ruido-blanco .rb-reiniciar { width: 100%; font-size: 0.7rem; padding: 0.25rem; }
+
+/* ---------- Muro de investigación ---------- */
+.ruido-blanco .rb-muro-wrapper { display: flex; flex-direction: column; height: 100%; padding: 0.8rem; gap: 0.6rem; }
+
+.ruido-blanco .rb-muro-cabecera {
+  display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem;
+  border-bottom: 2px solid var(--rb-oro); padding-bottom: 0.6rem;
+}
+
+.ruido-blanco .rb-muro-caso h1 { font-size: 1.8rem; color: var(--rb-papel); }
+.ruido-blanco .rb-pregunta { font-family: var(--rb-mano); font-size: 1.1rem; color: var(--rb-oro); margin: 0.2rem 0 0.4rem; }
+
+.ruido-blanco .rb-muro-umbral { text-align: right; display: flex; flex-direction: column; gap: 0.2rem; align-items: flex-end; }
+.ruido-blanco .rb-umbral-cifra { font-family: var(--rb-display); font-size: 2.2rem; line-height: 1; color: var(--rb-papel); }
+.ruido-blanco .rb-umbral-cifra small { font-size: 1rem; color: var(--rb-papel-3); }
+.ruido-blanco .rb-umbral-label { font-size: 0.7rem; text-transform: uppercase; color: var(--rb-papel-3); }
+.ruido-blanco .rb-umbral-ok { font-family: var(--rb-maquina); font-size: 0.7rem; color: var(--rb-senal); }
+.ruido-blanco .rb-umbral-falta { font-family: var(--rb-maquina); font-size: 0.7rem; color: var(--rb-papel-3); }
+.ruido-blanco .rb-boton-revelar { padding: 0.4rem 0.9rem; background: var(--rb-rojo); border-color: var(--rb-oro); }
+
+/* Contador de Ruido de Fondo */
+.ruido-blanco .rb-ruido { background: rgba(0, 0, 0, 0.3); border: 1px solid rgba(201, 161, 78, 0.3); padding: 0.5rem 0.8rem; }
+.ruido-blanco .rb-ruido h2 { font-size: 0.9rem; color: var(--rb-oro); }
+.ruido-blanco .rb-ruido .rb-ayuda { color: var(--rb-papel-3); }
+.ruido-blanco .rb-ruido-track { display: flex; gap: 0.3rem; }
+
+.ruido-blanco .rb-ruido-paso {
+  flex: 1; padding: 0.3rem 0; font-size: 0.9rem;
+  background: var(--rb-noche); border-color: rgba(201, 161, 78, 0.35);
+}
+
+.ruido-blanco .rb-ruido-paso.activo { background: var(--rb-rojo); color: var(--rb-papel); }
+.ruido-blanco .rb-ruido-paso.es-reaccion { border-color: var(--rb-oro); border-width: 2px; }
+.ruido-blanco .rb-ruido-paso.es-mayor { border-color: var(--rb-rojo-vivo); border-width: 2px; }
+.ruido-blanco .rb-ruido-leyenda { display: flex; justify-content: space-between; font-family: var(--rb-maquina); font-size: 0.62rem; color: var(--rb-papel-3); margin: 0.25rem 0 0; }
+
+/* Columnas */
+.ruido-blanco .rb-muro-columnas { flex: 1; display: grid; grid-template-columns: 1.4fr 1fr; gap: 0.8rem; min-height: 0; }
+.ruido-blanco .rb-columna { display: flex; flex-direction: column; min-height: 0; background: rgba(0, 0, 0, 0.25); border: 1px solid rgba(201, 161, 78, 0.2); }
+
+.ruido-blanco .rb-columna-cabecera {
+  display: flex; align-items: baseline; gap: 0.5rem;
+  padding: 0.4rem 0.6rem; border-bottom: 1px solid rgba(201, 161, 78, 0.3);
+}
+
+.ruido-blanco .rb-columna-cabecera h2 { font-size: 1rem; color: var(--rb-oro); }
+.ruido-blanco .rb-columna-nota { font-size: 0.7rem; font-style: italic; color: var(--rb-papel-3); flex: 1; }
+.ruido-blanco .rb-columna-cuerpo { flex: 1; overflow-y: auto; padding: 0.6rem; display: flex; flex-direction: column; gap: 0.6rem; }
+
+/* Tarjetas de Pista */
+.ruido-blanco .rb-tarjeta {
+  background: linear-gradient(180deg, var(--rb-papel), var(--rb-papel-2));
+  border: 1px solid var(--rb-papel-3);
+  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.5);
+  padding: 0.5rem 0.65rem;
+  color: var(--rb-tinta);
+  transform: rotate(-0.25deg);
+}
+
+.ruido-blanco .rb-tarjeta:nth-child(even) { transform: rotate(0.3deg); }
+.ruido-blanco .rb-tarjeta.oculta { opacity: 0.55; filter: grayscale(0.4); }
+.ruido-blanco .rb-tarjeta.dura { border-left: 4px solid var(--rb-rojo); }
+.ruido-blanco .rb-tarjeta header { display: flex; align-items: baseline; gap: 0.4rem; }
+.ruido-blanco .rb-tarjeta h3 { font-size: 0.85rem; flex: 1; color: var(--rb-tinta); }
+.ruido-blanco .rb-tarjeta-codigo { font-family: var(--rb-maquina); font-size: 0.7rem; background: var(--rb-tinta); color: var(--rb-papel); padding: 0.05rem 0.35rem; }
+.ruido-blanco .rb-tarjeta-texto { margin: 0.35rem 0; font-size: 0.86rem; line-height: 1.35; }
+.ruido-blanco .rb-tarjeta-contexto { font-size: 0.78rem; color: var(--rb-tinta-suave); border-left: 2px solid var(--rb-papel-3); padding-left: 0.4rem; margin: 0.25rem 0; }
+.ruido-blanco .rb-tarjeta-fiabilidad { font-family: var(--rb-maquina); font-size: 0.66rem; color: var(--rb-rojo); margin: 0.2rem 0; }
+.ruido-blanco .rb-tarjeta footer { display: flex; align-items: center; gap: 0.4rem; font-size: 0.7rem; color: var(--rb-tinta-suave); }
+.ruido-blanco .rb-tarjeta-acciones { margin-left: auto; display: flex; gap: 0.2rem; }
+.ruido-blanco .rb-tarjeta-acciones button { background: transparent; border: none; color: var(--rb-tinta-suave); padding: 0.1rem 0.25rem; }
+.ruido-blanco .rb-tarjeta-acciones button:hover { background: transparent; color: var(--rb-rojo); }
+
+.ruido-blanco .rb-badge { font-family: var(--rb-maquina); font-size: 0.6rem; padding: 0.05rem 0.3rem; border: 1px solid currentColor; }
+.ruido-blanco .rb-badge-dura { color: var(--rb-rojo); }
+
+/* Notas de hipótesis */
+.ruido-blanco .rb-nota {
+  background: #f2e9a8;
+  color: var(--rb-tinta);
+  padding: 0.55rem 0.65rem;
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.45);
+  transform: rotate(0.6deg);
+  font-family: var(--rb-mano);
+  font-size: 1.05rem;
+}
+
+.ruido-blanco .rb-nota:nth-child(even) { transform: rotate(-0.7deg); background: #efe6c4; }
+.ruido-blanco .rb-nota p { margin: 0 0 0.3rem; }
+.ruido-blanco .rb-nota.descartada p { text-decoration: line-through; opacity: 0.6; }
+.ruido-blanco .rb-nota footer { display: flex; align-items: center; font-size: 0.75rem; color: var(--rb-tinta-suave); }
+.ruido-blanco .rb-nota-autor { font-family: var(--rb-maquina); font-size: 0.62rem; }
+
+/* ---------- Revelación ---------- */
+.ruido-blanco .rb-revelacion-interior { padding: 0.8rem; display: flex; flex-direction: column; gap: 0.6rem; height: 100%; }
+.ruido-blanco .rb-revelacion-cabecera h1 { font-size: 2rem; color: var(--rb-papel); }
+.ruido-blanco .rb-lead { font-style: italic; color: var(--rb-papel-3); margin: 0.2rem 0; }
+.ruido-blanco .rb-nucleo label { color: var(--rb-tinta); font-family: var(--rb-display); font-size: 0.78rem; margin-top: 0.3rem; }
+.ruido-blanco .rb-revelacion-pistas { max-height: 34vh; overflow-y: auto; display: flex; flex-direction: column; gap: 0.4rem; }
+
+.ruido-blanco .rb-fila-pista {
+  background: rgba(255, 255, 255, 0.5);
+  border-left: 4px solid var(--rb-papel-3);
+  padding: 0.4rem 0.6rem;
+}
+
+.ruido-blanco .rb-fila-pista.rb-clase-senal { border-left-color: var(--rb-senal); }
+.ruido-blanco .rb-fila-pista.rb-clase-ruido { border-left-color: var(--rb-ruido); }
+.ruido-blanco .rb-fila-pista.rb-clase-interferencia { border-left-color: var(--rb-interferencia); }
+.ruido-blanco .rb-fila-pista header { display: flex; gap: 0.4rem; align-items: baseline; }
+.ruido-blanco .rb-fila-texto { margin: 0; font-size: 0.84rem; flex: 1; }
+.ruido-blanco .rb-fila-controles { display: flex; gap: 0.5rem; align-items: center; margin: 0.3rem 0; flex-wrap: wrap; }
+.ruido-blanco .rb-fila-controles select { width: auto; flex: 1; min-width: 130px; }
+
+.ruido-blanco .rb-radio { display: flex; align-items: center; gap: 0.25rem; font-family: var(--rb-display); font-size: 0.68rem; }
+.ruido-blanco .rb-radio input { width: auto; }
+.ruido-blanco .rb-radio-senal { color: var(--rb-senal); }
+.ruido-blanco .rb-radio-ruido { color: var(--rb-ruido); }
+.ruido-blanco .rb-radio-interferencia { color: var(--rb-interferencia); }
+.ruido-blanco .rb-fila-justificacion { font-size: 0.78rem; font-style: italic; }
+
+.ruido-blanco .rb-revelacion-marcador { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; }
+
+.ruido-blanco .rb-marcador-caja {
+  display: flex; flex-direction: column; align-items: center;
+  background: rgba(0, 0, 0, 0.35); border: 1px solid rgba(201, 161, 78, 0.3); padding: 0.4rem;
+}
+
+.ruido-blanco .rb-cifra { font-family: var(--rb-display); font-size: 1.9rem; line-height: 1; color: var(--rb-papel); }
+.ruido-blanco .rb-etiqueta { font-size: 0.65rem; text-transform: uppercase; color: var(--rb-papel-3); }
+.ruido-blanco .rb-marcador-senal { border-color: var(--rb-senal); }
+.ruido-blanco .rb-marcador-ruido { border-color: var(--rb-ruido); }
+.ruido-blanco .rb-marcador-interferencia { border-color: var(--rb-interferencia); }
+.ruido-blanco .rb-marcador-afinacion { border-color: var(--rb-oro); }
+.ruido-blanco .rb-marcador-afinacion .rb-cifra { color: var(--rb-oro); }
+
+.ruido-blanco .rb-estado { font-family: var(--rb-maquina); font-size: 0.72rem; margin: 0.15rem 0; }
+.ruido-blanco .rb-estado-control { color: var(--rb-oro); }
+.ruido-blanco .rb-estado-mordedura { color: var(--rb-rojo-vivo); }
+.ruido-blanco .rb-estado-ancla { color: var(--rb-interferencia); }
+.ruido-blanco .rb-requisitos { list-style: none; margin: 0.3rem 0 0; padding: 0; font-size: 0.72rem; }
+.ruido-blanco .rb-requisitos .cumplido { color: var(--rb-senal); }
+.ruido-blanco .rb-requisitos .pendiente { color: var(--rb-papel-3); }
+.ruido-blanco .rb-revelacion-bloqueos { background: rgba(143, 43, 34, 0.25); border-left: 3px solid var(--rb-rojo); padding: 0.4rem 0.6rem; font-size: 0.78rem; color: var(--rb-papel); }
+.ruido-blanco .rb-revelacion-bloqueos p { margin: 0.1rem 0; }
+.ruido-blanco .rb-revelacion-acciones { display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; }
+.ruido-blanco .rb-acciones-secundarias { display: flex; gap: 0.3rem; margin-left: auto; }
+.ruido-blanco .rb-acciones-secundarias button { font-size: 0.66rem; padding: 0.2rem 0.5rem; }
+
+/* ---------- Pista e Hipótesis ---------- */
+.ruido-blanco .rb-pista-header { align-items: center; }
+.ruido-blanco .rb-pista-codigo { width: 70px; font-family: var(--rb-maquina); text-align: center; color: var(--rb-papel); }
+.ruido-blanco .rb-pista-cuerpo label { color: var(--rb-oro); font-family: var(--rb-display); font-size: 0.75rem; }
+.ruido-blanco .rb-pista-cuerpo input,
+.ruido-blanco .rb-pista-cuerpo textarea,
+.ruido-blanco .rb-pista-cuerpo select { color: var(--rb-papel); background: rgba(255, 255, 255, 0.07); }
+.ruido-blanco .rb-pista-fila { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; }
+.ruido-blanco .rb-pista-gm { display: flex; gap: 1rem; margin: 0.5rem 0; font-size: 0.75rem; color: var(--rb-papel-3); }
+.ruido-blanco .rb-panel-revelacion label { color: var(--rb-tinta-suave); }
+.ruido-blanco .rb-panel-revelacion input,
+.ruido-blanco .rb-panel-revelacion textarea,
+.ruido-blanco .rb-panel-revelacion select { color: var(--rb-tinta); background: rgba(255, 255, 255, 0.4); }
+.ruido-blanco .rb-ayuda-despl { font-size: 0.75rem; color: var(--rb-tinta-suave); margin-top: 0.4rem; }
+.ruido-blanco .rb-ayuda-despl ul { margin: 0.3rem 0 0 1rem; }
+.ruido-blanco .rb-sheet-hipotesis .rb-sheet-body { font-family: var(--rb-mano); font-size: 1.05rem; }
+.ruido-blanco .rb-sheet-hipotesis.descartada textarea { text-decoration: line-through; opacity: 0.6; }
+.ruido-blanco .rb-pnj-cuerpo label { color: var(--rb-oro); font-family: var(--rb-display); font-size: 0.75rem; margin-bottom: 0.4rem; }
+.ruido-blanco .rb-pnj-cuerpo textarea { color: var(--rb-papel); background: rgba(255, 255, 255, 0.07); }
+
+/* ---------- Tarjetas de chat ---------- */
+.rb-chat {
+  font-family: "Crimson Pro", serif;
+  background: linear-gradient(160deg, #142235, #0c1622);
+  border: 1px solid #c9a14e;
+  color: #e9e1cc;
+  padding: 0.6rem 0.7rem;
+}
+
+.rb-chat header { display: flex; align-items: baseline; gap: 0.5rem; border-bottom: 1px solid rgba(201, 161, 78, 0.4); padding-bottom: 0.3rem; }
+.rb-chat h3 { font-family: "Oswald", sans-serif; text-transform: uppercase; font-size: 1.05rem; margin: 0; flex: 1; border: none; color: #e9e1cc; }
+.rb-chat-metodo { font-family: "Special Elite", monospace; font-size: 0.62rem; color: #c9a14e; text-transform: uppercase; }
+.rb-chat-total { font-family: "Oswald", sans-serif; font-size: 1.7rem; line-height: 1; color: #c9a14e; }
+.rb-chat-apuesta { font-size: 0.82rem; font-style: italic; margin: 0.35rem 0; color: #d9cfb4; }
+.rb-chat-dados { display: flex; align-items: center; gap: 0.3rem; flex-wrap: wrap; margin: 0.35rem 0; }
+
+.rb-dado {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 24px; height: 24px;
+  background: #e9e1cc; color: #1a1710;
+  font-family: "Oswald", sans-serif; font-size: 0.85rem;
+}
+
+.rb-dado.descartado { opacity: 0.3; text-decoration: line-through; }
+.rb-chat-formula { font-family: "Special Elite", monospace; font-size: 0.65rem; color: #a99e83; margin-left: auto; }
+.rb-chat-flag { font-family: "Special Elite", monospace; font-size: 0.6rem; padding: 0.05rem 0.3rem; border: 1px solid currentColor; }
+.rb-flag-ventaja { color: #4f6b46; }
+.rb-flag-desventaja { color: #b93b2b; }
+.rb-flag-control { color: #c9a14e; }
+.rb-flag-mordedura { color: #b93b2b; }
+.rb-chat-efecto { font-size: 0.85rem; margin: 0.3rem 0 0; }
+.rb-chat-nota { font-family: "Special Elite", monospace; font-size: 0.7rem; color: #a99e83; margin: 0.3rem 0 0; }
+.rb-chat-marcador { display: flex; gap: 0.5rem; flex-wrap: wrap; font-family: "Special Elite", monospace; font-size: 0.66rem; color: #a99e83; margin: 0.35rem 0; }
+.rb-chat-nucleo { background: rgba(0, 0, 0, 0.3); border-left: 3px solid #c9a14e; padding: 0.35rem 0.5rem; font-size: 0.82rem; }
+.rb-chat-nucleo p { margin: 0.1rem 0; }
+.rb-chat-ancla { font-size: 0.8rem; color: #3b5a75; background: rgba(59, 90, 117, 0.18); padding: 0.25rem 0.4rem; }
+.rb-chat-lentes { font-size: 0.78rem; margin-top: 0.35rem; }
+.rb-chat-lentes ul { margin: 0.25rem 0 0 1rem; padding: 0; }
+.rb-chat-secuela { color: #b93b2b; }
+.rb-chat-ruptura h3, .rb-grado-falso-positivo h3 { color: #b93b2b; }
+.rb-grado-clara h3 { color: #6f9160; }
+.rb-grado-nitido .rb-chat-total { color: #6f9160; }
+.rb-grado-reves .rb-chat-total { color: #b93b2b; }
+.rb-chat-ruido h3 { color: #b93b2b; }
+.rb-chat button { font-family: "Oswald", sans-serif; text-transform: uppercase; background: #8f2b22; color: #e9e1cc; border: 1px solid #c9a14e; width: 100%; margin-top: 0.4rem; padding: 0.3rem; cursor: pointer; }
+
+/* ---------- Diálogos ---------- */
+.ruido-blanco .rb-dialog { color: var(--rb-papel); display: flex; flex-direction: column; gap: 0.5rem; }
+.ruido-blanco .rb-dialog-lead { font-style: italic; color: var(--rb-papel-3); font-size: 0.82rem; margin: 0; }
+.ruido-blanco .rb-dialog label { color: var(--rb-oro); font-family: var(--rb-display); font-size: 0.72rem; }
+.ruido-blanco .rb-dialog input[type="text"],
+.ruido-blanco .rb-dialog textarea,
+.ruido-blanco .rb-dialog select { color: var(--rb-papel); background: rgba(255, 255, 255, 0.08); }
+.ruido-blanco .rb-dialog-flags { display: grid; grid-template-columns: 1fr 1fr; gap: 0.25rem; }
+.ruido-blanco .rb-dialog-flags label { display: flex; align-items: center; gap: 0.35rem; color: var(--rb-papel); font-family: var(--rb-texto); font-size: 0.8rem; text-transform: none; }
+.ruido-blanco .rb-dialog-flags input { width: auto; }

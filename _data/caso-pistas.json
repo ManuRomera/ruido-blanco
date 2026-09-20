@@ -1,0 +1,232 @@
+{
+  "documents": [
+    {
+      "_id": "RBPistaP10000000",
+      "name": "Informe preliminar",
+      "type": "pista",
+      "img": "icons/svg/eye.svg",
+      "sort": 100000,
+      "system": {
+        "codigo": "P1",
+        "texto": "El informe preliminar sitúa la muerte entre las 22:15 y las 22:35 por un traumatismo grave. El mecanismo exacto no está claro.",
+        "contexto": "",
+        "fiabilidad": "El mecanismo exacto no está determinado.",
+        "lugar": "ORBITA",
+        "dura": false,
+        "descubierta": false,
+        "clasificacion": "",
+        "justificacion": "",
+        "ancla": ""
+      }
+    },
+    {
+      "_id": "RBPistaP20000000",
+      "name": "Once minutos sin imagen",
+      "type": "pista",
+      "img": "icons/svg/eye.svg",
+      "sort": 200000,
+      "system": {
+        "codigo": "P2",
+        "texto": "Las cámaras interiores de la planta 17 no grabaron entre 22:08 y 22:19. No fue una caída general: la desconexión fue manual y requería privilegios de mantenimiento.",
+        "contexto": "",
+        "fiabilidad": "",
+        "lugar": "Seguridad",
+        "dura": false,
+        "descubierta": false,
+        "clasificacion": "",
+        "justificacion": "",
+        "ancla": ""
+      }
+    },
+    {
+      "_id": "RBPistaP30000000",
+      "name": "Credencial S-14",
+      "type": "pista",
+      "img": "icons/svg/eye.svg",
+      "sort": 300000,
+      "system": {
+        "codigo": "P3",
+        "texto": "A las 22:13 una credencial S-14 abrió ORBITA. Está asignada a Sara, pero el manual de Seguridad permite crear clones temporales de contingencia.",
+        "contexto": "",
+        "fiabilidad": "El registro identifica la credencial, no a quien la portaba.",
+        "lugar": "Seguridad",
+        "dura": false,
+        "descubierta": false,
+        "clasificacion": "",
+        "justificacion": "",
+        "ancla": ""
+      }
+    },
+    {
+      "_id": "RBPistaP40000000",
+      "name": "Copia de NEREIDA",
+      "type": "pista",
+      "img": "icons/svg/eye.svg",
+      "sort": 400000,
+      "system": {
+        "codigo": "P4",
+        "texto": "A las 22:05 el paquete de archivos llamado NEREIDA fue copiado desde el equipo de Irene a un soporte externo.",
+        "contexto": "",
+        "fiabilidad": "",
+        "lugar": "Oficina de Irene",
+        "dura": false,
+        "descubierta": false,
+        "clasificacion": "",
+        "justificacion": "",
+        "ancla": ""
+      }
+    },
+    {
+      "_id": "RBPistaP50000000",
+      "name": "El mensaje de las 21:58",
+      "type": "pista",
+      "img": "icons/svg/eye.svg",
+      "sort": 500000,
+      "system": {
+        "codigo": "P5",
+        "texto": "A las 21:58 Irene envió a Tomás: «Sube por servicio. ORBITA 22:10. Si esto sale mal, publica NEREIDA. No uses el resumen».",
+        "contexto": "",
+        "fiabilidad": "",
+        "lugar": "Oficina de Irene",
+        "dura": false,
+        "descubierta": false,
+        "clasificacion": "",
+        "justificacion": "",
+        "ancla": ""
+      }
+    },
+    {
+      "_id": "RBPistaP60000000",
+      "name": "Orden LM-3",
+      "type": "pista",
+      "img": "icons/svg/eye.svg",
+      "sort": 600000,
+      "system": {
+        "codigo": "P6",
+        "texto": "La orden LM-3 programó mantenimiento del CCTV de planta 17 a las 22:07. La orden fue creada con la cuenta de Leo.",
+        "contexto": "",
+        "fiabilidad": "Identifica la cuenta, no necesariamente a la persona.",
+        "lugar": "Seguridad",
+        "dura": false,
+        "descubierta": false,
+        "clasificacion": "",
+        "justificacion": "",
+        "ancla": ""
+      }
+    },
+    {
+      "_id": "RBPistaP70000000",
+      "name": "Microfracturas y yeso",
+      "type": "pista",
+      "img": "icons/svg/eye.svg",
+      "sort": 700000,
+      "system": {
+        "codigo": "P7",
+        "texto": "Junto al ventanal y la mesa hay microfracturas y polvo de yeso recientes. El patrón es compatible tanto con un forcejeo como con una preparación o escenificación.",
+        "contexto": "",
+        "fiabilidad": "Compatible con más de una lectura física.",
+        "lugar": "ORBITA",
+        "dura": false,
+        "descubierta": false,
+        "clasificacion": "",
+        "justificacion": "",
+        "ancla": ""
+      }
+    },
+    {
+      "_id": "RBPistaP80000000",
+      "name": "3,8 segundos de audio",
+      "type": "pista",
+      "img": "icons/svg/eye.svg",
+      "sort": 800000,
+      "system": {
+        "codigo": "P8",
+        "texto": "Se recuperan 3,8 segundos de audio de ORBITA. Una voz dice: «prometiste que terminaba aquí». La grabación no permite identificar con fiabilidad a quien habla.",
+        "contexto": "",
+        "fiabilidad": "No permite identificar con fiabilidad a la persona que habla.",
+        "lugar": "ORBITA",
+        "dura": false,
+        "descubierta": false,
+        "clasificacion": "",
+        "justificacion": "",
+        "ancla": ""
+      }
+    },
+    {
+      "_id": "RBPistaP90000000",
+      "name": "Apertura del ventanal",
+      "type": "pista",
+      "img": "icons/svg/eye.svg",
+      "sort": 900000,
+      "system": {
+        "codigo": "P9",
+        "texto": "A las 22:24 el ventanal inteligente de ORBITA recibió una orden local de apertura mediante una cuenta administrativa.",
+        "contexto": "",
+        "fiabilidad": "",
+        "lugar": "ORBITA",
+        "dura": false,
+        "descubierta": false,
+        "clasificacion": "",
+        "justificacion": "",
+        "ancla": ""
+      }
+    },
+    {
+      "_id": "RBPistaP10000000",
+      "name": "Facturas marcadas",
+      "type": "pista",
+      "img": "icons/svg/eye.svg",
+      "sort": 1000000,
+      "system": {
+        "codigo": "P10",
+        "texto": "Irene había marcado como irregulares varias facturas del proyecto NEREIDA vinculadas a un proveedor aprobado desde Finanzas.",
+        "contexto": "",
+        "fiabilidad": "",
+        "lugar": "Finanzas",
+        "dura": false,
+        "descubierta": false,
+        "clasificacion": "",
+        "justificacion": "",
+        "ancla": ""
+      }
+    },
+    {
+      "_id": "RBPistaP11000000",
+      "name": "Pago privado a Leo",
+      "type": "pista",
+      "img": "icons/svg/eye.svg",
+      "sort": 1100000,
+      "system": {
+        "codigo": "P11",
+        "texto": "Leo recibió un pago privado de una consultora que también aparece en el circuito económico de NEREIDA.",
+        "contexto": "",
+        "fiabilidad": "",
+        "lugar": "Finanzas",
+        "dura": false,
+        "descubierta": false,
+        "clasificacion": "",
+        "justificacion": "",
+        "ancla": ""
+      }
+    },
+    {
+      "_id": "RBPistaP12000000",
+      "name": "Sesión administrativa a las 22:16",
+      "type": "pista",
+      "img": "icons/svg/eye.svg",
+      "sort": 1200000,
+      "system": {
+        "codigo": "P12",
+        "texto": "A las 22:16 el portátil asignado a Eva inició una sesión administrativa hacia la automatización de planta 17. El registro identifica el dispositivo y el token, no quién estaba físicamente delante del teclado.",
+        "contexto": "",
+        "fiabilidad": "El registro identifica el dispositivo y el token, no a la persona.",
+        "lugar": "Finanzas",
+        "dura": false,
+        "descubierta": false,
+        "clasificacion": "",
+        "justificacion": "",
+        "ancla": ""
+      }
+    }
+  ]
+}

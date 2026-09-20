@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RUIDO BLANCO — Manual del investigador</title>
+<meta name="description" content="Juego de rol de investigación contemporánea emergente. Las Pistas son reales. Su significado, interpretable.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Special+Elite&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --noche:#0c1622; --noche-2:#142235; --noche-3:#1d2f45;
+  --papel:#e9e1cc; --papel-2:#d9cfb4; --papel-3:#b9ad8d;
+  --tinta:#1a1710; --tinta-suave:#5a5243;
+  --rojo:#8f2b22; --rojo-vivo:#b93b2b; --oro:#c9a14e;
+  --senal:#4f6b46; --interferencia:#3b5a75;
+  --display:"Oswald",sans-serif; --texto:"Crimson Pro",serif;
+  --maquina:"Special Elite",monospace; --mano:"Caveat",cursive;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:var(--texto);
+  font-size:18px;
+  line-height:1.6;
+  color:var(--papel);
+  background:
+    radial-gradient(circle at 15% 0%,rgba(201,161,78,.12),transparent 45%),
+    linear-gradient(170deg,var(--noche-2),var(--noche) 60%);
+  background-attachment:fixed;
+}
+a{color:var(--oro)}
+h1,h2,h3,h4,h5{font-family:var(--display);text-transform:uppercase;letter-spacing:.03em;line-height:1.1;margin:0}
+
+/* Portada */
+.hero{
+  min-height:82vh;display:flex;flex-direction:column;justify-content:center;
+  padding:4rem 1.5rem;text-align:center;position:relative;overflow:hidden;
+  border-bottom:3px solid var(--oro);
+}
+.hero::after{
+  content:"";position:absolute;inset:0;
+  background:url("portada.webp") center/cover no-repeat;
+  opacity:.18;filter:grayscale(.3);z-index:-1;
+}
+.hero h1{font-size:clamp(3rem,12vw,7rem);color:var(--papel);text-shadow:0 6px 30px rgba(0,0,0,.8)}
+.hero .sub{font-family:var(--maquina);font-size:.8rem;letter-spacing:.3em;color:var(--oro);margin-top:1rem}
+.hero .lema{
+  font-family:var(--display);font-size:clamp(1rem,2.6vw,1.5rem);
+  margin-top:2rem;padding:1rem;border-top:1px solid rgba(201,161,78,.4);border-bottom:1px solid rgba(201,161,78,.4);
+  max-width:34rem;margin-inline:auto;
+}
+.hero .version{font-family:var(--maquina);font-size:.72rem;color:var(--papel-3);margin-top:1.5rem}
+.hero .acciones{margin-top:2rem;display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap}
+.hero .acciones a{
+  font-family:var(--display);text-transform:uppercase;font-size:.85rem;letter-spacing:.06em;
+  padding:.6rem 1.2rem;border:1px solid var(--oro);color:var(--papel);text-decoration:none;
+  background:rgba(12,22,34,.7);
+}
+.hero .acciones a:hover{background:var(--rojo);border-color:var(--rojo-vivo)}
+
+/* Estructura */
+.envoltorio{display:grid;grid-template-columns:minmax(200px,250px) minmax(0,1fr);gap:2.5rem;max-width:1180px;margin:0 auto;padding:3rem 1.5rem 6rem}
+nav.indice{position:sticky;top:1.5rem;align-self:start;max-height:calc(100vh - 3rem);overflow-y:auto}
+nav.indice h2{font-size:.78rem;color:var(--oro);margin-bottom:.6rem;border-bottom:1px solid rgba(201,161,78,.3);padding-bottom:.3rem}
+nav.indice ol{list-style:none;margin:0;padding:0;counter-reset:cap}
+nav.indice li{margin:.2rem 0}
+nav.indice a{font-size:.85rem;text-decoration:none;color:var(--papel-2);display:block;padding:.15rem .3rem;border-left:2px solid transparent}
+nav.indice a:hover{color:var(--papel);border-left-color:var(--rojo-vivo);background:rgba(255,255,255,.04)}
+
+/* Papel */
+main section{
+  background:linear-gradient(180deg,var(--papel),var(--papel-2));
+  color:var(--tinta);
+  padding:2rem 2.2rem;
+  margin-bottom:2rem;
+  border:1px solid var(--papel-3);
+  box-shadow:0 12px 40px rgba(0,0,0,.55);
+  scroll-margin-top:1.5rem;
+}
+main h2{font-size:clamp(1.6rem,4vw,2.4rem);color:var(--tinta);border-bottom:3px solid var(--tinta);padding-bottom:.4rem;margin-bottom:1.2rem}
+main h3{font-size:1.25rem;color:var(--rojo);margin:1.8rem 0 .6rem}
+main h4{font-size:1rem;color:var(--tinta-suave);margin:1.2rem 0 .4rem}
+main p{margin:.7rem 0}
+.rb-lead{font-style:italic;font-size:1.1rem;color:var(--tinta-suave);border-left:3px solid var(--oro);padding-left:.9rem}
+.rb-rule{font-family:var(--display);text-transform:uppercase;font-size:.92rem;letter-spacing:.02em;background:rgba(26,23,16,.07);padding:.5rem .7rem;border-left:4px solid var(--rojo)}
+.rb-small{font-family:var(--maquina);font-size:.78rem;color:var(--tinta-suave)}
+blockquote{margin:1rem 0;padding:.8rem 1rem;background:rgba(26,23,16,.06);border-left:4px solid var(--oro);font-style:italic}
+.rb-caja{margin:1.2rem 0;padding:1rem 1.2rem;background:var(--noche);color:var(--papel);border:1px solid var(--oro);box-shadow:0 6px 18px rgba(0,0,0,.4)}
+.rb-caja h5{font-size:.82rem;letter-spacing:.18em;color:var(--oro);margin-bottom:.4rem}
+.rb-caja p{margin:.3rem 0;font-size:.95rem}
+ul,ol{margin:.7rem 0;padding-left:1.4rem}
+li{margin:.25rem 0}
+table{width:100%;border-collapse:collapse;margin:1.1rem 0;font-size:.92rem}
+th{background:var(--tinta);color:var(--papel);font-family:var(--display);text-transform:uppercase;font-size:.76rem;letter-spacing:.04em;text-align:left;padding:.45rem .6rem}
+td{border-bottom:1px solid var(--papel-3);padding:.45rem .6rem;vertical-align:top}
+tbody tr:nth-child(even){background:rgba(26,23,16,.04)}
+
+footer{text-align:center;padding:2.5rem 1.5rem;font-family:var(--maquina);font-size:.74rem;color:var(--papel-3);border-top:1px solid rgba(201,161,78,.25)}
+@media(max-width:820px){
+  body{font-size:17px}
+  .envoltorio{grid-template-columns:1fr;padding-top:2rem}
+  nav.indice{position:static;max-height:none;background:rgba(0,0,0,.3);padding:1rem;border:1px solid rgba(201,161,78,.25)}
+  main section{padding:1.4rem 1.1rem}
+  table{display:block;overflow-x:auto}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <h1>Ruido Blanco</h1>
+  <p class="sub">Juego de rol de investigación emergente</p>
+  <p class="lema">LAS PISTAS SON REALES.<br>SU SIGNIFICADO INTERPRETABLE.</p>
+  <p class="version">v0.5.5 · Edición de blind playtest · Creado por Manu Romera</p>
+  <p class="acciones">
+    <a href="#1-que-es-ruido-blanco">Leer el manual</a>
+    <a href="https://github.com/ManuRomera/ruido-blanco">Repositorio</a>
+    <a href="https://github.com/ManuRomera/ruido-blanco/releases/latest">Sistema para Foundry VTT</a>
+  </p>
+</header>
+
+<div class="envoltorio">
+  <nav class="indice">
+    <h2>Contenido</h2>
+    <ol>
+<li><a href="#1-que-es-ruido-blanco">1. Qué es RUIDO BLANCO</a></li>
+<li><a href="#2-por-que-se-llama-ruido-blanco">2. Por qué se llama RUIDO BLANCO</a></li>
+<li><a href="#3-investigadores">3. Investigadores</a></li>
+<li><a href="#4-accion-y-consecuencias">4. Acción y consecuencias</a></li>
+<li><a href="#5-investigar-y-construir-el-caso">5. Investigar y construir el caso</a></li>
+<li><a href="#6-ruido-de-fondo">6. Ruido de Fondo</a></li>
+<li><a href="#7-la-revelacion">7. La Revelación</a></li>
+<li><a href="#8-dirigir-ruido-blanco">8. Dirigir RUIDO BLANCO</a></li>
+<li><a href="#9-disenar-un-caso">9. Diseñar un caso</a></li>
+<li><a href="#10-caso-de-playtest-once-minutos-sin-imagen">10. Caso de playtest: ONCE MINUTOS SIN IMAGEN</a></li>
+<li><a href="#11-investigadores-pregenerados">11. Investigadores pregenerados</a></li>
+<li><a href="#12-hoja-de-investigador">12. Hoja de investigador</a></li>
+<li><a href="#13-referencia-rapida-de-mesa">13. Referencia rápida de mesa</a></li>
+<li><a href="#14-hoja-de-revelacion">14. Hoja de Revelación</a></li>
+<li><a href="#15-protocolo-de-blind-playtest">15. Protocolo de blind playtest</a></li>
+    </ol>
+  </nav>
+  <main>
+<section id="estado-de-esta-edicion" class="portada">
+<p class="rb-lead">Creado por Manu Romera</p>
+<p class="rb-small">Edición de blind playtest - septiembre de 2026</p>
+<aside class="rb-caja"><h5>ESTADO DE ESTA EDICIÓN</h5><p>Este manuscrito compila el núcleo jugable validado hasta v0.5.5 y está preparado para pasar a maquetación y playtest ciego. La progresión de campaña, una Organización con subsistema propio y un módulo sobrenatural desarrollado quedan deliberadamente fuera hasta que el motor central haya sido probado por mesas externas.</p></aside>
+</section>
+<section id="1-que-es-ruido-blanco"><h2>1. Qué es RUIDO BLANCO</h2>
+<p class="rb-lead">Las Pistas existen. La dificultad está en separar la señal del ruido sin inventar una solución secreta.</p>
+<p>RUIDO BLANCO es un juego de rol de investigación contemporánea emergente. El GM prepara un incidente, personas, lugares, presiones y Pistas concretas. No prepara quién fue, por qué ocurrió ni una cronología causal secreta que los jugadores deban adivinar.</p>
+<aside class="rb-caja"><h5>PRINCIPIO DEFINITORIO</h5><p>LAS PISTAS SON REALES. SU SIGNIFICADO INTERPRETABLE.</p></aside>
+<p>Una Pista puede decir que una credencial abrió una puerta a las 22:13, que una cámara dejó de grabar durante once minutos o que alguien recibió una transferencia al día siguiente. Esos hechos existen. Lo que todavía no existe es la explicación definitiva que los conecta.</p>
+<p>La mesa investiga, formula hipótesis y, cuando está dispuesta a comprometerse con una explicación, realiza una Revelación. La Revelación no comprueba si los jugadores han adivinado la solución del GM: decide cuánto de esa interpretación se convierte en verdad y qué parte del caso todavía estaba siendo entendida de forma incorrecta.</p>
+<h3>El ciclo de juego</h3>
+<p>1. Investigar. Los personajes buscan, preguntan, acceden y se arriesgan. Las Pistas esenciales aparecen cuando el acceso y el método son razonables.</p>
+<p>2. Conectar. La mesa propone hipótesis libremente. Ninguna conexión se convierte en verdad por decirla muchas veces.</p>
+<p>3. Soportar presión. Investigar altera el entorno. Ruido de Fondo mide cuánto ha empezado el caso a reaccionar contra quienes lo investigan.</p>
+<p>4. Revelar. El grupo pone una teoría en el mundo dentro de una escena real: acusa, confronta, denuncia, publica, ejecuta una trampa o actúa como si esa explicación fuera cierta.</p>
+<p>5. Fijar. Con 7+, QUÉ y QUIÉN quedan fijados. Con 10+ la verdad sale limpia; con 7-9 aparece una Distorsión. Con 6- la teoría era un Falso Positivo y el caso abre una nueva grieta.</p>
+<h3>Qué no es</h3>
+<ul>
+<li>No es una investigación clásica con una solución secreta que los jugadores deben adivinar.</li>
+<li>No es improvisación libre donde cualquier detalle puede significar cualquier cosa sin resistencia.</li>
+<li>No es un simulador forense: no existen Custodios, cadenas de custodia, estados de Verificación ni calidad probatoria como subsistemas.</li>
+<li>No separa “descubrir la verdad” y “cerrar el caso” mediante un segundo minijuego. La Revelación ocurre dentro de la ficción; después solo se resuelven las consecuencias que sigan realmente abiertas.</li>
+</ul>
+<h3>Qué necesitas</h3>
+<p>Una persona que dirija y de 2 a 5 investigadores; varios dados de seis caras; una hoja por personaje; tarjetas, notas adhesivas o fichas para las Pistas; y una superficie compartida que funcione como Muro de investigación.</p>
+<h3>Acuerdo de tono y seguridad</h3>
+<p>Antes de crear investigadores, acordad qué clase de caso queréis jugar y qué contenidos no queréis poner en primer plano. RUIDO BLANCO puede tratar muerte, violencia, corrupción, abuso institucional, desapariciones o secretos personales; la investigación nunca necesita saltarse los límites de la mesa para funcionar.</p>
+<p>Líneas: contenidos que no aparecerán. Velos: contenidos que pueden existir, pero quedan fuera de cámara o se resuelven sin detalle. Cualquier persona puede pedir una pausa, rebobinar una descripción o cambiar el grado de detalle sin tener que justificarlo.</p>
+<p>Acordad también el grado de lo extraño. MUNDANO: no existe una explicación sobrenatural real. AMBIGUO: puede parecer posible, pero la mesa no necesita confirmarlo. ABIERTO: una Revelación puede establecer fenómenos sobrenaturales si las Pistas lo permiten. Esta edición no añade todavía reglas específicas de horror.</p></section>
+<section id="2-por-que-se-llama-ruido-blanco"><h2>2. Por qué se llama RUIDO BLANCO</h2>
+<p class="rb-lead">Hay casos en los que no falta información. Sobra.</p>
+<p>En una investigación contemporánea el problema casi nunca es el silencio, sino el zumbido.</p>
+<p>Todo deja rastro: antenas repetidoras, metadatos, movimientos bancarios, cámaras de seguridad. Acumular registros no resuelve un caso; solo crea un muro de datos indistinguibles. La baja relación señal-ruido significa que la prueba existe, pero está ahogada por el entorno.</p>
+<p class="rb-rule">No acumulamos pruebas. Limpiamos la frecuencia hasta que la respuesta sea evidente.</p>
+<p>En RUIDO BLANCO, «evidente» no significa que exista una solución secreta esperando ser descubierta. Significa que el equipo ha limpiado suficiente ruido como para comprometerse con una interpretación capaz de sobrevivir a todo lo que realmente ha encontrado.</p>
+<h3>El término dentro de la ficción</h3>
+<p>Ruido Blanco no es necesariamente el nombre de una agencia. Es una expresión profesional para describir un tipo de caso: uno en el que existe información de sobra, pero la relación señal-ruido es tan baja que acumular más datos ya no produce claridad.</p>
+<p>En algunos entornos empezó como jerga entre analistas, investigadores, auditores, periodistas y personal técnico. Cuando un incidente reunía registros contradictorios, versiones incompatibles, secretos paralelos y demasiadas explicaciones plausibles, alguien terminaba diciendo: «Esto ya es Ruido Blanco».</p>
+<p>Con el tiempo, la expresión también acabó identificando informalmente a las personas capaces de trabajar esos casos. No existe una estructura obligatoria llamada Ruido Blanco: vuestro grupo puede ser una unidad interna, un bufete, una redacción, una agencia, un colectivo civil, una unidad policial o una red informal de especialistas. Lo que compartís es una forma de trabajar.</p>
+<h3>La jerga del sistema pertenece al mundo</h3>
+<p>PISTA. Un hecho registrado: algo que ocurrió, fue observado o dejó rastro.</p>
+<p>SEÑAL. Una Pista cuyo significado sostiene la explicación que estáis construyendo.</p>
+<p>RUIDO. Un dato real que pertenece a otra cadena causal y parecía formar parte del incidente central.</p>
+<p>INTERFERENCIA. Algo real que todavía no sabéis interpretar sin forzar la teoría.</p>
+<p>AFINACIÓN. Hasta qué punto la teoría está sostenida por la Señal que habéis conseguido aislar.</p>
+<p>RUIDO DE FONDO. La alteración que vuestra propia investigación provoca sobre aquello que intentáis comprender.</p>
+<p>REVELACIÓN. El momento en que dejáis de escuchar posibilidades y os comprometéis con una lectura del caso.</p>
+<h3>La frase que resume el contrato de juego</h3>
+<p class="rb-rule">LAS PISTAS SON REALES. SU SIGNIFICADO INTERPRETABLE.</p>
+<p>El director protege los hechos. Los jugadores construyen significado. Los dados deciden cuánto de esa interpretación consigue convertirse en verdad.</p>
+<h3>Qué clase de casos encajan</h3>
+<ul>
+<li>Muertes dudosas, accidentes y desapariciones dentro de organizaciones.</li>
+<li>Fraude, sabotaje, corrupción, filtraciones o encubrimientos.</li>
+<li>Investigaciones periodísticas, internas o privadas que cruzan intereses incompatibles.</li>
+<li>Casos donde la versión oficial cambia conforme la investigación altera el entorno.</li>
+<li>Horror institucional o fenómenos extraños, siempre que el grupo acuerde de antemano qué grado de sobrenatural es posible. Esta edición no incluye todavía un módulo específico para ello.</li>
+</ul></section>
+<section id="3-investigadores"><h2>3. Investigadores</h2>
+<p class="rb-lead">Personas competentes, vulnerables y con motivos para seguir mirando cuando sería más sensato marcharse.</p>
+<p>Un investigador no es una clase. Se define por cómo actúa, qué sabe, qué lleva consigo, qué no puede dejar de mirar y qué existe en su vida fuera del caso.</p>
+<h3>Creación en nueve pasos</h3>
+<p>Antes de empezar, anota nombre, pronombres y una imagen mental clara del personaje.</p>
+<p>1. Concepto. Una frase: quién eres y qué clase de problemas sueles resolver.</p>
+<p>2. Métodos. Reparte 2, 1, 1 y 0 entre OBSERVAR, RAZONAR, INFLUIR e INTERVENIR.</p>
+<p>3. Profesión. Define tu lugar normal en el mundo y el tipo de puertas que puedes abrir sin pedir permiso al sistema.</p>
+<p>4. Especialidades. Elige dos campos concretos; al menos uno debería ser coherente con tu Profesión.</p>
+<p>5. Kit. Elige uno que represente tu preparación habitual.</p>
+<p>6. Talento. Elige uno de la lista de inicio.</p>
+<p>7. Obsesión y Punto Ciego. Escribe qué no puedes dejar de perseguir y de qué forma tiendes a leer mal el mundo.</p>
+<p>8. Dos Anclas personales. Personas, lugares, rutinas o compromisos que existen fuera de la investigación.</p>
+<p>9. Vínculo. Escribe una relación significativa con otro investigador.</p>
+<p class="rb-rule">Estado inicial: Tensión 0, sin Condiciones y sin Secuelas.</p>
+<h3>Los cuatro Métodos</h3>
+<table><thead><tr><th>Método</th><th>Sirve para</th></tr></thead><tbody><tr><td>OBSERVAR</td><td>Vigilar, leer una escena, seguir, detectar cambios y notar lo que no encaja.</td></tr><tr><td>RAZONAR</td><td>Cruzar datos, reconstruir, investigar archivos, entender sistemas y patrones.</td></tr><tr><td>INFLUIR</td><td>Entrevistar, persuadir, presionar, engañar, negociar y ganarse confianza.</td></tr><tr><td>INTERVENIR</td><td>Entrar, correr, conducir, proteger, sabotear y actuar físicamente bajo presión.</td></tr></tbody></table>
+<p class="rb-rule">MÉTODO 0. Un 0 no significa incompetencia. Significa que esa no es tu manera destacada de resolver problemas. Sigues tirando 2d6 y puedes actuar profesionalmente cuando la ficción lo permita.</p>
+<h3>Profesión</h3>
+<p>La Profesión concede permiso ficticio: credenciales, contactos, lenguaje, rutinas y acceso plausible. No es un poder que se activa una vez por caso. Si tu profesión razonablemente te permitiría estar allí, conocer ese procedimiento o llamar a esa persona, forma parte de la ficción.</p>
+<p>La Profesión también trae presión. Un periodista tiene fuentes que proteger; una abogada responde ante conflictos de interés; un sanitario trabaja bajo confidencialidad; un auditor deja trazabilidad. El GM puede usar esas obligaciones como consecuencias cuando sean relevantes.</p>
+<table><thead><tr><th>Profesión</th><th>Acceso habitual</th><th>Presión típica</th></tr></thead><tbody><tr><td>Periodista</td><td>Fuentes, hemerotecas, derecho a preguntar.</td><td>Plazos, demandas, protección de fuentes.</td></tr><tr><td>Abogada / cumplimiento</td><td>Expedientes, contratos, interlocución institucional.</td><td>Secreto profesional, conflictos de interés.</td></tr><tr><td>Sanitario</td><td>Hospitales, lenguaje médico, lesiones y circuitos asistenciales.</td><td>Confidencialidad y responsabilidad.</td></tr><tr><td>Analista / auditor</td><td>Datos, procesos y documentación corporativa.</td><td>Accesos revocables y trazabilidad.</td></tr><tr><td>Especialista técnico</td><td>Laboratorios, redes, sistemas, ingeniería.</td><td>Permisos, herramientas y tiempo.</td></tr><tr><td>Investigador privado</td><td>Vigilancia, calle, clientes y contactos informales.</td><td>Legalidad, dinero y reputación.</td></tr><tr><td>Académico / investigador</td><td>Bibliotecas, expertos, archivos y metodología.</td><td>Burocracia, prestigio y financiación.</td></tr><tr><td>Seguridad / emergencias</td><td>Protección, logística, evaluación de riesgos.</td><td>Autoridad limitada y escalada.</td></tr></tbody></table>
+<h3>Especialidades</h3>
+<p>Una Especialidad es formación o experiencia real. No añade dados automáticamente. Permite reconocer información experta sin tirar, intentar tareas que requieren formación y justificar Ventaja cuando cambia de verdad la situación.</p>
+<p class="rb-rule">REGLA DE PROFUNDIDAD. Si cualquiera puede ver el detalle pero hace falta formación para comprenderlo, el GM da primero el hecho visible a todos y después la lectura experta a quien tenga la Especialidad.</p>
+<table><thead><tr><th>Área</th><th>Ejemplos</th></tr></thead><tbody><tr><td>Ciencia y salud</td><td>Medicina, Enfermería, Forense, Toxicología, Psicología, Biología, Química.</td></tr><tr><td>Tecnología</td><td>Ciberseguridad, OSINT, Redes, Programación, Electrónica, Análisis de datos, Audiovisual.</td></tr><tr><td>Sociedad e instituciones</td><td>Derecho, Finanzas, Periodismo de investigación, Burocracia, Sociología, Medios.</td></tr><tr><td>Calle y campo</td><td>Vigilancia, Seguridad, Conducción, Cerrajería, Supervivencia, Fotografía.</td></tr><tr><td>Cultura y conocimiento</td><td>Historia, Arte, Arquitectura, Ingeniería, Lingüística, Archivos, Criminología.</td></tr></tbody></table>
+<h3>Kit</h3>
+<p>Un Kit resume equipo, consumibles y preparación. Si llevas el adecuado, se asume que posees lo razonable sin hacer inventario. El Kit hace posibles acciones que de otro modo exigirían conseguir herramientas y puede justificar Ventaja cuando cambia materialmente el riesgo. No concede Ventaja automática y no se acumula con una Especialidad solo por nombrar ambas.</p>
+<p>El equipo ordinario coherente con tu Profesión no necesita estar dentro del Kit. El Kit representa lo que has decidido tener siempre preparado.</p>
+<table><thead><tr><th>Kit</th><th>Incluye de forma abstracta</th></tr></thead><tbody><tr><td>Digital</td><td>Portátil, adaptadores, almacenamiento cifrado y utilidades de análisis.</td></tr><tr><td>Forense</td><td>Guantes, iluminación, bolsas, reactivos básicos, medición y documentación.</td></tr><tr><td>Vigilancia</td><td>Óptica, grabación discreta, rastreadores, baterías y ropa adecuada.</td></tr><tr><td>Movilidad</td><td>Vehículo, rutas, herramientas y material de carretera.</td></tr><tr><td>Médico</td><td>Material de primera respuesta, medicación permitida y evaluación.</td></tr><tr><td>Acceso</td><td>Herramientas de entrada, uniformes y credenciales plausibles.</td></tr><tr><td>Comunicaciones</td><td>Radios, canales seguros, grabación y redundancias.</td></tr><tr><td>Legal</td><td>Modelos, legislación, contactos procesales y documentación.</td></tr><tr><td>Prensa</td><td>Cámara, sonido, acreditaciones, edición y publicación.</td></tr><tr><td>Campo</td><td>Cartografía, luz, cuerda, protección y material de terreno.</td></tr></tbody></table>
+<h3>Talentos de inicio</h3>
+<p>Cada investigador empieza con un Talento. Los Talentos conceden preguntas, permisos o excepciones concretas; no son bonificadores permanentes.</p>
+<table><thead><tr><th>Talento</th><th>Regla</th></tr></thead><tbody><tr><td>Esto no encaja</td><td>Una vez por escena, tras examinar un lugar, pregunta qué detalle objetivo contradice la explicación más obvia.</td></tr><tr><td>Lectura del sistema</td><td>Una vez por escena institucional, pregunta quién puede darte realmente lo que buscas y qué quiere evitar.</td></tr><tr><td>Una última pregunta</td><td>Cuando termina una conversación, pregunta qué tema intenta cerrar el PNJ. El GM responde con sinceridad.</td></tr><tr><td>Tengo a alguien</td><td>Una vez por caso, introduce un contacto plausible. El GM dice qué quiere a cambio.</td></tr><tr><td>Acceso lateral</td><td>Una vez por escena de entrada, declara una vía secundaria plausible. No elimina el riesgo: cambia la situación.</td></tr><tr><td>Salida preparada</td><td>Una vez por sesión, cuando todo se complica, obtén Ventaja para abandonar la escena.</td></tr><tr><td>Preparación oculta</td><td>Marca 1 Tensión para declarar una preparación previa concreta y razonable.</td></tr><tr><td>Manos firmes</td><td>Una vez por sesión, un 7-9 al mantener control físico bajo presión no puede quitarte el objetivo básico.</td></tr></tbody></table>
+<h3>Obsesión y Punto Ciego</h3>
+<p>Obsesión. Es la pregunta, injusticia o patrón que te impide dejar el caso cuando sería más prudente hacerlo. No concede un bono en esta edición; existe para producir decisiones. Cuando tu Obsesión te lleva a asumir un riesgo evitable, el GM debe hacerlo visible antes de la tirada.</p>
+<p>Punto Ciego. Es la forma habitual en que interpretas mal a personas o situaciones: confiar demasiado en registros, sospechar de la autoridad, creer que todo problema tiene una solución procesal. El GM puede usarlo para proponerte una lectura tentadora o una consecuencia, pero nunca para cambiar el texto de una Pista, ocultar información esencial o decidir por ti qué significa el caso.</p>
+<h3>Anclas personales</h3>
+<p>Elige dos Anclas personales: personas, lugares, rutinas o compromisos que te recuerdan que existe una vida fuera del caso. No tienen estados ni barras en este blind playtest.</p>
+<p>Una vez por sesión, juega una escena breve y significativa con una de tus Anclas y borra 1 Tensión. La escena debe mostrar realmente qué te devuelve al mundo: una conversación, una comida, una rutina, un lugar o una responsabilidad.</p>
+<p>Las Anclas pueden ser amenazadas por la ficción como cualquier otra cosa importante, pero el GM no debe usarlas automáticamente como rehenes solo porque estén escritas en la ficha.</p>
+<h3>Vínculo</h3>
+<p>El Vínculo es una frase sobre otro investigador: qué le debes, qué sabes de esa persona o por qué confías -o no- en su criterio. No concede un bonificador por sí mismo. Sirve para poner esa relación en escena y puede justificar cómo le Ayudas cuando existe una contribución real.</p></section>
+<section id="4-accion-y-consecuencias"><h2>4. Acción y consecuencias</h2>
+<p class="rb-lead">Los dados aparecen cuando la ficción ya ha producido una decisión con riesgo.</p>
+<h3>Cuándo tirar</h3>
+<p>Tira únicamente si el resultado es incierto, fallar produciría una consecuencia interesante y la acción cambia realmente la situación. Si falta una de esas condiciones, decide por la ficción.</p>
+<h3>La tirada</h3>
+<p>1. Di qué quieres conseguir y cómo.</p>
+<p>2. El GM formula la Apuesta en una frase: qué puede salir mal si tiras.</p>
+<p>3. Tira 2d6 + tantos d6 adicionales como tu Método.</p>
+<p>4. Conserva los dos dados más altos y suma sus resultados.</p>
+<p>5. Aplica el resultado y la consecuencia anunciada.</p>
+<table><thead><tr><th>Total</th><th>Resultado</th><th>Qué ocurre</th></tr></thead><tbody><tr><td>12</td><td>Nítido</td><td>Consigues lo que querías y además creas una ventaja, reduces 1 Ruido de Fondo si tiene sentido o descubres un detalle adicional.</td></tr><tr><td>10-11</td><td>Limpio</td><td>Consigues el objetivo sin consecuencia relevante.</td></tr><tr><td>7-9</td><td>Con coste</td><td>Consigues lo esencial y el GM cobra una consecuencia coherente con la Apuesta.</td></tr><tr><td>2-6</td><td>Revés</td><td>No lo consigues como pretendías y la situación empeora. La partida siempre avanza.</td></tr></tbody></table>
+<h3>Ventaja y Desventaja</h3>
+<p>Ventaja: añade 1d6 y conserva los dos mejores. Desventaja: añade 1d6, elimina el resultado más alto y conserva los dos mejores restantes. Se cancelan entre sí y nunca se acumulan más de una vez.</p>
+<aside class="rb-caja"><h5>PISTAS ESENCIALES</h5><p>Nunca tires para saber si encuentras la Pista que mantiene vivo el caso. Si estás en el lugar correcto y actúas con un método razonable, la encuentras. La tirada decide profundidad, velocidad, huella, exposición, peligro o qué precio pagas por obtenerla.</p></aside>
+<h3>Ayudar</h3>
+<p>Cuando otro investigador realiza una Acción y puedes contribuir de forma material, explica cómo ayudas. El investigador activo obtiene Ventaja. Solo una persona puede Ayudar a una misma tirada.</p>
+<p>Ayudar te expone. Si la Acción genera una consecuencia que también podría alcanzarte, el GM puede aplicártela o repartirla de forma razonable. No puedes Ayudar si tu aportación es únicamente moral o si no estás en posición de intervenir.</p>
+<h3>Tensión 0-3</h3>
+<p>La Tensión mide cuánto de ti mismo estás gastando para seguir funcionando. Empieza en 0 y no penaliza tiradas por sí sola.</p>
+<p>Forzar. Después de conocer la Apuesta, marca 1 Tensión para obtener Ventaja en tu Acción.</p>
+<p>Encajar. Cuando una consecuencia personal pueda reducirse razonablemente a costa de absorberla tú, marca 1 Tensión y describe cómo la contienes. Encajar no puede borrar consecuencias externas ni convertir un fracaso en éxito.</p>
+<h3>Condiciones</h3>
+<p>Las Condiciones son descriptores de ficción: “costillas golpeadas”, “sin credencial”, “agotada”, “mano vendada”. Si una Condición afecta directamente a una Acción, provoca Desventaja. Si hace la Acción inverosímil, debes cambiar de enfoque antes de tirar.</p>
+<p>Una Condición desaparece cuando la ficción lo permite: tratamiento, descanso, sustitución de una credencial, cambio de ropa, salir de una situación comprometida. No existe una pista de daño separada.</p>
+<h3>Ruptura y Secuelas</h3>
+<p>Si debes marcar una cuarta Tensión, sufres una Ruptura. Resuelve primero la Acción o consecuencia que la provocó. Después describe cómo te quiebras, baja tu Tensión a 1 y escribe una Secuela coherente con lo ocurrido.</p>
+<p>Una Secuela tiene un nombre y un Disparador. Cuando ese Disparador aparece, el GM puede ofrecer una complicación concreta nacida de la Secuela. Elige: marcar 1 Tensión para mantener el control, o dejar que la Secuela actúe y aceptar la complicación. Una Secuela nunca puede falsear una Pista ni quitarte una decisión fundamental.</p>
+<table><thead><tr><th>Secuela</th><th>Disparador</th><th>Complicación típica</th></tr></thead><tbody><tr><td>Hipervigilancia</td><td>Sentirte observado o seguido.</td><td>Te adelantas, desconfías de la persona equivocada o revelas que estabas vigilando.</td></tr><tr><td>Necesidad de control</td><td>Alguien cambia el plan sin consultarte.</td><td>Intentas recuperar el control y deterioras una relación o pierdes tiempo.</td></tr><tr><td>Insomnio</td><td>Horas de espera, noche avanzada o silencio prolongado.</td><td>Tu agotamiento se vuelve una Condición hasta que descanses.</td></tr><tr><td>Dolor crónico</td><td>Esfuerzo físico, frío o mala postura.</td><td>Debes bajar el ritmo, pedir ayuda o aceptar Desventaja en la acción física.</td></tr></tbody></table></section>
+<section id="5-investigar-y-construir-el-caso"><h2>5. Investigar y construir el caso</h2>
+<p class="rb-lead">La Pista es objetiva. La conexión es provisional.</p>
+<h3>Qué es una Pista</h3>
+<p>Una Pista es un dato concreto que existe en la ficción y puede escribirse en una tarjeta sin incluir su explicación. Debe ser suficientemente precisa para importar y suficientemente abierta para admitir más de una lectura plausible.</p>
+<table><thead><tr><th>Mala pista</th><th>Buena pista RUIDO BLANCO</th></tr></thead><tbody><tr><td>“Eva apagó las cámaras para matar a Irene.”</td><td>“Las cámaras se desconectaron manualmente once minutos antes de la ventana de muerte mediante una cuenta con privilegios de mantenimiento.”</td></tr><tr><td>“Una llave vieja manchada de verde.”</td><td>“Una llave de archivo que no pertenece al edificio aparece en el bolso de la víctima; tiene restos recientes de pintura industrial verde.”</td></tr></tbody></table>
+<aside class="rb-caja"><h5>PRUEBA DE CALIDAD</h5><p>Si una Pista puede eliminarse del escenario sin cambiar ninguna conversación posterior, no es una buena Pista. Antes de jugar, el GM debe poder imaginar al menos dos lecturas plausibles de cada Pista, pero no escribe cuál será verdadera.</p></aside>
+<h3>El Muro durante la investigación</h3>
+<p>Durante la investigación usa solo dos zonas: PISTAS e HIPÓTESIS. Las Pistas contienen hechos. Las Hipótesis son frases de los jugadores y pueden tacharse, dividirse o contradecirse libremente. Señal, Ruido e Interferencia solo se asignan cuando llega una Revelación.</p>
+<h3>Profundizar</h3>
+<p>Después de obtener una Pista, una acción arriesgada puede revelar contexto adicional: procedencia, cronología, relación con otra persona o una limitación técnica. Ese contexto se añade a la misma tarjeta si no constituye por sí mismo una nueva Pista significativa.</p>
+<h3>Fuentes y fiabilidad</h3>
+<p>La ficción puede hacer que una Pista sea dudosa: una copia sin metadatos, una declaración interesada, una imagen parcial. Escríbelo en la propia tarjeta. No existe un estado mecánico de Verificación. Si más tarde se demuestra una limitación o autenticidad, se añade ese dato a la Pista.</p></section>
+<section id="6-ruido-de-fondo"><h2>6. Ruido de Fondo</h2>
+<p class="rb-lead">Investigar modifica aquello que intentas comprender.</p>
+<p>Ruido de Fondo es el único contador compartido del caso. Va de 0 a 6 y mide cuánto ha alterado vuestra presencia el entorno: sospechosos que comparan versiones, abogados que cierran accesos, rumores, destrucción defensiva de material, prensa, policía, superiores o entidades que reparan en vosotros.</p>
+<h3>Cuándo aumenta</h3>
+<ul>
+<li>Una acción visible, ilegal o agresiva puede sumar +1 como consecuencia.</li>
+<li>Un 7-9 o un Revés puede sumar Ruido si estaba dentro de la Apuesta.</li>
+<li>Seguir la Grieta tras un Falso Positivo suma +2; Retirada suma +1.</li>
+<li>Nunca aumenta solo porque pase tiempo. Debe reflejar algo que la investigación ha provocado.</li>
+</ul>
+<table><thead><tr><th>Nivel</th><th>Efecto</th></tr></thead><tbody><tr><td>0-2</td><td>El entorno todavía no ha reorganizado su conducta alrededor de vosotros.</td></tr><tr><td>3</td><td>REACCIÓN. Algo responde a la investigación: cambia conducta, restringe una vía, crea urgencia o expone una vulnerabilidad. Puede abrir una oportunidad, pero no entrega una Pista automáticamente.</td></tr><tr><td>4-5</td><td>La investigación ya forma parte del caso. Personas y sistemas reaccionan teniendo en cuenta vuestra presencia.</td></tr><tr><td>6</td><td>REACCIÓN MAYOR. Ocurre un coste irreversible: una fuente deja de colaborar, un acceso se pierde, alguien huye, una relación se rompe, una prueba desaparece, entra una autoridad externa o la investigación se hace pública. Después, el Ruido baja a 3.</td></tr></tbody></table>
+<h3>No bloquear no significa ayudar</h3>
+<p>Una Reacción puede destruir rutas concretas. Lo que no puede hacer es convertir el caso en injugable. Si vuestra conducta quema dos de cuatro maneras de acceder a una información, quedan dos. El caso sigue vivo; vuestra posición empeora.</p>
+<aside class="rb-caja"><h5>REGLA FUNDAMENTAL</h5><p>Una Reacción cambia la situación. Puede crear una oportunidad de información, pero nunca regala una Pista. Para convertir esa oportunidad en información hay que actuar.</p></aside></section>
+<section id="7-la-revelacion"><h2>7. La Revelación</h2>
+<p class="rb-lead">El clímax ocurre cuando alguien pone una explicación en el mundo y acepta sus consecuencias.</p>
+<p>La Revelación convierte una interpretación en verdad. Hasta ese momento no existe una solución secreta. Las Pistas existen. Los acontecimientos que describen existen. Su significado conjunto todavía no.</p>
+<h3>7.1 Umbral de Revelación</h3>
+<table><thead><tr><th>Caso</th><th>Umbral</th></tr></thead><tbody><tr><td>Breve</td><td>5 Pistas</td></tr><tr><td>Estándar</td><td>6 Pistas</td></tr><tr><td>Amplio</td><td>8 Pistas</td></tr></tbody></table>
+<p>Al alcanzar el Umbral podéis Revelar, pero no estáis obligados. Encontrar más información nunca reduce directamente vuestra Afinación.</p>
+<h3>7.2 Formular el Núcleo</h3>
+<p>Antes de clasificar Pistas, formulad tres afirmaciones:</p>
+<ul>
+<li>QUÉ OCURRIÓ. El acontecimiento central que explica el caso.</li>
+<li>QUIÉN / QUÉ LO PROVOCÓ. Una persona, grupo, accidente, fenómeno o combinación.</li>
+<li>POR QUÉ. El motivo, objetivo o lógica que explica lo ocurrido.</li>
+</ul>
+<p>En casos donde esas preguntas no encajen, la hoja del caso puede sustituirlas por tres preguntas equivalentes. Lo importante es que la Revelación tenga un Núcleo claro.</p>
+<h3>7.3 Incompatibilidad factual</h3>
+<p>Una teoría no puede contradecir literalmente una Pista. Existe Incompatibilidad Factual únicamente cuando, para que vuestra teoría sea cierta, tendría que ser falso un dato material explícito de una Pista: hora, lugar, identidad, presencia o ausencia demostrada, estado físico, secuencia establecida o propiedad material.</p>
+<aside class="rb-caja"><h5>PRUEBA RÁPIDA</h5><p>¿Pueden ser ciertas simultáneamente nuestra afirmación y esta Pista sin cambiar ninguna de las dos? Si sí, no hay contradicción: la Pista puede ser Señal, Ruido o Interferencia. Si no, la teoría debe reformularse antes de Revelar.</p></aside>
+<p>Ejemplo: unas bridas colocadas antes de la muerte no contradicen por sí solas que alguien introdujera veneno durante una cena; ambas cosas podrían haber ocurrido. Pero una Pista que demuestre que la víctima estuvo inmovilizada en otro lugar durante toda la ventana en la que la teoría exige la cena sí produce Incompatibilidad Factual.</p>
+<h3>7.4 Clasificar todas las Pistas</h3>
+<p>Tomad todas las Pistas descubiertas. Ninguna puede ignorarse. Durante la Revelación cada una queda temporalmente como SEÑAL, RUIDO o INTERFERENCIA.</p>
+<table><thead><tr><th>Categoría</th><th>Qué significa</th></tr></thead><tbody><tr><td>SEÑAL</td><td>Sostiene directamente alguna parte de vuestra teoría y realiza una aportación material.</td></tr><tr><td>RUIDO</td><td>Es verdadera, pero ya podéis explicar mediante un Puente Causal por qué pertenece a otra cadena causal. Queda cerrada para esta Revelación.</td></tr><tr><td>INTERFERENCIA</td><td>Puede coexistir con vuestra teoría, pero todavía no sabéis qué significa dentro de ella.</td></tr></tbody></table>
+<h3>7.5 Señal: la Prueba de Aporte</h3>
+<p>Para declarar una Pista como Señal completad: “Esto apoya nuestra teoría porque...”. La frase debe describir una aportación concreta. Ser simplemente compatible con la teoría no basta.</p>
+<p class="rb-rule">Una Pista cuenta como Señal si realiza al menos una de estas funciones:</p>
+<ul>
+<li>relaciona una persona, grupo o fenómeno con el incidente;</li>
+<li>establece acceso, oportunidad, capacidad, herramienta, método o ventana temporal;</li>
+<li>sostiene un motivo, objetivo, beneficio o presión relevante;</li>
+<li>establece una secuencia o una acción necesaria;</li>
+<li>explica una anomalía concreta que ya estaba sobre la mesa;</li>
+<li>conecta materialmente dos elementos del caso que antes estaban separados.</li>
+</ul>
+<aside class="rb-caja"><h5>NO ES SEÑAL POR CONTEXTO</h5><p>Un horario de limpieza no cuenta solo porque “demuestra que el edificio estaba raro”. Puede contar si establece una ventana concreta que hace posible el acceso, explica por qué una planta estaba vacía o conecta a alguien con el momento del incidente. Los datos ambientales, atmosféricos o meramente compatibles no aumentan Afinación.</p></aside>
+<h3>7.6 Ruido y Puente Causal</h3>
+<p>Una Pista es Ruido cuando pertenece a otra cadena causal. Para declararla así construid un Puente Causal:</p>
+<blockquote>“Esto existe porque [HECHO YA ESTABLECIDO], que explica [PROPIEDAD CONCRETA DE LA PISTA], pero pertenece a [OTRO SUCESO, SECRETO O CONFLICTO].”</blockquote>
+<p class="rb-rule">El Puente debe superar tres pruebas:</p>
+<ul>
+<li>Origen. El hecho citado explica directamente por qué existe la Pista.</li>
+<li>Pertinencia. Explica una propiedad concreta: procedencia, momento, ubicación, transferencia, conducta, acceso, objeto, dinero, comunicación u otra característica relevante.</li>
+<li>Continuidad. No necesita inventar un acontecimiento nuevo que todavía no exista en la ficción.</li>
+</ul>
+<p>El GM no juzga si vuestra teoría le gusta. Solo puede rechazar un Puente porque contradice una Pista, porque el origen propuesto no explica la característica citada o porque necesita un eslabón inventado.</p>
+<aside class="rb-caja"><h5>POR QUÉ MERECE LA PENA RESOLVER RUIDO</h5><p>Una Pista clasificada como Ruido mediante un Puente Causal válido queda CERRADA para esta Revelación. No puede utilizarse como Ancla de una Distorsión. En cambio, incluso una sola Interferencia será el Ancla obligatoria si obtenéis 7-9. Comprender una pista incómoda importa aunque todavía no active Mordedura.</p></aside>
+<h3>7.7 Interferencia</h3>
+<p>Una Pista es Interferencia cuando puede coexistir con la teoría, pero no podéis usarla como Señal ni explicar su presencia mediante un Puente Causal válido.</p>
+<blockquote>Significa: “Esto ocurrió. Nuestra explicación todavía no sabe por qué.”</blockquote>
+<p>Las Interferencias no reducen Afinación. Representan misterio residual.</p>
+<h3>7.8 Mordedura</h3>
+<p>Con 0-1 Interferencias la Revelación conserva sus rangos normales. Con 2 o más Interferencias, cualquier resultado final de 10+ se convierte en 7-9: SEÑAL DISTORSIONADA. Esto es la Mordedura.</p>
+<p>La Mordedura no aumenta la probabilidad de Falso Positivo. Significa que podéis haber comprendido correctamente lo esencial, pero habéis llegado a la verdad dejando demasiados elementos sin explicar.</p>
+<p>Con exactamente 1 Interferencia no hay degradación de 10+, pero si obtenéis 7-9 esa Interferencia debe ser el Ancla de la Distorsión. Por eso convertirla en Ruido mediante un Puente Causal sigue teniendo valor.</p>
+<h3>7.9 Afinación</h3>
+<table><thead><tr><th>Señales</th><th>Afinación</th></tr></thead><tbody><tr><td>0-2</td><td>+0</td></tr><tr><td>3-4</td><td>+1</td></tr><tr><td>5-6</td><td>+2</td></tr><tr><td>7 o más</td><td>+3</td></tr></tbody></table>
+<p>Afinación mide cuánto apoyo material tiene el Núcleo. Interferencia mide cuánto misterio residual aceptáis llevar a la Revelación. Son cosas distintas.</p>
+<h3>7.10 Anclas del Núcleo</h3>
+<p>Para alcanzar Afinación +2 o +3 señalad en el Muro tres Pistas distintas:</p>
+<ul>
+<li>Ancla de QUÉ: la Pista que mejor sostiene qué ocurrió.</li>
+<li>Ancla de QUIÉN: la Pista que mejor sostiene quién o qué lo provocó.</li>
+<li>Ancla de POR QUÉ: la Pista que mejor sostiene el motivo, objetivo o lógica.</li>
+</ul>
+<p>Una Pista puede contener información útil sobre varias afirmaciones, pero las tres Anclas deben ser tarjetas distintas. No existe una prueba 2-2-2 ni una auditoría de “fuentes independientes”.</p>
+<p>Para +2 necesitáis 5-6 Señales y tres Anclas distintas. Para +3 necesitáis 7 o más Señales, las tres Anclas y haber descubierto al menos dos Pistas por encima del Umbral del caso.</p>
+<h3>7.11 Control</h3>
+<p>Afinación +3 concede CONTROL. En cualquier 7-9 obtenido con +3, QUÉ, QUIÉN y POR QUÉ quedan protegidos. La Distorsión solo puede afectar a Método, Secuencia, Complicidad, Encubrimiento, Beneficiario o Consecuencias.</p>
+<p>Mordedura y Control pueden actuar simultáneamente. Si tenéis +3 y 2 o más Interferencias, un 10+ se convierte en 7-9, pero Control permanece: el mundo muerde a través de un cabo suelto sin reescribir el corazón de una investigación excepcional.</p>
+<h3>7.12 La tirada</h3>
+<p>Tira 2d6 + Afinación. Nada más modifica esta tirada.</p>
+<table><thead><tr><th>Afinación</th><th>Señal Clara 10+</th><th>Señal Distorsionada 7-9</th><th>Falso Positivo 6-</th></tr></thead><tbody><tr><td>+0</td><td>16,7 %</td><td>41,7 %</td><td>41,7 %</td></tr><tr><td>+1</td><td>27,8 %</td><td>44,4 %</td><td>27,8 %</td></tr><tr><td>+2</td><td>41,7 %</td><td>41,7 %</td><td>16,7 %</td></tr><tr><td>+3</td><td>58,3 %</td><td>33,3 %</td><td>8,3 %</td></tr></tbody></table>
+<h3>7.13 La Revelación ocurre en la ficción</h3>
+<p>Revelar no significa obligatoriamente realizar una acusación pública irreversible. Puede ser una confrontación privada, una reunión, una trampa, una denuncia, un informe, una publicación, una operación o cualquier acción que comprometa a los investigadores con su explicación.</p>
+<p>Antes de tirar, el GM anuncia: “Si os equivocáis aquí, esto es lo que estáis poniendo en riesgo.” Los jugadores pueden cambiar lugar, audiencia, grado de exposición o forma de la Revelación antes de lanzar los dados.</p>
+<h3>7.14 10+ - Señal Clara</h3>
+<p>QUÉ, QUIÉN y POR QUÉ se convierten en verdad tal como los habéis presentado. Las Señales adquieren definitivamente ese significado. Las Pistas cerradas como Ruido pertenecen efectivamente a otras historias. Las Interferencias restantes no pueden contradecir el Núcleo ya fijado.</p>
+<p>Quien lideró la Revelación añade un detalle visible que confirma la conclusión. No es necesario realizar otra tirada para “certificar” que teníais razón.</p>
+<h3>7.15 7-9 - Señal Distorsionada</h3>
+<p>QUÉ y QUIÉN son verdad. El GM nunca puede convertir al responsable principal en otra persona ni negar el acontecimiento central. La fórmula del resultado es siempre: “Tenéis razón en lo fundamental, pero...”.</p>
+<p>Sin Control, la Distorsión puede afectar a POR QUÉ, Método, Secuencia, Complicidad, Encubrimiento, Beneficiario o Consecuencias. Con Control, POR QUÉ también queda protegido.</p>
+<h4>Prioridad del Ancla</h4>
+<ul>
+<li>Si existe alguna Interferencia, el GM debe usar una como Ancla.</li>
+<li>Si no existen Interferencias, utiliza una Señal secundaria. Las Pistas cerradas como Ruido no vuelven a abrirse para fabricar la Distorsión.</li>
+</ul>
+<h4>Lentes de Distorsión</h4>
+<table><thead><tr><th>Lente</th><th>Pregunta</th></tr></thead><tbody><tr><td>PROPÓSITO</td><td>¿Qué parte del motivo habíais interpretado de forma incompleta? Solo está disponible sin Control.</td></tr><tr><td>MÉTODO</td><td>¿Qué parte ocurrió de otra manera?</td></tr><tr><td>SECUENCIA</td><td>¿Qué ocurrió antes o después de lo que creíais?</td></tr><tr><td>COMPLICIDAD</td><td>¿Quién más intervino sin sustituir al responsable principal?</td></tr><tr><td>ENCUBRIMIENTO</td><td>¿Quién manipuló posteriormente lo ocurrido y por qué?</td></tr><tr><td>BENEFICIARIO</td><td>¿Quién aprovechó el incidente sin haberlo provocado?</td></tr><tr><td>CONSECUENCIA</td><td>¿Qué efecto importante de lo ocurrido todavía no habíais visto?</td></tr></tbody></table>
+<aside class="rb-caja"><h5>PROPÓSITO SIN NEGAR EL ANCLA</h5><p>Si el GM usa PROPÓSITO, el Ancla de POR QUÉ sigue siendo factual y sigue siendo relevante. La Distorsión puede revelar que era un detonante visible, un motivo parcial, una tapadera o un objetivo instrumental, pero no puede volver la Pista irrelevante ni convertirla en falsa.</p></aside>
+<h4>Plantillas rápidas</h4>
+<ul>
+<li>Complicidad: “Tenéis razón sobre ___, pero ___ también hizo ___; ahora ___.”</li>
+<li>Propósito: “___ era real y sí empujó a ___, pero el objetivo de fondo era ___; por eso ahora ___.”</li>
+<li>Método: “El resultado es correcto, pero ___ no ocurrió como pensáis. En realidad ___; ahora ___.”</li>
+<li>Secuencia: “Ambas cosas ocurrieron, pero ___ ocurrió primero. Eso significa que ahora ___.”</li>
+<li>Encubrimiento: “___ no provocó el incidente; estaba ocultando ___. Al descubrir vuestra Revelación, ___.”</li>
+<li>Beneficiario: “___ no causó lo ocurrido, pero lo aprovechó para ___. Vuestra Revelación acaba de ___.”</li>
+<li>Consecuencia: “Teníais razón sobre el caso, pero eso ya ha provocado ___ y ahora ___.”</li>
+</ul>
+<aside class="rb-caja"><h5>UNA BUENA DISTORSIÓN</h5><p>Debe cambiar una decisión, relación, peligro, objetivo, oportunidad o situación presente. Si solo añade trivia retrospectiva, no es una Distorsión suficiente.</p></aside>
+<h3>7.16 Resolución física después de una Revelación con 7+</h3>
+<p>La Revelación fija la verdad, no necesariamente el resultado físico inmediato. Si alguien huye, un servidor está siendo borrado, hay que rescatar a una persona o una entidad debe ser contenida, la escena continúa con las reglas normales de Acción.</p>
+<p>La verdad ya no está en juego. No vuelvas a tirar para descubrir si la teoría era correcta. Solo se tiran las consecuencias físicas, sociales o tácticas que sigan realmente abiertas.</p>
+<aside class="rb-caja"><h5>VENTAJA DE REVELACIÓN</h5><p>Después de una Revelación con 7+, la primera acción del grupo que explote directamente una verdad recién fijada obtiene Ventaja. Si no existe un obstáculo independiente y la única duda era si la teoría era cierta, no hace falta tirar.</p></aside>
+<h3>7.17 6- - Falso Positivo</h3>
+<p>Solo un 6- puede negar el Núcleo. La teoría no es la verdad del caso. La escena ocurre y el riesgo anunciado se materializa de forma proporcional a cómo elegisteis Revelar.</p>
+<p>El GM añade un detalle factual a una Pista y la convierte en PISTA DURA. Ese nuevo dato demuestra por qué al menos una afirmación importante era incorrecta, pero no revela automáticamente la solución correcta.</p>
+<p>Una Pista Dura debe abrir al menos dos explicaciones plausibles nuevas. En una Revelación posterior puede ser Señal o Interferencia. Solo podrá convertirse en Ruido si información obtenida después del Falso Positivo permite construir un Puente Causal válido.</p>
+<h3>7.18 Retirada o Seguir la Grieta</h3>
+<p>Tras un Falso Positivo el grupo elige una de dos respuestas:</p>
+<p class="rb-rule">RETIRADA</p>
+<p>Aceptáis que esta vía ha fallado y protegéis lo que todavía pueda salvarse. Ruido de Fondo +1. La consecuencia anunciada ocurre de manera limitada pero real. El GM indica qué vías de investigación continúan existiendo, sin entregar una Pista nueva.</p>
+<p class="rb-rule">SEGUIR LA GRIETA</p>
+<p>Actuáis inmediatamente sobre el nuevo dato. Ruido de Fondo +2. La Pista Dura señala una persona, lugar, registro, objeto o acción relacionada con la grieta, pero no entrega información automáticamente. La siguiente escena empieza allí y aún habrá que actuar para conseguir algo.</p>
+<aside class="rb-caja"><h5>PROTECCIÓN DE LA GRIETA</h5><p>Si el +2 provoca una Reacción o Reacción Mayor, esta no puede destruir ni volver definitivamente inaccesible la fuente exacta que la Pista Dura acaba de señalar antes de que los investigadores tengan una oportunidad significativa de interactuar con ella. Puede complicarla, poner seguridad, iniciar un borrado, provocar una fuga o cerrar otras rutas. La protección dura solo hasta la primera acción significativa.</p></aside>
+<h3>7.19 Reparto de autoridad</h3>
+<table><thead><tr><th>Los jugadores deciden</th><th>El GM decide</th></tr></thead><tbody><tr><td>La teoría y su Núcleo.</td><td>Qué hechos existen mediante las Pistas.</td></tr><tr><td>Qué Pistas proponen como Señal.</td><td>Si una propuesta de Señal supera la Prueba de Aporte.</td></tr><tr><td>Qué Puentes Causales proponen para Ruido.</td><td>Si un Puente cumple Origen, Pertinencia y Continuidad.</td></tr><tr><td>Cómo y dónde realizan la Revelación.</td><td>La Apuesta de la Revelación y sus consecuencias.</td></tr><tr><td>Retirada o Seguir la Grieta.</td><td>Ancla, Lente y contenido de una Distorsión; el nuevo detalle de una Pista Dura; las Reacciones del entorno.</td></tr></tbody></table>
+<p>El GM no decide qué solución esperaba, qué teoría le gusta más ni quién era culpable antes de la Revelación. Los jugadores no pueden inventar hechos durante la clasificación, ignorar una Pista, convertir una asociación temática en Puente Causal ni negar el texto literal de una Pista.</p>
+<aside class="rb-caja"><h5>PRINCIPIO FINAL</h5><p>Una buena teoría no tiene que explicar cada detalle, pero sí debe sobrevivir a todos los hechos. SEÑAL mide apoyo. RUIDO demuestra que una pista incómoda ya está comprendida dentro de otra cadena causal. INTERFERENCIA mide cuánto misterio residual lleváis hasta el clímax.</p></aside></section>
+<section id="8-dirigir-ruido-blanco"><h2>8. Dirigir RUIDO BLANCO</h2>
+<p class="rb-lead">No protejas una solución. Protege la consistencia de las Pistas y la honestidad de las consecuencias.</p>
+<h3>Agenda del GM</h3>
+<ul>
+<li>Da información concreta. Evita Pistas que solo existan para sonar misteriosas.</li>
+<li>No empujes hacia una teoría. Si una Pista parece señalar a alguien, deja que sean los jugadores quienes lo digan.</li>
+<li>Haz que las personas quieran cosas incluso cuando no son culpables de nada.</li>
+<li>Anuncia la Apuesta antes de tirar. El coste debe ser comprensible antes de que el jugador se comprometa.</li>
+<li>Usa Ruido de Fondo para mostrar que observar también altera. No lo utilices como una excusa para esconder el juego.</li>
+<li>En la Revelación, arbitra hechos y requisitos mínimos; no juzgues si una teoría es elegante o coincide con lo que tú habrías imaginado.</li>
+<li>En un 7-9 introduce resistencia real. En un 6- abre una grieta, no una nueva solución secreta.</li>
+</ul>
+<h3>PNJ sin culpabilidad predeterminada</h3>
+<p>Las personas de interés necesitan deseos, secretos y límites. Un secreto no equivale a culpabilidad. La persona que oculta una relación, dinero, una infracción laboral o una traición puede terminar siendo culpable, cómplice, testigo, beneficiaria o simplemente una historia paralela. No lo decidas antes de la Revelación.</p>
+<h3>Qué responder con un Talento</h3>
+<p>Cuando un Talento formula una pregunta objetiva (“¿qué detalle contradice la explicación más obvia?”, “¿quién puede darme realmente esto?”), responde de forma útil y concreta. El Talento existe para producir dirección, no acertijos adicionales.</p></section>
+<section id="9-disenar-un-caso"><h2>9. Diseñar un caso</h2>
+<p class="rb-lead">Preparar hechos con elasticidad es más importante que preparar una trama.</p>
+<h3>Un caso estándar necesita</h3>
+<p>1. Pregunta Central. Debe admitir respuestas distintas y exigir una explicación, no un dato binario.</p>
+<p>2. Incidente. Lo que ya ha ocurrido cuando empieza la partida.</p>
+<p>3. 3-5 Personas de interés. Para cada una: qué quiere, qué oculta y cómo reacciona bajo presión. El secreto no equivale automáticamente a autoría.</p>
+<p>4. 3-5 Localizaciones o vías de acceso a información.</p>
+<p>5. 8-12 Pistas concretas. Ninguna pertenece previamente a una solución.</p>
+<p>6. 4-6 Reacciones posibles de Ruido de Fondo, incluyendo al menos dos Reacciones Mayores plausibles.</p>
+<p>7. Una lista breve de posibles riesgos de Revelación: reputación, acceso, legalidad, seguridad, pérdida de una fuente, exposición pública...</p>
+<p>8. No escribas culpable, método verdadero, motivo verdadero ni cronología causal completa.</p>
+<h3>Escribir buenas Pistas</h3>
+<table><thead><tr><th>Haz</th><th>Evita</th></tr></thead><tbody><tr><td>Datos con hora, objeto, conducta, contradicción, transferencia, acceso o relación.</td><td>Conclusiones como “X mintió porque era culpable”.</td></tr><tr><td>Pistas que puedan cambiar de significado cuando aparece otra.</td><td>Pistas intercambiables que podrían pertenecer a cualquier caso.</td></tr><tr><td>Limitaciones visibles: “el registro identifica el dispositivo, no quién estaba al teclado”.</td><td>Fiabilidad como estadística o casilla mecánica.</td></tr><tr><td>Secretos secundarios con consecuencias reales.</td><td>Que todos los secretos estén relacionados con la autoría.</td></tr><tr><td>Pistas que puedan ser Señal en una teoría y Ruido en otra.</td><td>Pistas tan vagas que acepten cualquier explicación sin resistencia.</td></tr></tbody></table>
+<aside class="rb-caja"><h5>CONTROL FINAL</h5><p>Lee tus Pistas y pregúntate: “¿podría la mesa construir al menos dos historias radicalmente distintas sin contradecir el texto literal de estas tarjetas?”. Si no, has escrito una solución secreta por accidente.</p></aside>
+<h3>Diseñar Reacciones</h3>
+<p>Una Reacción no debe ser una pista gratuita. Debe cambiar la situación: bloquear una ruta, obligar a elegir, crear urgencia, separar aliados, hacer intervenir a terceros o poner algo en movimiento. Puede señalar una oportunidad, pero los investigadores aún tendrán que actuar para convertirla en información.</p>
+<h3>Diseñar para la Distorsión</h3>
+<p>No prepares “giros verdaderos”. Prepara PNJ con agendas, secretos secundarios y oportunidades para que las Lentes produzcan consecuencias coherentes. Si existe una transferencia sospechosa, piensa qué otros conflictos podrían explicarla. Si hay un acceso misterioso, piensa qué tipo de complicidad, encubrimiento o secuencia podría nacer de él. No decidas cuál será real.</p></section>
+<section id="10-caso-de-playtest-once-minutos-sin-imagen"><h2>10. Caso de playtest: ONCE MINUTOS SIN IMAGEN</h2>
+<p class="rb-lead">Thriller corporativo contemporáneo. Una sesión larga o dos cortas. No existe solución oficial.</p>
+<h3>Pregunta Central</h3>
+<p class="rb-lead">¿Qué ocurrió realmente en ORBITA durante los once minutos sin imagen, quién fue responsable de la muerte de Irene Salvat y qué estaba intentando conseguir?</p>
+<h3>Apertura para leer</h3>
+<aside class="rb-caja"><h5>02:17</h5><p>NEREIDA Labs sigue iluminada como si todavía fueran las diez. En la planta 17, la sala ORBITA está acordonada. Irene Salvat, directora técnica, yace junto a la mesa de demostraciones. Las cámaras interiores dejaron de grabar durante once minutos. Una credencial de contingencia abrió la puerta durante ese vacío. Nadie admite saber por qué Irene seguía allí.</p></aside>
+<h3>Personas de interés</h3>
+<table><thead><tr><th>Persona</th><th>Quiere</th><th>Oculta / bajo presión</th></tr></thead><tbody><tr><td>Sara Beltrán - cofundadora y expareja</td><td>Mantener el control de NEREIDA y su vida privada fuera del escándalo.</td><td>Irene le pidió material interno fuera de protocolo. Coopera hasta que la relación personal entra en juego; después llama a abogados.</td></tr><tr><td>Leo Marín - Seguridad</td><td>Demostrar que la brecha no fue negligencia suya.</td><td>Hizo cambios de mantenimiento mal documentados. Bajo presión explica demasiado y empieza a “ordenar” registros ambiguos.</td></tr><tr><td>Eva Montal - Finanzas</td><td>Salvar una ronda de financiación.</td><td>Autorizó pagos irregulares vinculados a NEREIDA y usa administración remota. Intenta encuadrarlo todo como problema de Seguridad.</td></tr><tr><td>Tomás Vidal - periodista</td><td>Publicar NEREIDA y proteger a su fuente.</td><td>Entró en el edificio y ocultó el motivo real. Niega su presencia hasta que los registros la hacen insostenible.</td></tr></tbody></table>
+<h3>Localizaciones</h3>
+<p>ORBITA - Centro de Seguridad - Oficina de Irene - Finanzas - Garaje y entorno - Ascensores y planta 17. Deja que la mesa elija el orden. Si encuentran otra vía razonable -un proveedor, una copia personal, un contacto, una cámara municipal-, mueve la Pista al lugar donde tenga sentido.</p>
+<h3>Las doce Pistas</h3>
+<table><thead><tr><th>Código</th><th>Pista</th></tr></thead><tbody><tr><td>P1</td><td>El informe preliminar sitúa la muerte entre las 22:15 y las 22:35 por un traumatismo grave. El mecanismo exacto no está claro.</td></tr><tr><td>P2</td><td>Las cámaras interiores de la planta 17 no grabaron entre 22:08 y 22:19. No fue una caída general: la desconexión fue manual y requería privilegios de mantenimiento.</td></tr><tr><td>P3</td><td>A las 22:13 una credencial S-14 abrió ORBITA. Está asignada a Sara, pero el manual de Seguridad permite crear clones temporales de contingencia.</td></tr><tr><td>P4</td><td>A las 22:05 el paquete de archivos llamado NEREIDA fue copiado desde el equipo de Irene a un soporte externo.</td></tr><tr><td>P5</td><td>A las 21:58 Irene envió a Tomás: “Sube por servicio. ORBITA 22:10. Si esto sale mal, publica NEREIDA. No uses el resumen”.</td></tr><tr><td>P6</td><td>La orden LM-3 programó mantenimiento del CCTV de planta 17 a las 22:07. La orden fue creada con la cuenta de Leo.</td></tr><tr><td>P7</td><td>Junto al ventanal y la mesa hay microfracturas y polvo de yeso recientes. El patrón es compatible tanto con un forcejeo como con una preparación o escenificación.</td></tr><tr><td>P8</td><td>Se recuperan 3,8 segundos de audio de ORBITA. Una voz dice: “prometiste que terminaba aquí”. La grabación no permite identificar con fiabilidad a quien habla.</td></tr><tr><td>P9</td><td>A las 22:24 el ventanal inteligente de ORBITA recibió una orden local de apertura mediante una cuenta administrativa.</td></tr><tr><td>P10</td><td>Irene había marcado como irregulares varias facturas del proyecto NEREIDA vinculadas a un proveedor aprobado desde Finanzas.</td></tr><tr><td>P11</td><td>Leo recibió un pago privado de una consultora que también aparece en el circuito económico de NEREIDA.</td></tr><tr><td>P12</td><td>A las 22:16 el portátil asignado a Eva inició una sesión administrativa hacia la automatización de planta 17. El registro identifica el dispositivo y el token, no quién estaba físicamente delante del teclado.</td></tr></tbody></table>
+<h3>Dónde pueden aparecer</h3>
+<table><thead><tr><th>Lugar</th><th>Pistas naturales / profundidad</th></tr></thead><tbody><tr><td>ORBITA</td><td>P1. También permite descubrir P7, P8 o P9 mediante examen físico o técnico.</td></tr><tr><td>Seguridad</td><td>P2, P3 y P6. Acciones arriesgadas pueden revelar procedimientos, copias y cambios recientes.</td></tr><tr><td>Oficina de Irene</td><td>P4, P5 y documentación relacionada con P10.</td></tr><tr><td>Finanzas</td><td>P10, P11 y contexto contractual. P12 puede aparecer al cruzar telemetría con administración remota.</td></tr><tr><td>Entrevistas</td><td>Las personas pueden contextualizar cualquier Pista, pero sus interpretaciones no se convierten automáticamente en hechos.</td></tr></tbody></table>
+<h3>Reacciones de Ruido de Fondo</h3>
+<ul>
+<li>Legal centraliza las entrevistas. A partir de ahora acceder a empleados requiere autorización. Una asistente que ha visto el movimiento documental puede convertirse en una oportunidad si el grupo decide arriesgarse a contactarla.</li>
+<li>Se filtra a prensa que el equipo está tratando una muerte accidental como homicidio. La presión pública obliga a decidir entre mantener perfil bajo o utilizar la exposición para forzar a alguien a posicionarse.</li>
+<li>Un proveedor anuncia un borrado rutinario de telemetría. Los investigadores tienen una ventana limitada para preservar ciertos sistemas; no saben todavía cuáles contienen algo útil.</li>
+<li>Una persona de interés empieza a ordenar o mover documentación para proteger una irregularidad secundaria. El grupo puede seguir el movimiento, confrontarla o aprovechar el descuido que genera.</li>
+<li>Reacción Mayor: Dirección retira las credenciales temporales del equipo y entrega parte del expediente a un despacho externo. El grupo pierde accesos cómodos y deberá trabajar mediante contactos, vías laterales o información ya preservada.</li>
+<li>Reacción Mayor: alguien abandona el edificio con material físico relacionado con NEREIDA. El grupo sabe quién se mueve y puede decidir perseguirlo, interceptarlo o priorizar otra vía; no recibe automáticamente una nueva Pista.</li>
+</ul>
+<h3>Distorsiones: usa Lentes, no soluciones preparadas</h3>
+<p>No existe una lista de giros verdaderos. Si aparece un 7-9, utiliza la Interferencia disponible como Ancla y aplica una Lente. P11 puede convertirse en Encubrimiento o Beneficiario; P3 puede producir Complicidad; P7 puede alterar Método o Secuencia; P8 puede introducir otra relación; P12 puede cambiar Método sin decidir previamente quién estaba al teclado.</p></section>
+<section id="11-investigadores-pregenerados"><h2>11. Investigadores pregenerados</h2>
+<p class="rb-lead">Cuatro personajes completos para probar el sistema sin crear fichas. Todos empiezan con Tensión 0, sin Condiciones y sin Secuelas.</p>
+<h3>ALEX PARDO</h3>
+<p class="rb-rule">Abogada de cumplimiento y litigación interna</p>
+<p class="rb-small">INFLUIR 2 - RAZONAR 1 - OBSERVAR 1 - INTERVENIR 0</p>
+<p>Especialidades: Derecho; Finanzas</p>
+<p>Kit: Legal</p>
+<p>Talento: Lectura del sistema</p>
+<p>Obsesión: Obligar a una institución a reconocer la evidencia que intenta administrar.</p>
+<p>Punto Ciego: Cree que todo problema tiene una vía procesal si se encuentra el documento correcto.</p>
+<p>Anclas personales: Su hermana Júlia; su reputación profesional fuera de los casos de Ruido Blanco.</p>
+<p>Vínculo: Iván siempre encuentra el dato que Alex necesita convertir en argumento.</p>
+<h3>IVÁN COSTA</h3>
+<p class="rb-rule">Analista de respuesta a incidentes</p>
+<p class="rb-small">RAZONAR 2 - OBSERVAR 1 - INTERVENIR 1 - INFLUIR 0</p>
+<p>Especialidades: Ciberseguridad; Análisis de datos</p>
+<p>Kit: Digital</p>
+<p>Talento: Preparación oculta</p>
+<p>Obsesión: Demostrar que los sistemas dejan huellas incluso cuando las personas no.</p>
+<p>Punto Ciego: Sobrevalora los registros técnicos y sospecha demasiado de los testimonios emocionales.</p>
+<p>Anclas personales: Cocinar para su padre los domingos; el taller comunitario donde repara equipos viejos.</p>
+<p>Vínculo: Mara le recuerda que detrás de cada log hay un cuerpo o una persona.</p>
+<h3>MARA SOLER</h3>
+<p class="rb-rule">Enfermera forense de urgencias</p>
+<p class="rb-small">OBSERVAR 2 - INFLUIR 1 - INTERVENIR 1 - RAZONAR 0</p>
+<p>Especialidades: Medicina forense; Primeros auxilios</p>
+<p>Kit: Forense</p>
+<p>Talento: Esto no encaja</p>
+<p>Obsesión: Que la historia final respete lo que el cuerpo y la escena dicen de verdad.</p>
+<p>Punto Ciego: Interpreta el autocontrol de otras personas como ocultación demasiado rápido.</p>
+<p>Anclas personales: Su hijo Nil; correr al amanecer por el puerto.</p>
+<p>Vínculo: Óscar la convenció de empezar a trabajar casos de Ruido Blanco y todavía no sabe si agradecérselo.</p>
+<h3>ÓSCAR RIUS</h3>
+<p class="rb-rule">Investigador privado; antiguo seguridad corporativa</p>
+<p class="rb-small">INTERVENIR 2 - OBSERVAR 1 - INFLUIR 1 - RAZONAR 0</p>
+<p>Especialidades: Vigilancia; Seguridad</p>
+<p>Kit: Vigilancia</p>
+<p>Talento: Salida preparada</p>
+<p>Obsesión: Descubrir qué hace una institución cuando cree que nadie la está mirando.</p>
+<p>Punto Ciego: Asume que quien protege una organización protegerá antes la organización que la verdad.</p>
+<p>Anclas personales: Su hija adulta Laia; un gimnasio de barrio donde nadie le pregunta por su trabajo.</p>
+<p>Vínculo: Alex le ha sacado de más de un problema legal del que piensa admitir.</p></section>
+<section id="12-hoja-de-investigador"><h2>12. Hoja de investigador</h2>
+<p class="rb-lead">Una ficha compacta para crear personajes completos sin recuperar la contabilidad de versiones anteriores.</p>
+<table><thead><tr><th>CAMPO</th><th>ANOTACIÓN</th></tr></thead><tbody><tr><td>Nombre / pronombres</td><td></td></tr><tr><td>Concepto</td><td></td></tr><tr><td>Profesión</td><td></td></tr><tr><td>Métodos</td><td>OBSERVAR ___   RAZONAR ___   INFLUIR ___   INTERVENIR ___</td></tr><tr><td>Especialidades</td><td>1. __________________________   2. __________________________</td></tr><tr><td>Kit</td><td></td></tr><tr><td>Talento</td><td></td></tr><tr><td>Obsesión</td><td></td></tr><tr><td>Punto Ciego</td><td></td></tr><tr><td>Ancla personal 1</td><td></td></tr><tr><td>Ancla personal 2</td><td></td></tr><tr><td>Vínculo</td><td></td></tr><tr><td>Tensión</td><td>[ ]  [ ]  [ ]</td></tr><tr><td>Condiciones</td><td>1. ____________________   2. ____________________   3. ____________________</td></tr><tr><td>Secuelas</td><td>Nombre: ____________________  Disparador: ________________________________
+Nombre: ____________________  Disparador: ________________________________</td></tr></tbody></table>
+<p class="rb-rule">RECORDATORIO. Una vez por sesión, una escena significativa con una de tus Anclas personales borra 1 Tensión. Si debes marcar una cuarta Tensión, sufres una Ruptura: baja a 1 y escribe una Secuela.</p></section>
+<section id="13-referencia-rapida-de-mesa"><h2>13. Referencia rápida de mesa</h2>
+<p class="rb-lead">Una página para jugar sin buscar reglas.</p>
+<table><thead><tr><th>ACCIÓN</th><th>REVELACIÓN</th></tr></thead><tbody><tr><td>Tira 2d6 + Método; conserva los 2 mejores.</td><td>Alcanza el Umbral, formula QUÉ / QUIÉN / POR QUÉ y clasifica todas las Pistas.</td></tr><tr><td>12 Nítido; 10-11 Limpio; 7-9 Con coste; 2-6 Revés.</td><td>SEÑAL: aporta materialmente. RUIDO: Puente Causal y queda cerrado. INTERFERENCIA: no sabes qué significa.</td></tr><tr><td>Ventaja: +1d, conserva mejores. Desventaja: +1d, elimina el mayor.</td><td>Afinación: 0-2 Señales +0; 3-4 +1; 5-6 +2; 7+ +3.</td></tr><tr><td>Forzar: +1 Tensión para Ventaja. 4ª Tensión = Ruptura; baja a 1 y escribe Secuela.</td><td>Para +2/+3 necesitas Anclas distintas de QUÉ, QUIÉN y POR QUÉ. +3 exige además 2 Pistas sobre el Umbral.</td></tr><tr><td>Pista esencial: nunca tires para obtenerla si el acceso y el método son razonables.</td><td>2+ Interferencias: Mordedura, 10+ pasa a 7-9. Una sola Interferencia es Ancla obligatoria si sale 7-9.</td></tr><tr><td>Ruido de Fondo 3 = Reacción; 6 = Reacción Mayor y vuelve a 3.</td><td>10+ verdad limpia; 7-9 QUÉ/QUIÉN ciertos + Distorsión; 6- Falso Positivo + Pista Dura + Retirada o Grieta.</td></tr></tbody></table>
+<aside class="rb-caja"><h5>NUNCA OLVIDES</h5><p>7-9 no cambia al responsable principal. Con +3, Control protege también POR QUÉ. Después de cualquier Revelación con 7+, la primera acción del grupo que explote directamente la verdad recién fijada obtiene Ventaja.</p></aside>
+<h3>PERSONAJE</h3>
+<table><thead><tr><th>Elemento</th><th>Recordatorio</th></tr></thead><tbody><tr><td>Métodos</td><td>2, 1, 1, 0. La reserva es 2d6 + Método; conserva los 2 mejores.</td></tr><tr><td>Profesión / Especialidad</td><td>Dan acceso y lectura experta; no añaden dados automáticamente.</td></tr><tr><td>Kit</td><td>Equipo abstracto siempre preparado; puede justificar Ventaja si cambia de verdad el riesgo.</td></tr><tr><td>Ayudar</td><td>Da Ventaja si contribuyes materialmente y aceptas quedar expuesto a la consecuencia.</td></tr><tr><td>Tensión</td><td>Forzar o Encajar: +1 Tensión. Una cuarta marca provoca Ruptura.</td></tr><tr><td>Anclas personales</td><td>Una escena significativa con una de ellas borra 1 Tensión, una vez por sesión.</td></tr><tr><td>Secuela</td><td>Cuando aparece su Disparador: +1 Tensión para controlarla o acepta la complicación.</td></tr></tbody></table></section>
+<section id="14-hoja-de-revelacion"><h2>14. Hoja de Revelación</h2>
+<p class="rb-lead">Copiad esta estructura en una pizarra o usadla como hoja de mesa.</p>
+<p class="rb-rule">PREGUNTA CENTRAL</p>
+<p>________________________________________________________________________________________</p>
+<h3>NÚCLEO</h3>
+<p>QUÉ OCURRIÓ: __________________________________________________________________________</p>
+<p>QUIÉN / QUÉ FUE RESPONSABLE: _____________________________________________________________</p>
+<p>POR QUÉ / QUÉ INTENTABA CONSEGUIR: ______________________________________________________</p>
+<h3>ANCLAS DEL NÚCLEO</h3>
+<p>QUÉ  -&gt; Pista ________     QUIÉN -&gt; Pista ________     POR QUÉ -&gt; Pista ________</p>
+<h3>CLASIFICACIÓN</h3>
+<table><thead><tr><th>SEÑAL</th><th>RUIDO</th><th>INTERFERENCIA</th></tr></thead><tbody><tr><td>________________________</td><td>________________________</td><td>________________________</td></tr><tr><td>________________________</td><td>________________________</td><td>________________________</td></tr><tr><td>________________________</td><td>________________________</td><td>________________________</td></tr><tr><td>________________________</td><td>________________________</td><td>________________________</td></tr><tr><td>________________________</td><td>________________________</td><td>________________________</td></tr><tr><td>________________________</td><td>________________________</td><td>________________________</td></tr><tr><td>________________________</td><td>________________________</td><td>________________________</td></tr><tr><td>________________________</td><td>________________________</td><td>________________________</td></tr></tbody></table>
+<p>SEÑALES: ____   AFINACIÓN: ____      INTERFERENCIAS: ____      MORDEDURA: [  ] SÍ  [  ] NO</p>
+<p>CONTROL (+3): [  ] SÍ  [  ] NO</p>
+<p>¿DÓNDE Y CÓMO HACEMOS LA REVELACIÓN? ____________________________________________________</p>
+<p>APUESTA SI NOS EQUIVOCAMOS: ______________________________________________________________</p>
+<p>RESULTADO: [  ] Señal Clara     [  ] Señal Distorsionada     [  ] Falso Positivo</p>
+<p>ANCLA / LENTE / DISTORSIÓN: ______________________________________________________________</p>
+<p>PISTA DURA / NUEVA GRIETA: _______________________________________________________________</p>
+<p>TRAS 6-: [  ] Retirada    [  ] Seguir la Grieta</p></section>
+<section id="15-protocolo-de-blind-playtest"><h2>15. Protocolo de blind playtest</h2>
+<p class="rb-lead">No preguntes solo si gustó. Queremos saber qué comportamiento produce el sistema cuando el GM no ha participado en su diseño.</p>
+<h3>Datos que debe registrar el GM</h3>
+<ul>
+<li>Número de Pistas cuando el grupo alcanzó por primera vez el Umbral.</li>
+<li>Número de Pistas cuando decidió Revelar realmente.</li>
+<li>Número de Señales, Ruidos e Interferencias en ese momento.</li>
+<li>Afinación final y si existía Control.</li>
+<li>Si se activó Mordedura.</li>
+<li>Resultado de la Revelación y Lente utilizada.</li>
+<li>Ruido de Fondo al Revelar y al final del caso.</li>
+<li>Si hubo Falso Positivo: Retirada o Seguir la Grieta y qué ocurrió en la siguiente escena.</li>
+</ul>
+<h3>Después de jugar, responde</h3>
+<p>1. ¿Sentiste que estabais construyendo una explicación sometida a hechos o simplemente improvisando una historia?</p>
+<p>2. ¿Hubo alguna Pista que pudiera significar literalmente cualquier cosa? ¿Cuál?</p>
+<p>3. ¿La Prueba de Aporte impidió inflar Señales con contexto blando o generó discusiones?</p>
+<p>4. ¿Algún Puente Causal fue discutible? ¿El GM pudo resolverlo usando Origen, Pertinencia y Continuidad sin juzgar la teoría?</p>
+<p>5. ¿Convertir una Pista en Ruido se sintió útil por cerrarla frente a una Distorsión?</p>
+<p>6. ¿La existencia de una sola Interferencia cambió cómo vivisteis un 7-9?</p>
+<p>7. ¿La Mordedura hizo que quisierais investigar más o solo se sintió como castigo?</p>
+<p>8. ¿Las tres Anclas del Núcleo se eligieron en segundos o generaron contabilidad?</p>
+<p>9. ¿Alguien intentó inflar de forma retórica las Pistas 4-7 para alcanzar +3?</p>
+<p>10. ¿Control hizo que perseguir +3 pareciera una decisión útil pese al riesgo de Ruido de Fondo?</p>
+<p>11. ¿La Distorsión cambió la situación presente sin negar QUÉ o QUIÉN?</p>
+<p>12. ¿La lente PROPÓSITO pudo reinterpretar el motivo sin volver falsa o irrelevante el Ancla de POR QUÉ?</p>
+<p>13. ¿La resolución física posterior a la Revelación necesitó reglas adicionales o funcionó con Acción + Ventaja de Revelación?</p>
+<p>14. ¿Un Falso Positivo produjo ganas de continuar? ¿Retirada y Seguir la Grieta parecieron decisiones realmente distintas?</p>
+<p>15. ¿Alguna Reacción o Reacción Mayor regaló información sin que los jugadores tuvieran que actuar?</p>
+<p>16. ¿Qué regla consultasteis más de una vez?</p>
+<p>17. ¿Qué regla no utilizasteis?</p>
+<p>18. ¿En algún momento echasteis de menos Verificación, Amenaza, Cierre, Impacto u otro subsistema eliminado? ¿Por qué?</p>
+<h3>Datos de personaje que también queremos observar</h3>
+<ul>
+<li>¿Profesión, Especialidades y Kit produjeron permisos claros o generaron discusión sobre bonificadores?</li>
+<li>¿Obsesión y Punto Ciego generaron decisiones reales o quedaron como decoración?</li>
+<li>¿Las dos Anclas personales aparecieron de forma natural o parecieron material de campaña innecesario para un caso autoconclusivo?</li>
+<li>¿Alguna Secuela llegó a activarse? Si lo hizo, ¿produjo una elección interesante o solo castigo?</li>
+<li>¿Ayudar se usó? ¿El coste de quedar expuesto fue comprensible?</li>
+</ul>
+<h3>Hipótesis de diseño</h3>
+<aside class="rb-caja"><h5>LO QUE DEBE DEMOSTRAR EL PLAYTEST</h5><p>RUIDO BLANCO será un juego propio si la mesa siente que la solución no estaba escrita, pero tampoco podía inventar cualquier solución sin enfrentarse a toda la evidencia. La diferencia no está en tener más procedimientos que otros juegos de investigación emergente, sino en que las Pistas concretas ofrecen resistencia, el Ruido puede cerrarse causalmente y las Interferencias sobreviven hasta morder el clímax.</p></aside>
+<h3>Elementos deliberadamente fuera de esta prueba</h3>
+<p>Esta edición no intenta validar progresión de campaña, desarrollo de Organización, economía avanzada entre casos ni un módulo sobrenatural propio. Añadir esos elementos antes de comprobar el motor de investigación haría más difícil saber qué está funcionando realmente.</p>
+<h3>Inspiraciones reconocidas</h3>
+<p>RUIDO BLANCO reconoce la influencia de los juegos de investigación emergente de la familia Carved from Brindlewood, el principio de no bloquear información esencial asociado a GUMSHOE y los juegos contemporáneos que convierten la presión institucional y personal en consecuencias de ficción. El objetivo de esta versión no es ocultar esas influencias, sino comprobar si Señal / Ruido / Interferencia, la Mordedura y la Revelación producen una experiencia propia.</p></section>
+  </main>
+</div>
+
+<footer>
+  RUIDO BLANCO v0.5.5 — Manu Romera · Texto bajo CC BY-NC-SA 4.0 · Código bajo licencia MIT
+</footer>
+
+</body>
+</html>

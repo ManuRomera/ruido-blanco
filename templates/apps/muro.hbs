@@ -1,0 +1,76 @@
+<div class="rb-muro-wrapper">
+
+  <header class="rb-muro-cabecera">
+    <div class="rb-muro-caso">
+      <h1>{{#if caso.nombre}}{{caso.nombre}}{{else}}Caso sin nombre{{/if}}</h1>
+      <p class="rb-pregunta">{{#if caso.pregunta}}{{caso.pregunta}}{{else}}Escribe la Pregunta Central del caso.{{/if}}</p>
+      {{#if esGM}}
+      <button type="button" class="rb-boton-linea" data-action="editarCaso">
+        <i class="fa-solid fa-pen-to-square"></i> Editar caso</button>
+      {{/if}}
+    </div>
+
+    <div class="rb-muro-umbral">
+      <span class="rb-umbral-cifra">{{descubiertas}}<small>/{{caso.umbral}}</small></span>
+      <span class="rb-umbral-label">Pistas · caso {{caso.umbralLabel}}</span>
+      {{#if umbralAlcanzado}}
+        <span class="rb-umbral-ok">Umbral alcanzado{{#if sobreUmbral}} · {{sobreUmbral}} por encima{{/if}}</span>
+      {{else}}
+        <span class="rb-umbral-falta">Faltan {{faltan}}</span>
+      {{/if}}
+      <button type="button" class="rb-boton-revelar" data-action="abrirRevelacion">
+        <i class="fa-solid fa-bullseye"></i> Revelación</button>
+    </div>
+  </header>
+
+  {{> systems/ruido-blanco/templates/partials/ruido-track.hbs}}
+
+  <div class="rb-muro-columnas">
+
+    <section class="rb-columna rb-columna-pistas">
+      <header class="rb-columna-cabecera">
+        <h2>Pistas</h2>
+        <span class="rb-columna-nota">Hechos. No cambian de texto.</span>
+        {{#if esGM}}
+        <button type="button" class="rb-boton-linea" data-action="nuevaPista">
+          <i class="fa-solid fa-plus"></i> Nueva</button>
+        {{/if}}
+      </header>
+      <div class="rb-columna-cuerpo">
+        {{#each pistas}}
+          {{> systems/ruido-blanco/templates/partials/pista-tarjeta.hbs esGM=../esGM}}
+        {{else}}
+          <p class="rb-vacio">Todavía no hay Pistas en el Muro.</p>
+        {{/each}}
+      </div>
+    </section>
+
+    <section class="rb-columna rb-columna-hipotesis">
+      <header class="rb-columna-cabecera">
+        <h2>Hipótesis</h2>
+        <span class="rb-columna-nota">Frases de la mesa. Se tachan libremente.</span>
+        <button type="button" class="rb-boton-linea" data-action="nuevaHipotesis">
+          <i class="fa-solid fa-plus"></i> Nueva</button>
+      </header>
+      <div class="rb-columna-cuerpo">
+        {{#each hipotesis}}
+        <article class="rb-nota {{#if descartada}}descartada{{/if}}" data-id="{{id}}">
+          <p>{{texto}}</p>
+          <footer>
+            {{#if autor}}<span class="rb-nota-autor">{{autor}}</span>{{/if}}
+            <span class="rb-tarjeta-acciones">
+              <button type="button" data-action="alternarDescartada" title="Tachar">
+                <i class="fa-solid fa-strikethrough"></i></button>
+              <button type="button" data-action="abrirDoc" title="Abrir"><i class="fa-solid fa-pen"></i></button>
+              <button type="button" data-action="borrarDoc" title="Borrar"><i class="fa-solid fa-trash"></i></button>
+            </span>
+          </footer>
+        </article>
+        {{else}}
+          <p class="rb-vacio">Ninguna hipótesis sobre la mesa.</p>
+        {{/each}}
+      </div>
+    </section>
+
+  </div>
+</div>

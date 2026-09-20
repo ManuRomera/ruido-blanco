@@ -1,0 +1,12 @@
+<form class="rb-sheet rb-sheet-hipotesis {{#if system.descartada}}descartada{{/if}}" autocomplete="off">
+  <section class="rb-sheet-body">
+    <p class="rb-ayuda">Ninguna conexión se convierte en verdad por decirla muchas veces.</p>
+    <label>Hipótesis
+      <textarea name="system.texto" rows="4">{{system.texto}}</textarea></label>
+    <div class="rb-pista-fila">
+      <label>Quien la propuso
+        <input type="text" name="system.autor" value="{{system.autor}}"></label>
+      <label class="rb-check"><input type="checkbox" name="system.descartada" {{checked system.descartada}}> Tachada</label>
+    </div>
+  </section>
+</form>

@@ -1,0 +1,14 @@
+{
+  "name": "ruido-blanco",
+  "version": "0.5.5",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/*.test.mjs",
+    "build": "node scripts/build.mjs",
+    "manuscrito": "python3 scripts/manuscrito.py"
+  },
+  "devDependencies": {
+    "classic-level": "2.0.0"
+  }
+}

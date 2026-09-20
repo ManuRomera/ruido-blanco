@@ -1,0 +1,72 @@
+name: Publicar RUIDO BLANCO
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - name: Comprobar que la etiqueta coincide con system.json
+        run: |
+          version=$(node -p "require('./system.json').version")
+          if [ "v$version" != "${GITHUB_REF_NAME}" ]; then
+            echo "La etiqueta ${GITHUB_REF_NAME} no coincide con la versión v$version de system.json" >&2
+            exit 1
+          fi
+
+      - name: Validar JavaScript y manifiestos
+        run: |
+          node --check ruido-blanco.mjs
+          for archivo in module/*.mjs; do node --check "$archivo"; done
+          python3 -m json.tool system.json > /dev/null
+          python3 -m json.tool lang/es.json > /dev/null
+          for archivo in _data/*.json; do python3 -m json.tool "$archivo" > /dev/null; done
+
+      - run: npm ci
+
+      - name: Probar las reglas
+        run: npm test
+
+      - name: Regenerar reglamento y contenido desde el manuscrito
+        run: |
+          python3 scripts/manuscrito.py
+          python3 scripts/contenido.py
+          git diff --exit-code REGLAMENTO.md docs/ _data/ \
+            || { echo "El manuscrito y los archivos generados han divergido: ejecuta los scripts y haz commit." >&2; exit 1; }
+
+      - name: Compilar compendios
+        run: node scripts/build.mjs
+
+      - name: Empaquetar
+        run: |
+          mkdir -p dist/ruido-blanco
+          rsync -a \
+            --exclude '.git' --exclude '.github' --exclude 'dist' \
+            --exclude 'node_modules' --exclude '_data' --exclude 'scripts' \
+            --exclude 'sources' --exclude 'tests' --exclude 'docs' \
+            --exclude 'package*.json' --exclude '*.zip' \
+            ./ dist/ruido-blanco/
+          cd dist
+          zip -r ruido-blanco.zip ruido-blanco
+          cp ruido-blanco/system.json system.json
+
+      - name: Publicar versión
+        uses: softprops/action-gh-release@v2
+        with:
+          generate_release_notes: true
+          files: |
+            dist/ruido-blanco.zip
+            dist/system.json
