@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="docs/img/banner.png" alt="RUIDO BLANCO · Juego de rol de investigación para Foundry VTT" width="100%">
+</p>
+
 # RUIDO BLANCO
 
 <p align="center">
@@ -23,6 +27,13 @@ interpretación se convierte en verdad.
 📖 **[Leer el reglamento](REGLAMENTO.md)** · 🌐 **[Manual en web](https://manuromera.github.io/ruido-blanco/)**
 
 ---
+
+## Así se ve
+
+<p align="center">
+  <img src="docs/img/ficha.png" alt="Ficha de investigador con los cuatro Métodos, Especialidades y Talento" width="49%">
+  <img src="docs/img/muro.png" alt="Muro de investigación con Pistas, Hipótesis y Ruido de Fondo" width="49%">
+</p>
 
 ## Instalar en Foundry VTT
 
