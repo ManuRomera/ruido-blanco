@@ -2,7 +2,7 @@
   "id": "ruido-blanco",
   "title": "RUIDO BLANCO",
   "description": "Juego de rol de investigación contemporánea emergente. Las Pistas son reales; su significado, interpretable. Sistema para Foundry VTT con Muro de investigación, Ruido de Fondo compartido y motor de Revelación.",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "compatibility": {
     "minimum": "13",
     "verified": "13.351"
@@ -19,7 +19,8 @@
   "changelog": "https://github.com/ManuRomera/ruido-blanco/blob/main/CHANGELOG.md",
   "bugs": "https://github.com/ManuRomera/ruido-blanco/issues",
   "esmodules": [
-    "ruido-blanco.mjs"
+    "ruido-blanco.mjs",
+    "module/mr-credits.mjs"
   ],
   "styles": [
     "styles/ruido-blanco.css"

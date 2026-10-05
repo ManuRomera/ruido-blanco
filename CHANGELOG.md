@@ -2,6 +2,10 @@
 
 Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/).
 
+## [0.6.1] — 2026-10-05
+
+- Añadido el botón «Créditos» en los ajustes del paquete (Manu Romera · Digital RPG Design). No cambia el juego.
+
 ## [0.6.0] — 2026-09-20
 
 Reescritura de la interfaz y de la automatización. La v0.5.5 tenía el motor de
