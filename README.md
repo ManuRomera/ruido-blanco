@@ -124,3 +124,15 @@ RUIDO BLANCO reconoce la influencia de los juegos de investigación emergente de
 la familia *Carved from Brindlewood*, del principio de no bloquear información
 esencial asociado a *GUMSHOE*, y de los juegos contemporáneos que convierten la
 presión institucional y personal en consecuencias de ficción.
+
+---
+
+<p align="center">
+  <a href="https://github.com/ManuRomera">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/ManuRomera/ManuRomera/main/brand/MR_09_Monograma_Marfil_Transparente.png">
+      <img src="https://raw.githubusercontent.com/ManuRomera/ManuRomera/main/brand/MR_10_Monograma_Negro_Transparente.png" alt="MR · Manu Romera" height="56">
+    </picture>
+  </a><br>
+  <sub>Hecho por <a href="https://github.com/ManuRomera"><b>Manu Romera</b></a> · Digital RPG Design</sub>
+</p>
