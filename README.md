@@ -7,7 +7,7 @@
 <p align="center">
   <a href="https://github.com/ManuRomera/ruido-blanco/releases/latest"><img alt="Latest release" src="https://img.shields.io/github/v/release/ManuRomera/ruido-blanco?include_prereleases&style=for-the-badge&color=5a6270&label=release"></a>
   <a href="https://foundryvtt.com"><img alt="Foundry VTT V13" src="https://img.shields.io/badge/Foundry%20VTT-V13-57d8c8?style=for-the-badge"></a>
-  <a href="https://github.com/ManuRomera/ruido-blanco/releases"><img alt="Downloads" src="https://img.shields.io/github/downloads/ManuRomera/ruido-blanco/total?style=for-the-badge&color=ff7a1f"></a>
+  <a href="https://github.com/ManuRomera/ruido-blanco/releases"><img alt="Downloads" src="https://raw.githubusercontent.com/ManuRomera/ManuRomera/main/badges/descargas/ruido-blanco.svg"></a>
   <img alt="Game system" src="https://img.shields.io/badge/type-game%20system-2b3245?style=for-the-badge">
   <a href="LICENSE"><img alt="License" src="https://img.shields.io/badge/license-MIT-2b3245?style=for-the-badge"></a>
 </p>
